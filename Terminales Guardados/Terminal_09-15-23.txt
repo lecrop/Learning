@@ -1,0 +1,594 @@
+     +--------------------------------------------------------------------+
+     ¦                • MobaXterm Personal Edition v23.2 •                ¦
+     ¦              (X server, SSH client and network tools)              ¦
+     ¦                                                                    ¦
+     ¦ ? Your computer drives are accessible through the /drives path     ¦
+     ¦ ? Your DISPLAY is set to 172.33.1.128:0.0                          ¦
+     ¦ ? When using SSH, your remote DISPLAY is automatically forwarded   ¦
+     ¦ ? Each command status is specified by a special symbol (? or ?)    ¦
+     ¦                                                                    ¦
+     ¦ • Important:                                                       ¦
+     ¦ This is MobaXterm Personal Edition. The Professional edition       ¦
+     ¦ allows you to customize MobaXterm for your company: you can add    ¦
+     ¦ your own logo, your parameters, your welcome message and generate  ¦
+     ¦ either an MSI installation package or a portable executable.       ¦
+     ¦ We can also modify MobaXterm or develop the plugins you need.      ¦
+     ¦ For more information: https://mobaxterm.mobatek.net/download.html  ¦
+     +--------------------------------------------------------------------+
+
+ ? 15/09/2023 ? ? 09:54.38 ? ? /home/mobaxterm ? ssh raul@192.168.150.119 -p 49161
+raul@192.168.150.119's password:
+X11 forwarding request failed on channel 0
+Welcome to Ubuntu 18.04.4 LTS (GNU/Linux 5.3.0-62-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+Last login: Thu Sep 14 19:22:47 2023 from 192.168.151.182
+(base) raul@119cb66ee7b2:~$
+(base) raul@119cb66ee7b2:~$
+(base) raul@119cb66ee7b2:~$ bowtie
+-bash: bowtie: command not found
+(base) raul@119cb66ee7b2:~$ ma
+mailmail                    makeconv                    manpath                     matplotlib
+make                        man                         mapfile                     matt/
+make-first-existing-target  mandb                       markdown_py                 mawk
+(base) raul@119cb66ee7b2:~$ ma
+mailmail                    makeconv                    manpath                     matplotlib
+make                        man                         mapfile                     matt/
+make-first-existing-target  mandb                       markdown_py                 mawk
+(base) raul@119cb66ee7b2:~$ ma
+mailmail                    makeconv                    manpath                     matplotlib
+make                        man                         mapfile                     matt/
+make-first-existing-target  mandb                       markdown_py                 mawk
+(base) raul@119cb66ee7b2:~$ mat
+matplotlib  matt/
+(base) raul@119cb66ee7b2:~$ mat
+matplotlib  matt/
+(base) raul@119cb66ee7b2:~$ mat
+-bash: mat: command not found
+(base) raul@119cb66ee7b2:~$ nano .bashrc
+(base) raul@119cb66ee7b2:~$ exit
+logout
+Connection to 192.168.150.119 closed.
+                                                                                                                             ?
+
+ ? 15/09/2023 ? ? 10:11.09 ? ? /home/mobaxterm ? ssh raul@192.168.150.119 -p 49161
+raul@192.168.150.119's password:
+X11 forwarding request failed on channel 0
+Welcome to Ubuntu 18.04.4 LTS (GNU/Linux 5.3.0-62-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+Last login: Fri Sep 15 09:54:47 2023 from 192.168.151.182
+(base) raul@119cb66ee7b2:~$ sra
+sra-pileup             sra-search.3           sra-sort-cg.3.0.7      sra-stat.3.0.7         sratools.3.0.7
+sra-pileup-orig.3.0.7  sra-search.3.0.7       sra-sort.3             srapath
+sra-pileup.3           sra-sort               sra-sort.3.0.7         srapath-orig.3.0.7
+sra-pileup.3.0.7       sra-sort-cg            sra-stat               srapath.3
+sra-search             sra-sort-cg.3          sra-stat.3             srapath.3.0.7
+(base) raul@119cb66ee7b2:~$ sra
+sra-pileup             sra-search.3           sra-sort-cg.3.0.7      sra-stat.3.0.7         sratools.3.0.7
+sra-pileup-orig.3.0.7  sra-search.3.0.7       sra-sort.3             srapath
+sra-pileup.3           sra-sort               sra-sort.3.0.7         srapath-orig.3.0.7
+sra-pileup.3.0.7       sra-sort-cg            sra-stat               srapath.3
+sra-search             sra-sort-cg.3          sra-stat.3             srapath.3.0.7
+(base) raul@119cb66ee7b2:~$ sra
+sra-pileup             sra-search.3           sra-sort-cg.3.0.7      sra-stat.3.0.7         sratools.3.0.7
+sra-pileup-orig.3.0.7  sra-search.3.0.7       sra-sort.3             srapath
+sra-pileup.3           sra-sort               sra-sort.3.0.7         srapath-orig.3.0.7
+sra-pileup.3.0.7       sra-sort-cg            sra-stat               srapath.3
+sra-search             sra-sort-cg.3          sra-stat.3             srapath.3.0.7
+(base) raul@119cb66ee7b2:~$ sra
+sra-pileup             sra-search.3           sra-sort-cg.3.0.7      sra-stat.3.0.7         sratools.3.0.7
+sra-pileup-orig.3.0.7  sra-search.3.0.7       sra-sort.3             srapath
+sra-pileup.3           sra-sort               sra-sort.3.0.7         srapath-orig.3.0.7
+sra-pileup.3.0.7       sra-sort-cg            sra-stat               srapath.3
+sra-search             sra-sort-cg.3          sra-stat.3             srapath.3.0.7
+(base) raul@119cb66ee7b2:~$ sra
+sra-pileup             sra-search.3           sra-sort-cg.3.0.7      sra-stat.3.0.7         sratools.3.0.7
+sra-pileup-orig.3.0.7  sra-search.3.0.7       sra-sort.3             srapath
+sra-pileup.3           sra-sort               sra-sort.3.0.7         srapath-orig.3.0.7
+sra-pileup.3.0.7       sra-sort-cg            sra-stat               srapath.3
+sra-search             sra-sort-cg.3          sra-stat.3             srapath.3.0.7
+(base) raul@119cb66ee7b2:~$ ma
+mailmail                    makeconv                    manpath                     matplotlib
+make                        man                         mapfile                     matt/
+make-first-existing-target  mandb                       markdown_py                 mawk
+(base) raul@119cb66ee7b2:~$ mat
+-bash: mat: command not found
+(base) raul@119cb66ee7b2:~$ matt
+
+Matt v. 1.3.1
+
+Usage: matt <command> ...
+
+Commands:
+
+*Import data / check table                             *Maths and statistics
+  chk_nls:  check newlines in table                      col_calc:  apply calculations to columns
+  chk_tab:  check format of table                        perm_test: test differences between groups
+  get_pwm:  get PWM in Matt format                       row_calc:  apply calculations to rows
+  get_sj:   get SANJUAN CEs output
+  get_vast: get VAST-TOOLS output                      *Other
+                                                         extr_scafids: extract scaffold ids
+*Retrieve data from table                                get_kmers_from_pwm: get top-N kmers from PWM
+  col_uniq:   unique values in columns                   mk_uniq:      make table unique wrt. rows
+  conc:       concatenate columns                        perm_seqs:    randomly permute seqs
+  get_colnms: extract column names                       prnt_tab:     print table nicely
+  get_cols:   retrieve columns                           retr_geneids: retrieve gene IDs from GTF
+  get_match:  find ID match                              retr_rnaseq:  retrieve RNAseq data from GEO
+  get_ovl:    overlap of sets                            sort_tab:     sort table
+  get_rows:   retrieve rows                              stratify:     stratify data in table
+  rand_rows:  get random rows
+                                                       *High-level analyses
+*Manipulate table                                        cmpr_exons:   discriminate feature analysis
+  add_cols:   add columns to table                       cmpr_features: feature comparison
+  add_header: add column names                           cmpr_introns: discriminate feature analysis
+  add_range:  add column with range of values            rna_maps:     generate motif RNA maps
+  add_rows:   add rows at bottom                         rna_maps_cisbp: with all CISBP-RNA/k-mer motifs
+  add_val:    add column with fixed value                test_cisbp_enrich: test CISBP motif enrichment
+  chg_labs:   change labels
+  def_cats:   define categories
+  rm_cols:    removes columns from table
+  rn_cols:    rename columns
+
+*Retrieve sequences
+  extr_seqs: extract sequences from table
+  get_seqs:  get sequences from FASTA
+
+*Analyze sequences
+  cmpr_motif:      plot motif / PWM comparison
+  get_efeatures:   get exon features
+  get_gcc:         determines GC content
+  get_ifeatures:   get intron features
+  get_pwm_hits:    get hits of motif PWM
+  get_pwm_prof:    get profiles of PWM hits
+  get_regexp_hits: get REGEXP hits
+  get_regexp_prof: get profiles of REGEXP hits
+  get_seql:        determine sequence length
+  get_sss:         get SS strengths
+  plot_motif:      plot motif / PWM
+  test_pwm_enrich: test PWM motif enrichment
+  test_regexp_enrich: test REGEXP enrichment
+
+Attention: Tables processed by Matt must contain a header with column names and must not contain " characters
+           with exception of regular expressions. All other " characters will be ignored and removed. When using
+           MS Excel for table generation, please save tables in format Windows Text. Matt recognizes Windows newlines,
+           but not DOS nor old-style MacOS newlines (CR or \r only). Use command chk_nls to see and check newlines in tables.
+
+
+(base) raul@119cb66ee7b2:~$ mat
+matplotlib  matt/
+(base) raul@119cb66ee7b2:~$ mat
+matplotlib  matt/
+(base) raul@119cb66ee7b2:~$ matt
+
+Matt v. 1.3.1
+
+Usage: matt <command> ...
+
+Commands:
+
+*Import data / check table                             *Maths and statistics
+  chk_nls:  check newlines in table                      col_calc:  apply calculations to columns
+  chk_tab:  check format of table                        perm_test: test differences between groups
+  get_pwm:  get PWM in Matt format                       row_calc:  apply calculations to rows
+  get_sj:   get SANJUAN CEs output
+  get_vast: get VAST-TOOLS output                      *Other
+                                                         extr_scafids: extract scaffold ids
+*Retrieve data from table                                get_kmers_from_pwm: get top-N kmers from PWM
+  col_uniq:   unique values in columns                   mk_uniq:      make table unique wrt. rows
+  conc:       concatenate columns                        perm_seqs:    randomly permute seqs
+  get_colnms: extract column names                       prnt_tab:     print table nicely
+  get_cols:   retrieve columns                           retr_geneids: retrieve gene IDs from GTF
+  get_match:  find ID match                              retr_rnaseq:  retrieve RNAseq data from GEO
+  get_ovl:    overlap of sets                            sort_tab:     sort table
+  get_rows:   retrieve rows                              stratify:     stratify data in table
+  rand_rows:  get random rows
+                                                       *High-level analyses
+*Manipulate table                                        cmpr_exons:   discriminate feature analysis
+  add_cols:   add columns to table                       cmpr_features: feature comparison
+  add_header: add column names                           cmpr_introns: discriminate feature analysis
+  add_range:  add column with range of values            rna_maps:     generate motif RNA maps
+  add_rows:   add rows at bottom                         rna_maps_cisbp: with all CISBP-RNA/k-mer motifs
+  add_val:    add column with fixed value                test_cisbp_enrich: test CISBP motif enrichment
+  chg_labs:   change labels
+  def_cats:   define categories
+  rm_cols:    removes columns from table
+  rn_cols:    rename columns
+
+*Retrieve sequences
+  extr_seqs: extract sequences from table
+  get_seqs:  get sequences from FASTA
+
+*Analyze sequences
+  cmpr_motif:      plot motif / PWM comparison
+  get_efeatures:   get exon features
+  get_gcc:         determines GC content
+  get_ifeatures:   get intron features
+  get_pwm_hits:    get hits of motif PWM
+  get_pwm_prof:    get profiles of PWM hits
+  get_regexp_hits: get REGEXP hits
+  get_regexp_prof: get profiles of REGEXP hits
+  get_seql:        determine sequence length
+  get_sss:         get SS strengths
+  plot_motif:      plot motif / PWM
+  test_pwm_enrich: test PWM motif enrichment
+  test_regexp_enrich: test REGEXP enrichment
+
+Attention: Tables processed by Matt must contain a header with column names and must not contain " characters
+           with exception of regular expressions. All other " characters will be ignored and removed. When using
+           MS Excel for table generation, please save tables in format Windows Text. Matt recognizes Windows newlines,
+           but not DOS nor old-style MacOS newlines (CR or \r only). Use command chk_nls to see and check newlines in tables.
+
+
+(base) raul@119cb66ee7b2:~$ vast-tools
+
+VAST-TOOLS v2.5.1
+
+Usage: vast-tools sub-commands [options]
+
+[sub-commands]
+        align           :       Align RNA-Seq reads to exon-exon junctions and quantify AS
+        merge           :       Merge vast-tool outputs from multiple sub-samples
+        combine         :       Combine two or more 'aligned' RNA-Seq samples into summary tables
+        compare         :       Compare PSIs between samples and produces lists for GO analysis
+        compare_expr    :       Compare Gene Expression (cRPKMs) between samples
+        diff            :       Compare posterior distributions over PSI of two or more samples
+        plot            :       Utility application to plot PSI scatterplots
+        tidy            :       Simplifies and filters the PSI table for external analysis (e.g. in R)
+
+[global options]
+        -h,--help       :       Print this message
+        -o,--output     :       Output directory (default vast_out;
+                                    except for plot, which uses input file location)
+        --legacy        :       Use old input/output styles
+        --verbose       :       Print stderr
+
+
+*** Questions & Bug Reports:
+    - align, merge, combine, compare, tidy: Manuel Irimia (mirimia@gmail.com)
+    - diff: Tim Sterne-Weiler (tim.sterne.weiler@utoronto.ca)
+    - plot: Kevin Ha (k.ha@mail.utoronto.ca)
+
+(base) raul@119cb66ee7b2:~$ conda install bowtiew
+Collecting package metadata (current_repodata.json): failed
+
+CondaError: KeyboardInterrupt
+
+Exception ignored in: <module 'threading' from '/home/raul/anaconda3/lib/python3.9/threading.py'>
+Traceback (most recent call last):
+  File "/home/raul/anaconda3/lib/python3.9/threading.py", line 1440, in _shutdown
+    atexit_call()
+  File "/home/raul/anaconda3/lib/python3.9/concurrent/futures/thread.py", line 31, in _python_exit
+    t.join()
+  File "/home/raul/anaconda3/lib/python3.9/threading.py", line 1053, in join
+    self._wait_for_tstate_lock()
+  File "/home/raul/anaconda3/lib/python3.9/threading.py", line 1073, in _wait_for_tstate_lock
+    if lock.acquire(block, timeout):
+KeyboardInterrupt:
+
+(base) raul@119cb66ee7b2:~$
+(base) raul@119cb66ee7b2:~$ conda install bowtie
+Collecting package metadata (current_repodata.json): / WARNING conda.models.version:get_matcher(546): Using .* with relational operator is superfluous and deprecated and will be removed in a future version of conda. Your spec was 1.7.1.*, but conda is ignoring the .* and treating it as 1.7.1                                                                                    done
+Solving environment: failed with initial frozen solve. Retrying with flexible solve.
+Solving environment: failed with repodata from current_repodata.json, will retry                                               with next repodata source.
+Collecting package metadata (repodata.json): \ WARNING conda.models.version:get_                                              matcher(546): Using .* with relational operator is superfluous and deprecated an                                              d will be removed in a future version of conda. Your spec was 1.6.0.*, but conda                                               is ignoring the .* and treating it as 1.6.0
+WARNING conda.models.version:get_matcher(546): Using .* with relational operator                                               is superfluous and deprecated and will be removed in a future version of conda.                                               Your spec was 1.8.0.*, but conda is ignoring the .* and treating it as 1.8.0 |                                               WARNING conda.models.version:get_matcher(546): Using .* with relational operator                                               is superfluous and deprecated and will be removed in a future version of conda.                                               Your spec was 1.9.0.*, but conda is ignoring the .* and treating it as 1.9.0 do                                              ne
+Solving environment: failed with initial frozen solve. Retrying with flexible solve.
+
+CondaError: KeyboardInterrupt
+
+Error in atexit._run_exitfuncs:
+Traceback (most recent call last):
+  File "/home/raul/anaconda3/lib/python3.9/multiprocessing/util.py", line 334, in _exit_function
+    _run_finalizers(0)
+  File "/home/raul/anaconda3/lib/python3.9/multiprocessing/util.py", line 284, in _run_finalizers
+    f = lambda p : p[0] is not None and p[0] >= minpriority
+KeyboardInterrupt
+
+(base) raul@119cb66ee7b2:~$
+(base) raul@119cb66ee7b2:~$
+(base) raul@119cb66ee7b2:~$ sudo apt-get update -y
+[sudo] password for raul:
+Sorry, try again.
+[sudo] password for raul:
+Hit:1 http://archive.ubuntu.com/ubuntu bionic InRelease
+Get:2 http://security.ubuntu.com/ubuntu bionic-security InRelease [88.7 kB]
+Get:3 http://archive.ubuntu.com/ubuntu bionic-updates InRelease [88.7 kB]
+Get:4 http://archive.ubuntu.com/ubuntu bionic-backports InRelease [83.3 kB]
+Get:5 http://archive.ubuntu.com/ubuntu bionic-updates/universe amd64 Packages [2411 kB]
+Fetched 2672 kB in 1s (2086 kB/s)
+Reading package lists... Done
+(base) raul@119cb66ee7b2:~$ sudo apt-get install -y bowtie
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  libpython-stdlib libpython2.7-minimal libpython2.7-stdlib libtbb2 python python-minimal python2.7 python2.7-minimal
+Suggested packages:
+  bowtie-examples python-doc python-tk python2.7-doc binfmt-support
+The following NEW packages will be installed:
+  bowtie libpython-stdlib libpython2.7-minimal libpython2.7-stdlib libtbb2 python python-minimal python2.7 python2.7-minimal
+0 upgraded, 9 newly installed, 0 to remove and 201 not upgraded.
+Need to get 5768 kB of archives.
+After this operation, 24.5 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 libpython2.7-minimal amd64 2.7.17-1~18.04ubuntu1.11 [335 kB]
+Get:2 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 python2.7-minimal amd64 2.7.17-1~18.04ubuntu1.11 [1294 kB]
+Get:3 http://archive.ubuntu.com/ubuntu bionic/main amd64 python-minimal amd64 2.7.15~rc1-1 [28.1 kB]
+Get:4 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 libpython2.7-stdlib amd64 2.7.17-1~18.04ubuntu1.11 [1919 kB]
+Get:5 http://archive.ubuntu.com/ubuntu bionic-updates/main amd64 python2.7 amd64 2.7.17-1~18.04ubuntu1.11 [248 kB]
+Get:6 http://archive.ubuntu.com/ubuntu bionic/main amd64 libpython-stdlib amd64 2.7.15~rc1-1 [7620 B]
+Get:7 http://archive.ubuntu.com/ubuntu bionic/main amd64 python amd64 2.7.15~rc1-1 [140 kB]
+Get:8 http://archive.ubuntu.com/ubuntu bionic/universe amd64 libtbb2 amd64 2017~U7-8 [110 kB]
+Get:9 http://archive.ubuntu.com/ubuntu bionic/universe amd64 bowtie amd64 1.2.2+dfsg-2 [1686 kB]
+Fetched 5768 kB in 1s (8667 kB/s)
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package libpython2.7-minimal:amd64.
+(Reading database ... 35132 files and directories currently installed.)
+Preparing to unpack .../0-libpython2.7-minimal_2.7.17-1~18.04ubuntu1.11_amd64.deb ...
+Unpacking libpython2.7-minimal:amd64 (2.7.17-1~18.04ubuntu1.11) ...
+Selecting previously unselected package python2.7-minimal.
+Preparing to unpack .../1-python2.7-minimal_2.7.17-1~18.04ubuntu1.11_amd64.deb ...
+Unpacking python2.7-minimal (2.7.17-1~18.04ubuntu1.11) ...
+Selecting previously unselected package python-minimal.
+Preparing to unpack .../2-python-minimal_2.7.15~rc1-1_amd64.deb ...
+Unpacking python-minimal (2.7.15~rc1-1) ...
+Selecting previously unselected package libpython2.7-stdlib:amd64.
+Preparing to unpack .../3-libpython2.7-stdlib_2.7.17-1~18.04ubuntu1.11_amd64.deb ...
+Unpacking libpython2.7-stdlib:amd64 (2.7.17-1~18.04ubuntu1.11) ...
+Selecting previously unselected package python2.7.
+Preparing to unpack .../4-python2.7_2.7.17-1~18.04ubuntu1.11_amd64.deb ...
+Unpacking python2.7 (2.7.17-1~18.04ubuntu1.11) ...
+Selecting previously unselected package libpython-stdlib:amd64.
+Preparing to unpack .../5-libpython-stdlib_2.7.15~rc1-1_amd64.deb ...
+Unpacking libpython-stdlib:amd64 (2.7.15~rc1-1) ...
+Setting up libpython2.7-minimal:amd64 (2.7.17-1~18.04ubuntu1.11) ...
+Setting up python2.7-minimal (2.7.17-1~18.04ubuntu1.11) ...
+Linking and byte-compiling packages for runtime python2.7...
+Setting up python-minimal (2.7.15~rc1-1) ...
+Selecting previously unselected package python.
+(Reading database ... 35881 files and directories currently installed.)
+Preparing to unpack .../python_2.7.15~rc1-1_amd64.deb ...
+Unpacking python (2.7.15~rc1-1) ...
+Selecting previously unselected package libtbb2:amd64.
+Preparing to unpack .../libtbb2_2017~U7-8_amd64.deb ...
+Unpacking libtbb2:amd64 (2017~U7-8) ...
+Selecting previously unselected package bowtie.
+Preparing to unpack .../bowtie_1.2.2+dfsg-2_amd64.deb ...
+Unpacking bowtie (1.2.2+dfsg-2) ...
+Setting up libtbb2:amd64 (2017~U7-8) ...
+Setting up libpython2.7-stdlib:amd64 (2.7.17-1~18.04ubuntu1.11) ...
+Setting up python2.7 (2.7.17-1~18.04ubuntu1.11) ...
+Setting up libpython-stdlib:amd64 (2.7.15~rc1-1) ...
+Setting up python (2.7.15~rc1-1) ...
+Setting up bowtie (1.2.2+dfsg-2) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+Processing triggers for mime-support (3.60ubuntu1) ...
+(base) raul@119cb66ee7b2:~$
+(base) raul@119cb66ee7b2:~$
+(base) raul@119cb66ee7b2:~$ bo
+bokeh                   bowtie-align-l-debug    bowtie-build-l          bowtie-inspect          bowtie-inspect-s-debug
+bootctl                 bowtie-align-s          bowtie-build-l-debug    bowtie-inspect-l
+bowtie                  bowtie-align-s-debug    bowtie-build-s          bowtie-inspect-l-debug
+bowtie-align-l          bowtie-build            bowtie-build-s-debug    bowtie-inspect-s
+(base) raul@119cb66ee7b2:~$ bo
+bokeh                   bowtie-align-l-debug    bowtie-build-l          bowtie-inspect          bowtie-inspect-s-debug
+bootctl                 bowtie-align-s          bowtie-build-l-debug    bowtie-inspect-l
+bowtie                  bowtie-align-s-debug    bowtie-build-s          bowtie-inspect-l-debug
+bowtie-align-l          bowtie-build            bowtie-build-s-debug    bowtie-inspect-s
+(base) raul@119cb66ee7b2:~$ bowtie
+No index, query, or output file specified!
+Usage:
+bowtie [options]* <ebwt> {-1 <m1> -2 <m2> | --12 <r> | --interleaved <i> | <s>} [<hit>]
+
+  <m1>    Comma-separated list of files containing upstream mates (or the
+          sequences themselves, if -c is set) paired with mates in <m2>
+  <m2>    Comma-separated list of files containing downstream mates (or the
+          sequences themselves if -c is set) paired with mates in <m1>
+  <r>     Comma-separated list of files containing Crossbow-style reads.  Can be
+          a mixture of paired and unpaired.  Specify "-" for stdin.
+  <i>     Files with interleaved paired-end FASTQ reads.
+  <s>     Comma-separated list of files containing unpaired reads, or the
+          sequences themselves, if -c is set.  Specify "-" for stdin.
+  <hit>   File to write hits to (default: stdout)
+Input:
+  -q                 query input files are FASTQ .fq/.fastq (default)
+  -f                 query input files are (multi-)FASTA .fa/.mfa
+  -r                 query input files are raw one-sequence-per-line
+  -c                 query sequences given on cmd line (as <mates>, <singles>)
+  -C                 reads and index are in colorspace
+  -Q/--quals <file>  QV file(s) corresponding to CSFASTA inputs; use with -f -C
+  --Q1/--Q2 <file>   same as -Q, but for mate files 1 and 2 respectively
+  -s/--skip <int>    skip the first <int> reads/pairs in the input
+  -u/--qupto <int>   stop after first <int> reads/pairs (excl. skipped reads)
+  -5/--trim5 <int>   trim <int> bases from 5' (left) end of reads
+  -3/--trim3 <int>   trim <int> bases from 3' (right) end of reads
+  --phred33-quals    input quals are Phred+33 (default)
+  --phred64-quals    input quals are Phred+64 (same as --solexa1.3-quals)
+  --solexa-quals     input quals are from GA Pipeline ver. < 1.3
+  --solexa1.3-quals  input quals are from GA Pipeline ver. >= 1.3
+  --integer-quals    qualities are given as space-separated integers (not ASCII)
+  --large-index      force usage of a 'large' index, even if a small one is present
+Alignment:
+  -v <int>           report end-to-end hits w/ <=v mismatches; ignore qualities
+    or
+  -n/--seedmms <int> max mismatches in seed (can be 0-3, default: -n 2)
+  -e/--maqerr <int>  max sum of mismatch quals across alignment for -n (def: 70)
+  -l/--seedlen <int> seed length for -n (default: 28)
+  --nomaqround       disable Maq-like quality rounding for -n (nearest 10 <= 30)
+  -I/--minins <int>  minimum insert size for paired-end alignment (default: 0)
+  -X/--maxins <int>  maximum insert size for paired-end alignment (default: 250)
+  --fr/--rf/--ff     -1, -2 mates align fw/rev, rev/fw, fw/fw (default: --fr)
+  --nofw/--norc      do not align to forward/reverse-complement reference strand
+  --maxbts <int>     max # backtracks for -n 2/3 (default: 125, 800 for --best)
+  --pairtries <int>  max # attempts to find mate for anchor hit (default: 100)
+  -y/--tryhard       try hard to find valid alignments, at the expense of speed
+  --chunkmbs <int>   max megabytes of RAM for best-first search frames (def: 64)
+ --reads-per-batch   # of reads to read from input file at once (default: 16)
+Reporting:
+  -k <int>           report up to <int> good alignments per read (default: 1)
+  -a/--all           report all alignments per read (much slower than low -k)
+  -m <int>           suppress all alignments if > <int> exist (def: no limit)
+  -M <int>           like -m, but reports 1 random hit (MAPQ=0); requires --best
+  --best             hits guaranteed best stratum; ties broken by quality
+  --strata           hits in sub-optimal strata aren't reported (requires --best)
+Output:
+  -t/--time          print wall-clock time taken by search phases
+  -B/--offbase <int> leftmost ref offset = <int> in bowtie output (default: 0)
+  --quiet            print nothing but the alignments
+  --refidx           refer to ref. seqs by 0-based index rather than name
+  --al <fname>       write aligned reads/pairs to file(s) <fname>
+  --un <fname>       write unaligned reads/pairs to file(s) <fname>
+  --no-unal          suppress SAM records for unaligned reads
+  --max <fname>      write reads/pairs over -m limit to file(s) <fname>
+  --suppress <cols>  suppresses given columns (comma-delim'ed) in default output
+  --fullref          write entire ref name (default: only up to 1st space)
+Colorspace:
+  --snpphred <int>   Phred penalty for SNP when decoding colorspace (def: 30)
+     or
+  --snpfrac <dec>    approx. fraction of SNP bases (e.g. 0.001); sets --snpphred
+  --col-cseq         print aligned colorspace seqs as colors, not decoded bases
+  --col-cqual        print original colorspace quals, not decoded quals
+  --col-keepends     keep nucleotides at extreme ends of decoded alignment
+SAM:
+  -S/--sam           write hits in SAM format
+  --mapq <int>       default mapping quality (MAPQ) to print for SAM alignments
+  --sam-nohead       supppress header lines (starting with @) for SAM output
+  --sam-nosq         supppress @SQ header lines for SAM output
+  --sam-RG <text>    add <text> (usually "lab=value") to @RG line of SAM header
+Performance:
+  -o/--offrate <int> override offrate of index; must be >= index's offrate
+  -p/--threads <int> number of alignment threads to launch (default: 1)
+  --mm               use memory-mapped I/O for index; many 'bowtie's can share
+  --shmem            use shared mem for index; many 'bowtie's can share
+Other:
+  --seed <int>       seed for random number generator
+  --verbose          verbose output (for debugging)
+  --version          print version information and quit
+  -h/--help          print this usage message
+(base) raul@119cb66ee7b2:~$ cd Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data/
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$ vast-tools align Luminal_1_1.fastq.gz Luminal_1_2.fastq.gz -sp hs2 -o Vast-Tool_Align --expr --IR_version 2 -c 8 -n Luminal_1>Alineamiento_luminal_1.out &
+[1] 12939
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$ [vast align error]: hs2 is not a valid species
+
+fastq.gz -sp Hs2 -o Vast-Tool_Align --expr --IR_version 2 -c 8 -n Luminal_1>Alineamiento_luminal_1.out &
+[2] 12941
+[1]   Exit 1                  vast-tools align Luminal_1_1.fastq.gz Luminal_1_2.fastq.gz -sp hs2 -o Vast-Tool_Align --expr --IR_version 2 -c 8 -n Luminal_1 > Alineamiento_luminal_1.out
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$ [vast align]: VAST-TOOLS v2.5.1
+[vast align]: Species assembly: hg38, VASTDB Species key: Hs2
+[vast align]: VASTDB Version: vastdb.hs2.23.06.20
+[vast align]: Input RNA-seq file(s): /home/raul/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data/Luminal_1_1.fastq.gz and /home/raul/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data/Luminal_1_2.fastq.gz
+[vast align]: Most common read lengths detected for fq1 & fq2: 76 (100.00%) and 76 (100.00%)
+[vast align]: Sample name: Luminal_1
+[vast align]: Using VASTDB -> /home/raul/vast-tools/VASTDB/Hs2
+[vast align]: Setting output directory to Vast-Tool_Align
+[vast align]: Setting tmp directory..
+[vast align]: Set tmp directory to /home/raul/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data/Vast-Tool_Align/tmp!
+# reads processed: 500000
+# reads with at least one reported alignment: 352714 (70.54%)
+# reads that failed to align: 80792 (16.16%)
+# reads with alignments suppressed due to -m: 66494 (13.30%)
+Reported 352714 alignments
+[vast align]:    fraction of first reads mapping to fwd / rev strand : 0.0048 / 0.9952
+# reads processed: 500000
+# reads with at least one reported alignment: 341746 (68.35%)
+# reads that failed to align: 96705 (19.34%)
+# reads with alignments suppressed due to -m: 61549 (12.31%)
+Reported 341746 alignments
+[vast align]:    fraction of second reads mapping to fwd / rev strand : 0.9953 / 0.0047
+[vast align]:    reverse-complementing reads from /home/raul/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data/Luminal_1_1.fastq.gz; writing into /home/raul/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data/Vast-Tool_Align/tmp/tmpfqs_RObSVUMg/Luminal_1_1.fastq.gz
+
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$ [vast align]: Mapping RNAseq reads against mRNA sequences
+[vast align]: Calculating cRPKMs
+
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$ top
+top - 11:41:48 up 1159 days, 25 min,  3 users,  load average: 9.31, 8.01, 5.02
+Tasks:  25 total,   4 running,  21 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 13.1 us,  1.8 sy,  0.0 ni, 85.0 id,  0.0 wa,  0.0 hi,  0.1 si,  0.0 st
+KiB Mem : 79227392+total,  3252444 free, 10223643+used, 68678502+buff/cache
+KiB Swap: 38583292 total,        0 free, 38583292 used. 68457446+avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+12987 raul      20   0  153128  91920   4296 R 768.8  0.0  65:52.20 bowtie-align-s
+12986 raul      20   0   20876   6196   3968 R  66.4  0.0   5:54.38 perl
+12988 raul      20   0  820644 806132   4048 S  51.8  0.1   4:11.16 perl
+12985 raul      20   0    4912   1576   1396 R  38.5  0.0   3:21.35 gzip
+    1 root      20   0   72296   3840   3100 S   0.0  0.0   0:00.18 sshd
+    6 root      20   0   18496   2372   1924 S   0.0  0.0   0:00.02 bash
+   40 rstudio+  20   0 1255844 616952   5228 S   0.0  0.1 121:27.97 rserver
+ 4269 raul      20   0  670704 245044  45316 S   0.0  0.0   0:14.60 rsession
+ 4301 root      20   0  101552   6824   5864 S   0.0  0.0   0:00.03 sshd
+ 4316 raul      20   0  104188   6284   5100 S   0.0  0.0   0:03.43 sshd
+ 4317 root      20   0  101552   6976   6012 S   0.0  0.0   0:00.02 sshd
+ 4319 raul      20   0   18748   3504   2848 S   0.0  0.0   0:00.14 bash
+ 4344 raul      20   0  103848   6020   5000 S   0.0  0.0   0:00.03 sshd
+ 4351 raul      20   0   13056   2192   2036 S   0.0  0.0   0:00.02 sftp-server
+12489 root      20   0  101732   7104   6044 S   0.0  0.0   0:00.07 sshd
+12504 raul      20   0  104196   6480   5276 S   0.0  0.0   0:00.37 sshd
+12505 root      20   0  101552   7056   6096 S   0.0  0.0   0:00.03 sshd
+12507 raul      20   0   18636   3596   3000 S   0.0  0.0   0:00.02 bash
+12532 raul      20   0  103848   5940   4952 S   0.0  0.0   0:00.01 sshd
+12533 raul      20   0   13056   2196   2040 S   0.0  0.0   0:00.00 sftp-server
+12941 raul      20   0   22020   7120   3932 S   0.0  0.0   0:00.03 vast-tools
+12942 raul      20   0   32244   9496   4084 S   0.0  0.0   8:44.65 RunDBS_1.pl
+12983 raul      20   0   36640   3100   2620 S   0.0  0.0   0:00.81 top
+12984 raul      20   0    4624    804    736 S   0.0  0.0   0:00.00 sh
+12996 raul      20   0   36640   3100   2616 R   0.0  0.0   0:00.04 top
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$ [vast trim]: Total processed reads: 105204747
+[vast trim]: Total valid fwd reads: 105204747
+# reads processed: 105204747
+# reads with at least one reported alignment: 75008172 (71.30%)
+# reads that failed to align: 16099279 (15.30%)
+# reads with alignments suppressed due to -m: 14097296 (13.40%)
+Reported 75008172 alignments
+[vast align]: Trimming RNAseq reads to 50 nt sequences
+
+(base) raul@119cb66ee7b2:~/Fran/Basal_vs_Luminal/matt_analyses/rnaseq_data$ [vast trim]: Total processed reads: 105204747
+[vast trim]: Total valid fwd reads: 105204747
+[vast trim]: Total valid rev reads: 105204747
+[vast align]: Doing genome subtraction

@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Francisco Porcel-Pastrana">
+
+<title>Learning - Como descargar datos de repositorios on-line</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Learning</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Búsqueda en BBDDs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./RNAseq.html" rel="" target="">
+ <span class="menu-text">Bulk RNAseq</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./AS_Analysis.html" rel="" target="">
+ <span class="menu-text">Alternative Splicing</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="4">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#preparación-de-datos-para-evaluar-su-uso" id="toc-preparación-de-datos-para-evaluar-su-uso" class="nav-link active" data-scroll-target="#preparación-de-datos-para-evaluar-su-uso"><span class="header-section-number">1</span> Preparación de datos para evaluar su uso</a>
+  <ul class="collapse">
+  <li><a href="#comando-perl-de-descarga-de-datos-para-linux-y-mac" id="toc-comando-perl-de-descarga-de-datos-para-linux-y-mac" class="nav-link" data-scroll-target="#comando-perl-de-descarga-de-datos-para-linux-y-mac"><span class="header-section-number">1.1</span> Comando Perl de descarga de datos para Linux y Mac</a></li>
+  <li><a href="#comando-perl-de-descarga-de-datos-para-windows" id="toc-comando-perl-de-descarga-de-datos-para-windows" class="nav-link" data-scroll-target="#comando-perl-de-descarga-de-datos-para-windows"><span class="header-section-number">1.2</span> Comando Perl de descarga de datos para Windows</a>
+  <ul class="collapse">
+  <li><a href="#problemas-de-windows" id="toc-problemas-de-windows" class="nav-link" data-scroll-target="#problemas-de-windows"><span class="header-section-number">1.2.1</span> Problemas de windows</a></li>
+  </ul></li>
+  <li><a href="#contenido-script-irirmia_script_sra_file_maker.pl" id="toc-contenido-script-irirmia_script_sra_file_maker.pl" class="nav-link" data-scroll-target="#contenido-script-irirmia_script_sra_file_maker.pl"><span class="header-section-number">1.3</span> Contenido Script Irirmia_Script_SRA_File_maker.pl</a>
+  <ul class="collapse">
+  <li><a href="#código" id="toc-código" class="nav-link" data-scroll-target="#código"><span class="header-section-number">1.3.1</span> Código</a></li>
+  <li><a href="#explicación-del-script" id="toc-explicación-del-script" class="nav-link" data-scroll-target="#explicación-del-script"><span class="header-section-number">1.3.2</span> Explicación del Script</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#elección-de-bbdd-a-analizar" id="toc-elección-de-bbdd-a-analizar" class="nav-link" data-scroll-target="#elección-de-bbdd-a-analizar"><span class="header-section-number">2</span> Elección de BBDD a analizar</a>
+  <ul class="collapse">
+  <li><a href="#caso-1" id="toc-caso-1" class="nav-link" data-scroll-target="#caso-1"><span class="header-section-number">2.1</span> Caso 1</a></li>
+  <li><a href="#caso-2" id="toc-caso-2" class="nav-link" data-scroll-target="#caso-2"><span class="header-section-number">2.2</span> Caso 2</a></li>
+  <li><a href="#caso-3" id="toc-caso-3" class="nav-link" data-scroll-target="#caso-3"><span class="header-section-number">2.3</span> Caso 3</a></li>
+  <li><a href="#caso-4" id="toc-caso-4" class="nav-link" data-scroll-target="#caso-4"><span class="header-section-number">2.4</span> Caso 4</a></li>
+  <li><a href="#caso-5" id="toc-caso-5" class="nav-link" data-scroll-target="#caso-5"><span class="header-section-number">2.5</span> Caso 5</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Como descargar datos de repositorios on-line</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Francisco Porcel-Pastrana </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Para buscar RNAseq disponibles on-line es aquí me han recomendado acceder a NCBI, a la sección <a href="https://www.ncbi.nlm.nih.gov/sra">SRA</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 1</figcaption>
+</figure>
+</div>
+<p>Aquí realizamos la búsqueda que queramos. Veremos que muchos títulos, esto se debe a que lo que nos aparece son muestras de experimetos, no experimentos completos (como sucede en GEO). Es por ello por lo que en todo momento estamos viendo dónde se ha secuenciado la muestra, el número de reads (spots), el número de bases y lo que pesa cada archivo.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture2.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 2</figcaption>
+</figure>
+</div>
+<p>Cuando tengamos un candidato de muestra de interés clickamos y acedemos a la siguiente pantalla:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture3.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 3</figcaption>
+</figure>
+</div>
+<p>Dónde <strong><em>1</em></strong>) es el nombre que recibe el proyecto y donde tendremos toda la información asociada al mismo, tanto publicación (si está publicado), como accesos a GEO (si la tiene, que normalmente si) y accesos a la misma información que <strong><em>2</em></strong>). Esta información se trata de un listado de los SRA de las muestras secuenciadas en este experimento. Tenemos que clickar en <strong><em>2</em></strong> para ver este listado, que es lo que nos interesa.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture4.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 4</figcaption>
+</figure>
+</div>
+<p>Una vez aquí nos saldrá el Run Selector (hay veces que no aparecer pero no pasa nada, no es imprescindible hacer este paso), donde podremos ver las propiedades del experimento:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture5.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 5</figcaption>
+</figure>
+</div>
+<p>Aquí tenemos toda la información del experimento (en common Fields) al que pertenecen las muestras. Esta información es muy útil para generar un documento excel para recopilar información de posibles RNAseq a analizar (dejo el ejemplo del que he creado yo):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture6.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 6</figcaption>
+</figure>
+</div>
+<p>Es recomendable dejar los hipervínculos para luego facilitar el trabajo a la hora de buscar los datos. Continuaremos trabajando como ejemplo con el experimento que he ido mostrado en las ilustraciones. El siguiente paso es descargar un .csv con los accession de los SRA que vamos a analizar en la primera columna. Para ello tenemos que tener buscado en el NIH/SRA el código SRA del estudio al que están asociadas las muestras (tal y como se ve en la ilustración 1). Una vez aquí, clickamos en “Send to”, seleccionamos “File” y en formato seleccionamos “Accession List”, tal y como se observa en la Ilustración 1, y le damos a <code>Create File</code>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture7.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 7</figcaption>
+</figure>
+</div>
+<p>Nos quedaría el siguiente (1), del cual tendríamos que eliminar la primera fila para que quede como (2) de forma definitiva.</p>
+<p><strong>!!Comienzsa la programación!!</strong> <em>O no.. depende de ti jeje</em></p>
+<section id="preparación-de-datos-para-evaluar-su-uso" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Preparación de datos para evaluar su uso</h1>
+<p>El siguiente paso consiste en la descarga de los SRR de cada muestra del experimento que lo hacen con un archivo <em>perl</em> (en el último subapartado de este apartado viene tanto el código como la explicación del mismo) que se puede ejecutar directamente en bash (Linux y Mac) pero para Windows hay que hacer unas cosas antes (está en su correspondiente apartado).</p>
+<p>Realmente este apartado no es estrictamente necesario hacerlo mediante códigos ya que es extraer información de la web y ponerla en un Excel para así ver que proyecto es el que podemos utilizar para nuestros análisis y de qué manera.</p>
+<p>Tras el procesamiento de datos (explicado previamente y desglosado en los apartados siguientes) tenemos que crear en distintas hojas del mismo Excel que habíamos creado en la recopilación de datos y en cada hoja guardaremos los distintos datos correspondientes a cada muestra de la siguiente manera (con los comandos perl obtenemos la info en un <code>.txt</code> y es simplemente copiar y pegar en la hoja):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture8.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 8</figcaption>
+</figure>
+</div>
+<p>Si se quiere obtener a mano esta información debemos de buscar la información de los encabezados. La primera columna (1) va a ser el listado de muestras que hemos generado en el .csv anterior. La segunda columna son los nombres de las muestras (2), los cuales podemos utilizar o bien el nombre con el que esté subido en SRA o bien podemos cambiarlo nosotros como queramos (este nombre ya va a ser de nuestro análisis a partir de ahora). Para obtener la columna del número de spots (4) de cada muestra lo tenemos en el SRR de la muestra buscando en SRA:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture9.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 9</figcaption>
+</figure>
+</div>
+<p>En esta misma página tenemos que clicar en el SSR del run (rodeado con un círculo en la imagen anterior) para obtener el resto de información. Esto nos dirigirá a la siguiente página, donde he indicado con números de dónde coger la info:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture10.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 10</figcaption>
+</figure>
+</div>
+<section id="comando-perl-de-descarga-de-datos-para-linux-y-mac" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="comando-perl-de-descarga-de-datos-para-linux-y-mac"><span class="header-section-number">1.1</span> Comando Perl de descarga de datos para Linux y Mac</h2>
+<p>Para trabajar con este script y tener la información ordenada es recomendable crear una carpeta en el escritorio con un nombre sin espacios. En esta carpeta tenemos que introducir un <code>.csv</code> con los accession que hemos preparado previamente. Para ejecutarlo, el comando es el siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>perl Irimia_Script_SRA_File_maker.pl SraAccList.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Donde, - Perl Abre las funciones del lenguaje perl. - <code>Irimia_Script_SRA_File_maker.pl</code> es el script que se va ejecutar. - <code>SraAccList.csv</code> es el documento csv que nos bajamos con los accesion de las muestras de un experimento.</p>
+</section>
+<section id="comando-perl-de-descarga-de-datos-para-windows" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="comando-perl-de-descarga-de-datos-para-windows"><span class="header-section-number">1.2</span> Comando Perl de descarga de datos para Windows</h2>
+<p>Para utilizar Perl en Windows hay que descargar <a href="https://strawberryperl.com/">“Strawberry”</a> e instalarlo en <code>C\:</code> (siguiendo las recomendaciones de instalación en todo momento).</p>
+<p>Una vez lo hemos instalado podremos utilizar el lenguaje Perl en nuestro ordenador Windows. Para poder utilizarlo tenemos leer el script de descarga automática (<code>Irirmia_Script_SRA_File_maker.pl</code>).</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para visualizar el script (no es necesario modificar nada del script) es recomendable descargarse un visualizador de documentos. En Windows hay un visualizador bastante cómodo de utilizar que es el <a href="https://code.visualstudio.com/">“Visual Studio Code”</a>.</p>
+</div>
+</div>
+<p>Para trabajar con este script y tener la información ordenada es recomendable crear una carpeta en el escritorio con un <strong>nombre sin espacios</strong> (por ejemplo, yo puse “Visual_Studio_Folders”. En esta carpeta tenemos que introducir un <code>.csv</code> con los accession.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este archivo lo tenemos que colocar en la misma carpeta que el script (la que hemos creado para utilizar Perl)</p>
+</div>
+</div>
+<p>Una vez tenemos esta carpeta con los documentos adecuados abrimos el terminal de Windows (buscamos cmd) y nos vamos a la carpeta que hemos creado con estos archivos y lo ejecutamos con la misma sintaxis que para Linux.</p>
+<section id="problemas-de-windows" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="problemas-de-windows"><span class="header-section-number">1.2.1</span> Problemas de windows</h3>
+<p>Es posible que si estamos utilizando el cmd de windows nos de el siguiente error:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="st">"wget"</span> no se reconoce como un comando interno o externo, programa o archivo por lotes ejecutable.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>En este caso necesitamos instalar esta función como función ejecutable. Para ello debemos seguir las instrucciones de la siguiente <a href="https://www.jcchouinard.com/wget/">página web</a></p>
+<p>En esta página nos tenemos que ir al apartado siguiente (y ver el video):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture11.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 11</figcaption>
+</figure>
+</div>
+<p>Por si acaso, dejo también el enlace tanto del <a href="https://youtu.be/cvvcG1a7dOM">video en youtube</a> como de la página de descarga (hay que descargar el de x64 bits, https://eternallybored.org/misc/wget/)</p>
+<p>Por algún motivo no se me ha descargado (por error 404 al intentar acceder a la pag web) pero no pasa nada porque voy a empezar a trabajar en el superordenador que va con Linux y así se me acaban los problemas.</p>
+</section>
+</section>
+<section id="contenido-script-irirmia_script_sra_file_maker.pl" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="contenido-script-irirmia_script_sra_file_maker.pl"><span class="header-section-number">1.3</span> Contenido Script Irirmia_Script_SRA_File_maker.pl</h2>
+<section id="código" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="código"><span class="header-section-number">1.3.1</span> Código</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">open</span> (I, <span class="sc">$</span>ARGV[<span class="dv">0</span>]);</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">open</span> (O, <span class="st">"&gt;$ARGV[0].out"</span>);</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>system <span class="st">"mkdir SRA"</span> <span class="fu">unless</span> (<span class="sc">-</span>e <span class="st">"SRA"</span>);</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="sc">&lt;</span>I<span class="sc">&gt;</span>){</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    s<span class="sc">/</span>\r<span class="sc">/</span><span class="er">/</span>g;</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    s<span class="sc">/</span>\<span class="st">"//g;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="st">    ($sra)=/(.+)/;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="st">    sleep 2 unless (-e "</span><span class="sc">$</span>sra<span class="st">" || -e "</span>SRA<span class="sc">/</span><span class="er">$</span>sra<span class="st">");</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="st">    system "</span>wget https<span class="sc">:</span><span class="er">//</span>www.ncbi.nlm.nih.gov<span class="sc">/</span>sra<span class="sc">/</span><span class="er">$</span>sra <span class="sc">-</span>O SRA<span class="sc">/</span><span class="er">$</span>sra<span class="st">" unless (-e "</span><span class="sc">$</span>sra<span class="st">" || -e "</span>SRA<span class="sc">/</span><span class="er">$</span>sra<span class="st">");</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="st">    open (F, "</span>SRA<span class="sc">/</span><span class="er">$</span>sra<span class="st">");</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="st">    $/="";</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="st">    $PE=$n_reads=$all_info="";</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="st">    while (&lt;F&gt;){</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="st">    if (/$sra\&lt;\/a\&gt;\&lt;\/td\&gt;\&lt;td align\=</span><span class="sc">\"</span><span class="st">right</span><span class="sc">\"</span><span class="st">\&gt;(.+?)\&lt;\/td\&gt;\&lt;td align\=</span><span class="sc">\"</span><span class="st">right</span><span class="sc">\"</span><span class="st">\&gt;(.+?)\&lt;\/td\&gt;\&lt;td align/){$n_reads=$1;$bases=$2;}</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="st">    if (/(\&gt;Sample\: .+?)\&gt;Library\:/){$all_info1=$1;}</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="st">    if (/(\&gt;Library\: .+?)\&gt;Runs\:/){$all_info2=$1;}</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="st">    if (/Layout\: \&lt;span\&gt;PAIRED\&lt;\/span\&gt;/){$PE="</span>PE<span class="st">";}</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="st">    elsif (/Layout\: \&lt;span\&gt;SINGLE\&lt;\/span\&gt;/){$PE="</span>SE<span class="st">";}</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="st">    close F;</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="st">    $/="</span>\n<span class="st">";</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="st">    ($bp,$mult)=$bases=~/(.+)(\w)$/;</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="st">    $bases=$bp*1000 if $mult eq "</span>K<span class="st">";</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="st">    $bases=$bp*1000000 if $mult eq "</span>M<span class="st">";</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="st">    $bases=$bp*1000000000 if $mult eq "</span>G<span class="st">";</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="st">    </span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="st">    $n_readsT=$n_reads;</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="st">    $n_readsT=~s/\,//g;</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="st">    $le=sprintf("</span>%.0f<span class="st">",$bases/$n_readsT) if $n_readsT&gt;0;</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="st">    $le="</span>NA<span class="st">" if $n_readsT==0;</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="st">    ($info1)=$all_info1=~/\&gt;Sample\:.+?\&gt;(.+?)\&lt;/;</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="st">    ($info2)=$all_info2=~/\&gt;Name\:.+?\&gt;(.+?)\&lt;/;</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="st"> </span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="st">    print O "</span><span class="sc">$</span>sra\t<span class="sc">$</span>info1\t<span class="sc">$</span>info2\t<span class="sc">$</span>n_reads\t<span class="sc">$</span>le\t<span class="sc">$</span>PE\n<span class="st">";</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="st">exit;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="explicación-del-script" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="explicación-del-script"><span class="header-section-number">1.3.2</span> Explicación del Script</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">open</span> (I, <span class="sc">$</span>ARGV[<span class="dv">0</span>]);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li><p><code>open</code>: open es una función incorporada en Perl que se utiliza para abrir archivos o comandos externos. Permite interactuar con archivos para lectura, escritura o ambas.</p></li>
+<li><p><code>(I, $ARGV[0])</code>: Esta parte de la función open toma dos argumentos encerrados entre paréntesis.</p></li>
+</ol>
+<ul>
+<li><p><code>I</code>: El primer argumento, I, es un identificador de archivo o “filehandle”. En Perl, los filehandles son como variables que representan archivos abiertos. En este caso, I se utiliza como el filehandle para referirse al archivo abierto.</p></li>
+<li><p><code>\$ARGV[0]</code>: El segundo argumento, <code>\$ARGV[0]</code>, es una variable de tipo array. <code>\$ARGV</code> es un array especial en Perl que contiene los argumentos de línea de comandos proporcionados a tu script de Perl. <code>\$ARGV[0]</code> se refiere específicamente al primer argumento de la línea de comandos, que generalmente es el nombre del archivo que deseas abrir. Por lo tanto, <code>\$ARGV[0]</code> es el nombre del archivo que deseas abrir.</p></li>
+</ul>
+<p>La línea que proporcionaste, <code>open (I, $ARGV[0])</code>, abre el archivo cuyo nombre se proporciona como el primer argumento de línea de comandos cuando ejecutas el script de Perl y lo asocia con el filehandle <code>I</code>. Después de esta línea, puedes leer o escribir en el archivo utilizando el filehandle <code>I</code>.</p>
+<p>Por ejemplo, puedes leer líneas del archivo de la siguiente manera:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="sc">&lt;</span>I<span class="sc">&gt;</span>) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Procesar cada línea del archivo abierto</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    print <span class="sc">$</span>_;  <span class="co"># Imprimir la línea</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Luego habría que cerrar el archivo con: <code>close(I)</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">open</span> (O, <span class="st">"&gt;$ARGV[0].out"</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Aquí está la explicación: 1. <code>open</code>: Al igual que en la línea anterior, open es una función incorporada en Perl que se utiliza para abrir archivos o realizar operaciones de archivo. 2. <code>(O, "&gt;$ARGV[0].out")</code>: Esta parte de la función open toma dos argumentos encerrados entre paréntesis. - <code>O</code>: El primer argumento, O, es un identificador de archivo o “filehandle”. Al igual que en el ejemplo anterior, se utiliza como un filehandle que representará al archivo que estamos a punto de abrir. - <code>&gt;\$ARGV[0].out</code>: El segundo argumento es una cadena de texto que define cómo se abrirá el archivo. En este caso, la cadena contiene “&gt;”, que indica que el archivo se abrirá en modo escritura (output), y <code>\$ARGV[0].out</code>, que es el nombre del archivo de salida. <code>$ARGV[0]</code> se refiere al primer argumento de la línea de comandos que generalmente es el nombre del archivo de entrada, y .out es una extensión que se agrega para el archivo de salida.</p>
+<p>Entonces, la línea open <code>(O, "&gt;\$ARGV[0].out")</code>; está abriendo un archivo para escritura. Si <code>\$ARGV[0]</code> fuera, por ejemplo, “entrada.txt”, esta línea crearía un nuevo archivo llamado “entrada.txt.out” (o con la extensión que hayas especificado) y asociaría el filehandle <code>O</code> con este archivo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>system <span class="st">"mkdir SRA"</span> <span class="fu">unless</span> (<span class="sc">-</span>e <span class="st">"SRA"</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Explicación: 1. <code>system</code>: es una función en Perl que te permite ejecutar comandos del sistema operativo desde tu script de Perl. Puedes proporcionarle un comando entre comillas, y Perl lo ejecutará en el sistema operativo. 2. <code>mkdir SRA</code>: Este es el comando que se ejecutará en el sistema operativo. En este caso, se trata del comando <code>mkdir</code>, que se utiliza para crear directorios (carpetas) en el sistema de archivos. <code>mkdir SRA</code> significa que se intentará crear un directorio llamado “SRA” en el directorio actual. 3. <code>unless (-e "SRA")</code>: Esta parte de la línea es una condición que se evalúa antes de ejecutar el comando <code>mkdir</code>. La condición verifica si el directorio “SRA” no existe en el sistema de archivos. Para hacerlo, utiliza <code>-e</code>, que es un operador de archivo en Perl que verifica si un archivo o directorio existe. Si el directorio “SRA” no existe (unless significa “a menos que” o “si no”), entonces se ejecuta el comando <code>mkdir SRA</code> para crear el directorio. En resumen, la línea <code>system "mkdir SRA" unless (-e "SRA")</code>; comprueba si el directorio “SRA” ya existe en el sistema de archivos. Si no existe, crea el directorio utilizando el comando del sistema <code>mkdir</code>. Esto es útil para asegurarse de que un directorio necesario esté presente antes de realizar alguna operación que dependa de su existencia en tu script de Perl.</p>
+<p>A continuación: 1. El script entra en un bucle <code>while</code> que lee líneas del archivo abierto para lectura <code>(I)</code>. Las líneas leídas se procesan de la siguiente manera: - Se eliminan los caracteres de retorno de carro <code>\r</code> y las comillas dobles ” de cada línea. - Se extrae el valor entre paréntesis <code>( )</code> en la variable $sra. 2. Después, el script espera 2 segundos (con <code>sleep 2</code>) si no se encuentra un archivo con el nombre almacenado en $sra en el directorio actual o en el directorio “SRA”. Esto parece ser una pausa para dar tiempo a que el archivo se descargue antes de continuar. 3. Si el archivo no existe en ninguno de los dos directorios, se utiliza el comando <code>system</code> para descargar el archivo desde el sitio web del NCBI y guardarlo en el directorio “SRA”. 4. Luego, se abre el archivo recién descargado <code>(SRA/\$sra)</code> y se procesa su contenido para extraer información relevante, como el número de lecturas, la cantidad de bases, el tipo de lecturas (pareadas o no), etc. 5. Se realiza una serie de transformaciones y cálculos en los datos extraídos, como la conversión de unidades de bases (K, M, G) a números enteros y el cálculo de la longitud promedio de las lecturas <code>(\$le)</code>. 6. Finalmente, se extraen más información de las variables <code>\$all_info1</code> y <code>\$all_info2</code>, se formatea y se imprime en el archivo de salida (O) junto con otros datos procesados. 7. El script continúa procesando el siguiente conjunto de datos en el archivo de entrada hasta que se llega al final del archivo. 8. Finalmente, el script sale con la instrucción <code>exit</code>, lo que indica que ha terminado su tarea.</p>
+<p>En resumen, este script se utiliza para descargar información sobre secuencias de ADN desde el NCBI, procesar esos datos y guardarlos en un archivo de salida para su posterior análisis.</p>
+</section>
+</section>
+</section>
+<section id="elección-de-bbdd-a-analizar" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Elección de BBDD a analizar</h1>
+<p>Todos los ejemplos de comentarios son para análisis de splicing alternativo (SA), para un análisis bulk se podrían utilizar todos.</p>
+<p>Para splicing alternativo vamos a ver distintas opciones (ejemplos reales) y los requerimientos necesarios mínimo para realizar este tipo de análisis de forma robusta, así como posibles soluciones para poder utilizar los datos.</p>
+<section id="caso-1" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="caso-1"><span class="header-section-number">2.1</span> Caso 1</h2>
+<p>Este primer caso es el que he estado utilizando como ejemplo hasta ahora mismo. Los datos serían los siguientes</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture12.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 12</figcaption>
+</figure>
+</div>
+<p>Si nos fijamos tenemos un gran problema a resolver: El número de spots es muy bajo. SE significa que es Single End, es decir, que solo se ha hecho una lectura del fragmento (en dirección 3’-&gt;5’ por lo que el número de Spots es el número real de lecturas que se han hecho (luego veremos un ejemplo para Paird End, PE). <strong>Para un análisis adecuado de splicing alternativo necesitamos un mínimo de 100 M de spots</strong> (aunque podemos bajar a 75 M como mucho). Una posible solución es juntar muestras.</p>
+<p>Otro problema que tenemos con estos datos es que la Read_Average_Length tiene en algunas muestras menos de 50 y <strong>para un análisis de AS tenemos que tener una longitud de lectura de 50</strong> de manera que esas muestras no las podemos utilizar, lo que reduce las posibilidades de poder llegar al mínimo al juntar las muestras.</p>
+<p>Una explicación más detallada del tratamiento de datos de este caso la podrás encontrar en la carpeta “Casos_Practicos_SA/Caso_1”.</p>
+</section>
+<section id="caso-2" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="caso-2"><span class="header-section-number">2.2</span> Caso 2</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture13.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 13</figcaption>
+</figure>
+</div>
+<p>Podemos ver que en este caso no tenemos Library Name pero no pasa nada, no es imprescindible realmente. En este caso, la longitud de lectura es adecuada ya que todas tienen una media superior a 50. Tenemos una secuenciación SE (Single-End) de nuevo de manera que la Avg_Lenght es la que estamos viendo. Volvemos a tener el problema de tener un número de lecturas muy reducido pero en este caso cada muestra es una condición distinta de manera que agruparlas no sería correcto. En este caso no se podría realizar un análisis de SA.</p>
+</section>
+<section id="caso-3" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="caso-3"><span class="header-section-number">2.3</span> Caso 3</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture14.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 14</figcaption>
+</figure>
+</div>
+<p>Podemos ver que en este caso no tenemos Library Name pero no pasa nada, no es imprescindible realmente. En este caso, tenemos una secuenciación Paird-end (PE) de manera que la longitud de lectura es adecuada es la mitad de lo que estamos viendo ya que en este tipo de secuenciación, la lectura se hace tanto en dirección 5’3’ como en dirección 3’5’. Este tipo de secuenciación es bastante más robusta y fiable que la SE. Todas tienen una media superior a 50 si dividimos el Avg_Lenght entre 2 (de hecho todos están sobre 80-90). Volvemos a tener el problema de tener un número de lecturas muy reducido pero en este caso si podemos intentar agrupar los pacientes mediante clustering no dirigido para agrupar en 3 y 4 aquellos que más se parezcan y así poder tener un análisis 2 vs 2. En este caso si se podría realizar un análisis de SA. Una explicación más detallada del tratamiento de datos de este caso la podrás encontrar en la carpeta “Casos_Practicos_SA/Caso_3”.</p>
+</section>
+<section id="caso-4" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="caso-4"><span class="header-section-number">2.4</span> Caso 4</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture15.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 15</figcaption>
+</figure>
+</div>
+<p>En este caso tenemos una cohorte de 8 pacientes todos ellos con la misma patología. Dado que no podemos ver condiciones entre ellos (a simple vista, podríamos buscar los fenotipos de los pacientes e identificar grupos de comparación) no es un buen ejemplo para comenzar a analizar.</p>
+</section>
+<section id="caso-5" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="caso-5"><span class="header-section-number">2.5</span> Caso 5</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/picture16.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 16</figcaption>
+</figure>
+</div>
+<p>En este caso, tenemos una secuenciación Paird-end (PE) de manera todas tienen una media superior a 50 si dividimos el Avg_Lenght entre 2 (de hecho todos están sobre 75). En este caso hay un número de lecturas bastante bueno, de entorno a 100 M todos ellos. En este caso se podría realizar un análisis de SA. <strong>De hecho es el mejor para empezar a practicar de manera que este será el Dataset que utilizaré para continuar el proceso y las explicaciones.</strong></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

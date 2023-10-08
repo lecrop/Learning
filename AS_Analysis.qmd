@@ -1,0 +1,425 @@
+---
+title: "Alternative Splicing"
+
+author: "Francisco Porcel-Pastrana"
+
+format:
+  html:
+    toc: true
+    toc-expand: 4
+    toc-location: left
+    number-sections: true
+    html-math-method: katex
+    number-depth: 4
+    css: styles.css
+---
+
+# Matt
+[Matt](https://gitlab.com/aghr/matt) es un paquete diseñado por Dr. Manuel Irimia para el análisis de eventos de splicing alternativo. Incluye funciones básicas para la manipulación de tablas, extracción de características relacionadas con exones e intrones, análisis de características discriminantes, mapas de motivos para proteínas de unión a ARN, etc. Cita:
+
+Gohr, M. Irimia Matt: Unix tools for alternative splicing analysis, Bioinformatics, 2019, DOI: 10.1093/bioinformatics/bty606
+
+::: {.callout-important}
+# **Trabajamos en Terminal**
+:::
+
+## Instalación de matt
+En el terminal, nos movemos a la carpeta donde queramos guardar Matt en nuestro ordenador o superordenador. Una vez ahí tenemos que crear un clon del repositorio de git:
+```{r, eval=FALSE}
+git clone https://gitlab.com/aghr/matt.git
+```
+
+A continuación, tenemos que ejecutar el script de instalación:
+```{r, eval=FALSE}
+chmod u+rwx ./INSTALL
+```
+
+Y corremos el script:
+```{r, eval=FALSE}
+./INSTALL
+```
+
+Una vez tengamos instalado Matt temenos que hacer que sus funciones formen parte del PATH para que se pueda ejecutar desde cualquier carpeta. Esto lo hacemos con la siguiente línea de comandos:
+```{r, eval=FALSE}
+export PATH=~/directorio/donde/hayas/guardado/matt:$PATH
+echo 'export PATH=~ directorio/donde/hayas/guardado/matt:$PATH' >> ~/.bashrc
+```
+
+Para comprobar que temenos matt instalado Podemos hacer la prueba de esctibir en el terminal el propio nombre:
+```{r, eval=FALSE}
+matt
+```
+
+Y el output que nos debe devolver es el siguiente:
+```{r, eval=FALSE}
+Matt v. 1.3.1
+
+Usage: matt <command> ...
+
+Commands:
+
+*Import data / check table                             *Maths and statistics
+  chk_nls:  check newlines in table                      col_calc:  apply calculations to columns
+.
+.
+..
+.
+.
+  test_regexp_enrich: test REGEXP enrichment
+
+Attention: Tables processed by Matt must contain a header with column names and must not contain " characters with exception of regular expressions. All other " characters will be ignored and removed. When using MS Excel for table generation, please save tables in format Windows Text. Matt recognizes Windows newlines, but not DOS nor old-style MacOS newlines (CR or \r only). Use command chk_nls to see and check newlines in tables.
+```
+
+Una vez instalado matt, es necesario comprobar que temenos instalado una de las herramientas del NCBI que es la que utiliza para funcionar: SRA-Tool Kit. 
+
+## Instalación de SRA-Toolkit
+Para comprobar si la temenos, en debemos hacer la prueba de esctibir en el terminal una de sus funciones, como por ejemplo:
+```{r, eval=FALSE}
+sra
+```
+
+Y el output que nos debe devolver es el siguiente:
+```{r, eval=FALSE}
+sra-pileup             sra-search.3           sra-sort-cg.3.0.7      sra-stat.3.0.7         sratools.3.0.7
+sra-pileup-orig.3.0.7  sra-search.3.0.7       sra-sort.3             srapath
+sra-pileup.3           sra-sort               sra-sort.3.0.7         srapath-orig.3.0.7
+sra-pileup.3.0.7       sra-sort-cg            sra-stat               srapath.3
+sra-search             sra-sort-cg.3          sra-stat.3             srapath.3.0.7
+
+```
+
+También debemos comprobar la versión de que tenemos instalada (debe de ser superior a la 2.8.0):
+```{r, eval=FALSE}
+vdb-config –version
+```
+
+El output será el siguiente:
+```{r, eval=FALSE}
+SRA-Toolkit 3.0.7
+```
+
+Si tienes la última versión guay, sino tienes que instalarla mediante los siguientes comandos en el terminal (comando cogidos de la página oficial para Linux, si tienes Mac o Windows busca en la página principal de SRA ([enlace](https://github.com/ncbi/sra-tools/wiki/02.-Installing-SRA-Toolkit)) la forma de instalarlo).
+
+Primero descargamos la herramienta (recomendable crear una carpeta donde meterlo)
+```{r, eval=FALSE}
+wget --output-document sratoolkit.tar.gz https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/current/sratoolkit.current-ubuntu64.tar.gz
+```
+
+A continuación lo instalamos:
+```{r, eval=FALSE}
+tar -vxzf sratoolkit.tar.gz
+```
+
+A continuación metemos la herramienta en el PATH:
+```{r, eval=FALSE}
+export PATH=~/directorio/donde/hayas/guardado/sratoolkit.current-ubuntu64.tar.gz/bin:$PATH
+echo 'export PATH=~ directorio/donde/hayas/guardado/sratoolkit.current-ubuntu64.tar.gz/bin:$PATH' >> ~/.bashrc
+```
+
+A continuación es recommendable comprobar que funciona:
+```{r, eval=FALSE}
+which fastq-dump
+```
+
+El output será el siguiente:
+```{r, eval=FALSE}
+/Users/JoeUser/sratoolkit.current-ubuntu64.tar.gz/bin /fastq-dump
+```
+
+También podemos probar que sea funcional:
+```{r, eval=FALSE}
+fastq-dump --stdout -X 2 SRR390728
+```
+
+El output será el siguiente:
+```{r, eval=FALSE}
+Read 2 spots for SRR390728
+Written 2 spots for SRR390728
+@SRR390728.1 1 length=72
+CATTCTTCACGTAGTTCTCGAGCCTTGGTTTTCAGCGATGGAGAATGACTTTGACAAGCTGAGAGAAGNTNC
++SRR390728.1 1 length=72
+;;;;;;;;;;;;;;;;;;;;;;;;;;;9;;665142;;;;;;;;;;;;;;;;;;;;;;;;;;;;;96&&&&(
+@SRR390728.2 2 length=72
+AAGTAGGTCTCGTCTGTGTTTTCTACGAGCTTGTGTTCCAGCTGACCCACTCCCTGGGTGGGGGGACTGGGT
++SRR390728.2 2 length=72
+;;;;;;;;;;;;;;;;;4;;;;3;393.1+4&&5&&;;;;;;;;;;;;;;;;;;;;;<9;<;;;;;464262
+```
+
+::: {.callout-note}
+*Todo lo hecho a partir de aquí está en Terminal_9-14-23.txt*
+:::
+
+## Cargar los datos del dataset seleccionados
+Para cargar los datos vamos a usar una función de `matt` (`retr_rnaseq`) que permite al usuario recuperar datos de ARN-seq del Gene Expression Omnibus (GEO), un repositorio público donde muchos investigadores almacenan sus datos de ARN-seq relacionados con sus publicaciones. Teniendo a mano los números de acceso GEO de los conjuntos de datos RNA-seq, este comando descarga los archivos SRA, extrae las lecturas de ARN-seq como archivos FASTQ o FASTA y, si lo desea renombra los archivos FASTA/FASTQ extraídos como especifique el usuario.
+
+Para ello tenemos que crear un `.txt` (con los nombres separados por un tab) como en el ejemplo:
+
+![Imagen 1](./Images/Picture23.png)
+
+Una vez que lo tenemos creado tenemos que subirlo a la misma carpeta en la que vayamos a hacer la descarga de los datos y los análisis. El siguiente paso es descargar de GEO los `.gz` de las muestras seleccionadas:
+```{r, eval=FALSE}
+matt retr_rnaseq accession_numbers.txt -keepsra -o rnaseq_data -p 6
+```
+
+Con este comando lo que hacemos es que se descarguen lo indicado (indicando el documento en el que se encuentran los datos, sin borrar los archivos SRA (`-keepsra`) en una carpeta nueva (`-o rnaseq_data`) y que el trabajo se divida entre 6 cores del superordenador (`-p 6`)
+
+Este comando tarda bastante por lo que es recomendable usar los siguientes **comandos para poner en segundo plano un trabajo y desvincularlos de la sesión de trabajo**, lo cual es recomendable porque nos permitirá continuar trabajando en el servidor mientras se están ejecutando los trabajos mandados. Otra ventaja es que, al desvincularlos de la sesión de trabajo podremos cerrar el terminal sin preocuparnos de que se paren los procesos. Si cerráramos el terminal sin desvincular el trabajo de nuestra sesión (la sesión está asociada al terminal de trabajo) este trabajo se interrumpiría en el momento de cerrar el terminal (y, por lo tanto, la sesión). Para ello debemos ejecutar lo siguientes comandos:
+
+1. Ejecutamos el trabajo que queramos hacer, en nuestro caso usaremos el ejemplo anterior:
+```{r, eval=FALSE}
+matt retr_rnaseq accession_numbers.txt -keepsra -o rnaseq_data -p 6
+```
+
+2.	Tras esto comenzará a ejecutarse. En este momento tenemos que **parar el proceso** con la combinación de teclas `Control + z`. El output debe ser el siguiente:
+```{r, eval=FALSE}
+[1]+  Stopped                 matt retr_rnaseq accession_numbers.txt -keepsra -o rnaseq_data -p 6
+```
+
+3.	En este punto tendremos el proceso parado y podremos escribir comandos. Lo siguiente que debemos hacer es mandar el trabajo a **ejecutarse en segundo plano** (mandar al background) con el siguiente comando:
+```{r, eval=FALSE}
+bg
+
+#Output:
+
+[1]+ matt retr_rnaseq accession_numbers.txt -keepsra -o rnaseq_data -p 6 &
+  
+#Y significará que se ha reanudado la ejecución en segundo plano. 
+```
+
+::: {.callout-tip}
+Y significará que se ha reanudado la ejecución en segundo plano. 
+```{r, eval=FALSE}
+matt retr_rnaseq accession_numbers.txt -keepsra -o rnaseq_data -p 6 &
+```
+:::
+
+4.	Una vez que hayamos ejecutado el proceso en segundo plano pasamos al siguiente paso que es **desvincular el proceso del terminal** (sesión) en el que lo hemos corrido para que continúe ejecutándose si cerramos sesión. Para ello usamos el comando:
+```{r, eval=FALSE}
+disown
+```
+
+El output del terminal no se guardará en ningún lado si los cerramos (el terminal) de manera que si queremos dejar un proceso funcionando y luego poder consultar qué mensajes nos ha dado el proceso (para chequear si ha ido bien o ha habido algún error durante el procesamiento). Podemos hacer que los mensajes que saldrían en el terminal se guarden en un `.txt` para luego poder consultarlos utilizando el siguiente comando:
+```{r, eval=FALSE}
+Proceso_mandado_a_ejecutar 1>Nombre_que_le_quieras_poner_al_documento.out
+
+```
+
+Este comando debe de utilizarse de la siguiente manera (en el siguiente ejemplo mi documento se llamará documento_ejemplo.out y lo voy a ejecutar directamente en segundo plano con el comando “&” previamente explicado):
+```{r, eval=FALSE}
+matt retr_rnaseq accession_numbers.txt -keepsra -o rnaseq_data -p 6 1>documento_ejemplo.out &
+```
+
+Con esto haremos que se guarde un documento `.out` (que se puede leer como `.txt`) en la carpeta en la que estemos trabajando y que el proceso se lance directamente en segundo plano por lo que solo necesitaríamos aplicar el comando `disown` para desvincularlo de la sesión y podremos descuidarnos.
+
+Los datos se nos descargaran en la carpeta rnaseq_data que hemos escrito en el código ejecutado. Cuando finalice, accedemos a esa carpeta y ejecutamos el comando `ls` (para ver el listado de archivos que contiene esta carpeta) veremos lo siguiente:
+```{r, eval=FALSE}
+Basal_2_1.fastq.gz  	Luminal_1_1.fastq.gz     	Luminal_2_1.fastq.gz  	SRR1919599.sra  	SRR1919603.sra
+Basal_2_2.fastq.gz  	Luminal_2_2.fastq.gz  	SRR1919600.sra  		SRR1919604.sra	dataset_info.tab
+Basal_1_1.fastq.gz          	Basal_3_1.fastq.gz  		Luminal_3_1.fastq.gz  	SRR1919601.sra  	Basal_1_2.fastq.gz          
+Basal_3_2.fastq.gz  	Luminal_1_2.fastq.gz     	Luminal_3_2.fastq.gz  	SRR1919602.sra  
+
+```
+
+Una vez en este punto comenzaremos el alineamiento con Vast-Tools.
+
+# Vast-Tools
+**Vertebrate Alternative Splicing and Transcription Tools (VAST-TOOLS)** es un conjunto de herramientas para perfilar y comparar eventos de splicing alternativo en datos de RNA-Seq. Es especialmente adecuado para comparaciones evolutivas. Funciona en sinergia con el servidor web *VastDB* y *Matt*, un conjunto de herramientas para el análisis posterior del splicing alternativo.
+[Enlace a GitHub](https://github.com/vastgroup/vast-tools). Citas:
+
+- ***Capítulo de libro donde viene todo incluso un ejemplo***: Gohr, A., Mantica, F., Hermoso-Pulido, A., Tapial, J., Márquez, Y., & Irimia, M. (2022). Computational Analysis of Alternative Splicing Using VAST-TOOLS and the VastDB Framework. Methods in molecular biology (Clifton, N.J.), 2537, 97–128. https://doi.org/10.1007/978-1-0716-2521-7_7
+- ***Artículo original***: Irimia, M., Weatheritt, R.J., Ellis, J., Parikshak, N.N., Gonatopoulos-Pournatzis, T., Babor, M., Quesnel-Vallières, M., Tapial, J., Raj, B., O’Hanlon, D., Barrios-Rodiles, M., Sternberg, M.J.E., Cordes, S.P., Roth, F.P., Wrana, J.L., Geschwind, D.H., Blencowe, B.B. (2014). A highly conserved program of neuronal microexons is misregulated in autistic brains. Cell, 59:1511-23.
+- ***Artículo principal***: Tapial, J., Ha, K.C.H., Sterne-Weiler, T., Gohr, A., Braunschweig, U., Hermoso-Pulido, A., Quesnel-Vallières, M., Permanyer, J., Sodaei, R., Marquez, Y., Cozzuto, L., Wang, X., Gómez-Velázquez, M., Rayón, M., Manzanares, M., Ponomarenko, J., Blencowe, B.J., Irimia, M. (2017). An atlas of alternative splicing profiles and functional associations reveals new regulatory programs and genes that simultaneously express multiple major isoforms. Genome Res, 27(10):1759-1768
+- ***Artículo de análisis de Intron Retention***: Braunschweig, U., Barbosa-Morais, N.L., Pan, Q., Nachman, E., Alipahani, B., Gonatopoulos-Pournatzis, T., Frey, B., Irimia, M., Blencowe, B.J. (2014). Widespread intron retention in mammals functionally tunes transcriptomes. Genome Research, 24:1774-86
+
+::: {.callout-important}
+# **Trabajamos en Terminal**
+:::
+
+## Instalación de Vast-Tools
+En el terminal, tenemos que crear un clon del repositorio de git:
+```{r, eval=FALSE}
+git clone https://github.com/vastgroup/vast-tools.git
+```
+
+Esto nos va a crear una carpeta en el directorio donde hagamos la clonación que se llamará `vast-tools`. Debemos acceder a esta carpeta y tenemos que crear una nueva carpeta que se llame “VASTDB” (con el comando `mkdir VASTDB`) con el cual tenemos que ejecutar los siguientes comandos:
+```{r, eval=FALSE}
+wget https://vastdb.crg.eu/libs/vastdb.hs2.23.06.20.tar.gz
+
+wget https://vastdb.crg.eu/libs/vastdb.mm2.23.06.20.tar.gz
+
+wget https://vastdb.crg.eu/libs/vastdb.rno.23.06.20.tar.gz
+```
+
+Con esto hemos instalado las librerías para hacer el alineamiento en humano (última vesión del genoma), en ratón y en rata, respectivamente. Si necesitamos realizar alineamientos con otras especies hay que acceder el github de Vast-Tolols.
+
+Una vez hemos instalado esto tenemos que añadir Vast-Tools al PATH para que se pueda ejecutar desde cualquier carpeta. Esto lo hacemos con la siguiente línea de comandos:
+```{r, eval=FALSE}
+export PATH=~/directorio/donde/hayas/guardado/vast-tools:$PATH
+
+echo 'export PATH=~ directorio/donde/hayas/guardado/ vast-tools:$PATH' >> ~/.bashrc
+```
+
+Para comprobar que temenos `matt` instalado Podemos hacer la prueba de esctibir en el terminal el propio nombre:
+```{r, eval=FALSE}
+Vast-tools
+```
+
+Y el output que nos debe devolver es el siguiente:
+```{r, eval=FALSE}
+VAST-TOOLS v2.5.1
+
+Usage: vast-tools sub-commands [options]
+
+[sub-commands]
+        align           :       Align RNA-Seq reads to exon-exon junctions and quantify AS
+        merge           :       Merge vast-tool outputs from multiple sub-samples
+        combine         :       Combine two or more 'aligned' RNA-Seq samples into summary tables.
+.
+..
+.
+.
+Performance:
+  -o/--offrate <int> override offrate of index; must be >= index's offrate
+  -p/--threads <int> number of alignment threads to launch (default: 1)
+  --mm               use memory-mapped I/O for index; many 'bowtie's can share
+  --shmem            use shared mem for index; many 'bowtie's can share
+Other:
+  --seed <int>       seed for random number generator
+  --verbose          verbose output (for debugging)
+  --version          print version information and quit
+  -h/--help          print this usage message
+
+```
+
+También tenemos que instalar una serie de paquetes para R con los siguientes comandos:
+
+```{r, eval=FALSE}
+R -e 'install.packages(c("optparse", "RColorBrewer", "reshape2", "ggplot2", "devtools"))'
+
+R -e 'devtools::install_github("kcha/psiplot")'
+
+```
+
+::: {.callout-important}
+# **Continuamos trabajando en Terminal aunque sea con R**
+:::
+
+La instalación de estos paquetes pueden necesitar de la actualización e instalación de otros, de manera que tendremos que ir comprobando cuales son necesarios y e instalarlos (buscando en internet como instalarlos). Tuve bastantes problemas con esto así que podéis encontrar la solución en el documento del terminal de este día. Una vez instalado vast-tools, es necesario comprobar que tenemos instalado una herramienta de alineamiento: `bowtie`. 
+
+::: {.callout-note}
+*Todo lo hecho a partir de aquí está en Terminal_9-15-23.txt*
+:::
+
+## Instalación de bowtie
+Para comprobar si la temenos, en debemos hacer la prueba de esctibir en el terminal una de sus funciones, como por ejemplo:
+```{r, eval=FALSE}
+No index, query, or output file specified!
+Usage:
+bowtie [options]* <ebwt> {-1 <m1> -2 <m2> | --12 <r> | --interleaved <i> | <s>} [<hit>]
+
+  <m1>    Comma-separated list of files containing upstream mates (or the
+.
+.
+ Performance:
+  -o/--offrate <int> override offrate of index; must be >= index's offrate
+  -p/--threads <int> number of alignment threads to launch (default: 1)
+  --mm               use memory-mapped I/O for index; many 'bowtie's can share
+  --shmem            use shared mem for index; many 'bowtie's can share
+Other:
+  --seed <int>       seed for random number generator
+  --verbose          verbose output (for debugging)
+  --version          print version information and quit
+  -h/--help          print this usage message
+```
+
+También debemos comprobar la versión de que tenemos instalada (**debe de ser la versión 1**, tener cuidado porque también existe `bowtie2` y esa nos va a dar error). Para instalarlo tenemos que escribir los siguientes comandos:
+```{r, eval=FALSE}
+sudo apt-get update -y
+sudo apt-get install -y bowtie
+```
+
+Si está correctamente instalado todo pasamos al alineamiento con Vast-Tools.
+
+## Alineamineto para Splicing Alternativo (SA)
+Como hemos repetido, para el alineamiento vamos a utilizar la herramienta Vast-Tools. Para ello vamos a la carpeta en la que tengamos los archivos a analizar (tras procesarlos en matt) y allí ejecutamos el comando `vast-tool align` (que lo explicaré con sus argumentos a continuación con la imgen 2):
+```{r, eval=FALSE}
+vast-tools align Luminal_1_1.fastq.gz Luminal_1_2.fastq.gz -sp Hs2 -o Vast-Tool_Align --expr --IR_version 2 -c 8 -n Luminal_1 
+```
+
+![Imagen 2](./Images/Picture24.png)
+
+::: {.callout-tip title="Nota 1"}
+Este ejemplo es para cuando tenemos análisis Pair-end, de manera que tendremos un archivo (“Luminal_1_1.fastq.gz”) para la secuenciación 3’5’ y otro (“Luminal_1_2.fastq.gz”) para la secuenciación 5’3’. Si tuviéramos un análisis Single-end solo tendríamos que poner el único archivo que se nos hubiera descargado para esa muestra.
+:::
+
+::: {.callout-tip title="Nota 2"}
+Este ejemplo es para cuando tenemos análisis Pair-end, de manera que tendremos un archivo (“Luminal_1_1.fastq.gz”) para la secuenciación 3’->5’ y otro (“Luminal_1_2.fastq.gz”) para la secuenciación 5’->3’. Si tuviéramos un análisis Single-end solo tendríamos que poner el único archivo que se nos hubiera descargado para esa muestra.
+:::
+
+Realmente el código que yo he corrido es el siguiente para añadir funciones (previamente explicadas):
+```{r, eval=FALSE}
+vast-tools align Luminal_1_1.fastq.gz Luminal_1_2.fastq.gz -sp Hs2top -o Vast-Tool_Align --expr --IR_version 2 -c 8 -n Luminal_1 1>Alineamiento_luminal_1.out &
+```
+
+Con esto le añado al final el comando `1>Alineamiento_luminal_1.out` para que me genere un archivo con los mensajes del terminal t así luego poder chequearlos y el comando `&` para que lo ejecute en segundo plano y así poder seguir usando el terminal (si quisiera desvincularlo a mi sesión ahora podría utilizar `disown` y podría cerrar el terminal sin miedo a parar el proceso).
+
+## Generación de los PSIs (Percent Spliced-In)
+
+::: {.callout-note}
+*Todo lo hecho a partir de aquí está en Terminal_9-18-23.txt*
+:::
+
+El siguiente paso es combinar en una tabla todos los eventos de cada muestra. Para ello usaremos el comando `vast-tools combine`. Para utilizar este comando tenemos que estar en la carpeta que contenga la carpeta donde se han generado los alineamientos (la generada tiene que contener la subcarpeta llamada `to_compare`):
+```{r, eval=FALSE}
+vast-tools combine -sp Hs2 -o Vast-Tool_Aling –cores 6
+```
+
+El comando combinará teniendo en cuenta la versión del genoma humano -hg38- (-sp Hs2). Con el argumento `-o <directorio>` indicamos la carpeta que contiene los archivos a analizar. Tiene que ser la carpeta previamente mencionada, la que contiene la subcarpeta llamada “to_compare” (que coincide con la que pusimos en el argumento `-o` en el comando del alineamiento (el paso anterior). Con el argumento `–cores <nº_cores>` indicamos el número de cores o CPUs del superordenador que queremos que se utilicen para este proceso (por defecto se utiliza 1, con 6 va bastante rápido y en 3-5 min está hecho).
+Para más opciones siempre podemos consultar la ayuda del comando con
+```{r, eval=FALSE}
+vast-tools combine -h
+```
+
+## Comparaicón entre grupos
+Para la comparación entre grupos y las consecutivas gráficas tendremos que instalar-actualizar bastantes paquetes de R que se nos habrá indicado en el output del proceso anterior. Instalarlos todos antes de continuar.
+Una vez instalados todos los paquetes que necesitaremos procedemos al proceso de comparación con el comando “vast-tools compare”, el cual lo tenemos que ejecutar en la carpeta en la que hemos generado la combinación (en nuestro caso, y siguiendo con el ejemplo, tendremos que acceder a la carpeta `Vast-Tool_Aling`):
+```{r, eval=FALSE}
+vast-tools compare INCLUSION_LEVELS_FULL-hg38-6.tab -a Basal_1,Basal_2,Basal_3 -name_A Basal_Cells 
+-b Luminal_1,Luminal_2,Luminal_3 -name_B Luminal_Cells -sp Hs2 --print_dPSI 
+--GO --print_sets --min_dPSI 25 --min_range 5
+
+```
+
+Los argumentos utilizados definen lo siguiente:
+
+-	`INCLUSION_LEVELS_FULL-especie_y_version que hayamos utilizado-nº_muestras_procesadas.tab`, Este primer argumento se utiliza para indicar dónde se encuentran los datos. Estos datos se encuentran en un archivo que se ha generado con la función `to_compare` previamente en la carpeta que habíamos indicado, por eso teníamos que acceder a dicha carpeta (en nuestro caso `Vast-Tool_Aling`)
+
+-	`-a muestra_1,muestra_2,muestra_3`, en este argumento tenemos que añadir todas las muestras que pertenezcan a este grupo, separadas por comas y sin espacios.
+-	`-name_A Nombre_Grupo_A`, Nombre que le queremos dar al grupo de muestras incluidas en el grupo “a”.
+
+-	`-b muestra_1,muestra_2,muestra_3`, en este argumento tenemos que añadir todas las muestras que pertenezcan a este grupo, separadas por comas y sin espacios.
+
+- `-name_B Nombre_Grupo_B`, Nombre que le queremos dar al grupo de muestras incluidas en el grupo “b”.
+
+-	`-Hs2`
+
+-	`--print_dPSI`
+
+-	`--GO`
+
+-	`--print_sets`
+
+-	`--min_dPSI`
+
+-	`--min_range`
+
+
+
+
+
+
+
+
+
+
+

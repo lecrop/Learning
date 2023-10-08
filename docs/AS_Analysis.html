@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Francisco Porcel-Pastrana">
+
+<title>Learning - Alternative Splicing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Learning</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Búsqueda en BBDDs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./RNAseq.html" rel="" target="">
+ <span class="menu-text">Bulk RNAseq</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./AS_Analysis.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Alternative Splicing</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="4">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#matt" id="toc-matt" class="nav-link active" data-scroll-target="#matt"><span class="header-section-number">1</span> Matt</a>
+  <ul class="collapse">
+  <li><a href="#instalación-de-matt" id="toc-instalación-de-matt" class="nav-link" data-scroll-target="#instalación-de-matt"><span class="header-section-number">1.1</span> Instalación de matt</a></li>
+  <li><a href="#instalación-de-sra-toolkit" id="toc-instalación-de-sra-toolkit" class="nav-link" data-scroll-target="#instalación-de-sra-toolkit"><span class="header-section-number">1.2</span> Instalación de SRA-Toolkit</a></li>
+  <li><a href="#cargar-los-datos-del-dataset-seleccionados" id="toc-cargar-los-datos-del-dataset-seleccionados" class="nav-link" data-scroll-target="#cargar-los-datos-del-dataset-seleccionados"><span class="header-section-number">1.3</span> Cargar los datos del dataset seleccionados</a></li>
+  </ul></li>
+  <li><a href="#vast-tools" id="toc-vast-tools" class="nav-link" data-scroll-target="#vast-tools"><span class="header-section-number">2</span> Vast-Tools</a>
+  <ul class="collapse">
+  <li><a href="#instalación-de-vast-tools" id="toc-instalación-de-vast-tools" class="nav-link" data-scroll-target="#instalación-de-vast-tools"><span class="header-section-number">2.1</span> Instalación de Vast-Tools</a></li>
+  <li><a href="#instalación-de-bowtie" id="toc-instalación-de-bowtie" class="nav-link" data-scroll-target="#instalación-de-bowtie"><span class="header-section-number">2.2</span> Instalación de bowtie</a></li>
+  <li><a href="#alineamineto-para-splicing-alternativo-sa" id="toc-alineamineto-para-splicing-alternativo-sa" class="nav-link" data-scroll-target="#alineamineto-para-splicing-alternativo-sa"><span class="header-section-number">2.3</span> Alineamineto para Splicing Alternativo (SA)</a></li>
+  <li><a href="#generación-de-los-psis-percent-spliced-in" id="toc-generación-de-los-psis-percent-spliced-in" class="nav-link" data-scroll-target="#generación-de-los-psis-percent-spliced-in"><span class="header-section-number">2.4</span> Generación de los PSIs (Percent Spliced-In)</a></li>
+  <li><a href="#comparaicón-entre-grupos" id="toc-comparaicón-entre-grupos" class="nav-link" data-scroll-target="#comparaicón-entre-grupos"><span class="header-section-number">2.5</span> Comparaicón entre grupos</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Alternative Splicing</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Francisco Porcel-Pastrana </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="matt" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Matt</h1>
+<p><a href="https://gitlab.com/aghr/matt">Matt</a> es un paquete diseñado por Dr.&nbsp;Manuel Irimia para el análisis de eventos de splicing alternativo. Incluye funciones básicas para la manipulación de tablas, extracción de características relacionadas con exones e intrones, análisis de características discriminantes, mapas de motivos para proteínas de unión a ARN, etc. Cita:</p>
+<p>Gohr, M. Irimia Matt: Unix tools for alternative splicing analysis, Bioinformatics, 2019, DOI: 10.1093/bioinformatics/bty606</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<strong>Trabajamos en Terminal</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<section id="instalación-de-matt" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="instalación-de-matt"><span class="header-section-number">1.1</span> Instalación de matt</h2>
+<p>En el terminal, nos movemos a la carpeta donde queramos guardar Matt en nuestro ordenador o superordenador. Una vez ahí tenemos que crear un clon del repositorio de git:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>git clone https<span class="sc">:</span><span class="er">//</span>gitlab.com<span class="sc">/</span>aghr<span class="sc">/</span>matt.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A continuación, tenemos que ejecutar el script de instalación:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>chmod u<span class="sc">+</span>rwx .<span class="sc">/</span>INSTALL</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Y corremos el script:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>.<span class="sc">/</span>INSTALL</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Una vez tengamos instalado Matt temenos que hacer que sus funciones formen parte del PATH para que se pueda ejecutar desde cualquier carpeta. Esto lo hacemos con la siguiente línea de comandos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">~/</span>directorio<span class="sc">/</span>donde<span class="sc">/</span>hayas<span class="sc">/</span>guardado<span class="sc">/</span>matt<span class="sc">:</span><span class="er">$</span>PATH</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>echo <span class="st">'export PATH=~ directorio/donde/hayas/guardado/matt:$PATH'</span> <span class="sc">&gt;</span><span class="er">&gt;</span> <span class="er">~/</span>.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para comprobar que temenos matt instalado Podemos hacer la prueba de esctibir en el terminal el propio nombre:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>matt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Y el output que nos debe devolver es el siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Matt v. <span class="dv">1</span>.<span class="fl">3.1</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Usage<span class="sc">:</span> matt <span class="sc">&lt;</span>command<span class="sc">&gt;</span> ...</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Commands<span class="sc">:</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="er">*</span>Import data <span class="sc">/</span> check table                             <span class="sc">*</span>Maths and statistics</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  chk_nls<span class="sc">:</span>  check newlines <span class="cf">in</span> table                      col_calc<span class="sc">:</span>  apply calculations to columns</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>.</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>.</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>..</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>.</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>.</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  test_regexp_enrich<span class="sc">:</span> test REGEXP enrichment</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>Attention<span class="sc">:</span> Tables processed by Matt must contain a header with column names and must not contain <span class="st">" characters with exception of regular expressions. All other "</span> characters will be ignored and removed. When using MS Excel <span class="cf">for</span> table generation, please save tables <span class="cf">in</span> format Windows Text. Matt recognizes Windows newlines, but not DOS nor old<span class="sc">-</span>style MacOS <span class="fu">newlines</span> (CR or \r only). Use command chk_nls to see and check newlines <span class="cf">in</span> tables.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Una vez instalado matt, es necesario comprobar que temenos instalado una de las herramientas del NCBI que es la que utiliza para funcionar: SRA-Tool Kit.</p>
+</section>
+<section id="instalación-de-sra-toolkit" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="instalación-de-sra-toolkit"><span class="header-section-number">1.2</span> Instalación de SRA-Toolkit</h2>
+<p>Para comprobar si la temenos, en debemos hacer la prueba de esctibir en el terminal una de sus funciones, como por ejemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sra</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Y el output que nos debe devolver es el siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sra<span class="sc">-</span>pileup             sra<span class="sc">-</span>search<span class="fl">.3</span>           sra<span class="sc">-</span>sort<span class="sc">-</span>cg.<span class="dv">3</span>.<span class="fl">0.7</span>      sra<span class="sc">-</span>stat.<span class="dv">3</span>.<span class="fl">0.7</span>         sratools.<span class="dv">3</span>.<span class="fl">0.7</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sra<span class="sc">-</span>pileup<span class="sc">-</span>orig.<span class="dv">3</span>.<span class="fl">0.7</span>  sra<span class="sc">-</span>search.<span class="dv">3</span>.<span class="fl">0.7</span>       sra<span class="sc">-</span>sort<span class="fl">.3</span>             srapath</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>sra<span class="sc">-</span>pileup<span class="fl">.3</span>           sra<span class="sc">-</span>sort               sra<span class="sc">-</span>sort.<span class="dv">3</span>.<span class="fl">0.7</span>         srapath<span class="sc">-</span>orig.<span class="dv">3</span>.<span class="fl">0.7</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>sra<span class="sc">-</span>pileup.<span class="dv">3</span>.<span class="fl">0.7</span>       sra<span class="sc">-</span>sort<span class="sc">-</span>cg            sra<span class="sc">-</span>stat               srapath<span class="fl">.3</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>sra<span class="sc">-</span>search             sra<span class="sc">-</span>sort<span class="sc">-</span>cg<span class="fl">.3</span>          sra<span class="sc">-</span>stat<span class="fl">.3</span>             srapath.<span class="dv">3</span>.<span class="fl">0.7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>También debemos comprobar la versión de que tenemos instalada (debe de ser superior a la 2.8.0):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>vdb<span class="sc">-</span>config –version</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>El output será el siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>SRA<span class="sc">-</span>Toolkit <span class="dv">3</span>.<span class="fl">0.7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Si tienes la última versión guay, sino tienes que instalarla mediante los siguientes comandos en el terminal (comando cogidos de la página oficial para Linux, si tienes Mac o Windows busca en la página principal de SRA (<a href="https://github.com/ncbi/sra-tools/wiki/02.-Installing-SRA-Toolkit">enlace</a>) la forma de instalarlo).</p>
+<p>Primero descargamos la herramienta (recomendable crear una carpeta donde meterlo)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>wget <span class="sc">--</span>output<span class="sc">-</span>document sratoolkit.tar.gz https<span class="sc">:</span><span class="er">//</span>ftp<span class="sc">-</span>trace.ncbi.nlm.nih.gov<span class="sc">/</span>sra<span class="sc">/</span>sdk<span class="sc">/</span>current<span class="sc">/</span>sratoolkit.current<span class="sc">-</span>ubuntu64.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A continuación lo instalamos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tar <span class="sc">-</span>vxzf sratoolkit.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A continuación metemos la herramienta en el PATH:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">~/</span>directorio<span class="sc">/</span>donde<span class="sc">/</span>hayas<span class="sc">/</span>guardado<span class="sc">/</span>sratoolkit.current<span class="sc">-</span>ubuntu64.tar.gz<span class="sc">/</span>bin<span class="sc">:</span><span class="er">$</span>PATH</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>echo <span class="st">'export PATH=~ directorio/donde/hayas/guardado/sratoolkit.current-ubuntu64.tar.gz/bin:$PATH'</span> <span class="sc">&gt;</span><span class="er">&gt;</span> <span class="er">~/</span>.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A continuación es recommendable comprobar que funciona:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>which fastq<span class="sc">-</span>dump</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>El output será el siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span>Users<span class="sc">/</span>JoeUser<span class="sc">/</span>sratoolkit.current<span class="sc">-</span>ubuntu64.tar.gz<span class="sc">/</span>bin <span class="sc">/</span>fastq<span class="sc">-</span>dump</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>También podemos probar que sea funcional:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fastq<span class="sc">-</span>dump <span class="sc">--</span>stdout <span class="sc">-</span>X <span class="dv">2</span> SRR390728</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>El output será el siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Read <span class="dv">2</span> spots <span class="cf">for</span> SRR390728</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>Written <span class="dv">2</span> spots <span class="cf">for</span> SRR390728</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>SRR390728<span class="fl">.1</span> <span class="dv">1</span> length<span class="ot">=</span><span class="dv">72</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>CATTCTTCACGTAGTTCTCGAGCCTTGGTTTTCAGCGATGGAGAATGACTTTGACAAGCTGAGAGAAGNTNC</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>SRR390728<span class="fl">.1</span> <span class="dv">1</span> length<span class="ot">=</span><span class="dv">72</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>;;;;;;;;;;;;;;;;;;;;;;;;;;;<span class="dv">9</span>;;<span class="dv">665142</span>;;;;;;;;;;;;;;;;;;;;;;;;;;;;;<span class="dv">96</span><span class="sc">&amp;&amp;</span><span class="er">&amp;&amp;</span>(</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>SRR390728<span class="fl">.2</span> <span class="dv">2</span> <span class="at">length=</span><span class="dv">72</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>AAGTAGGTCTCGTCTGTGTTTTCTACGAGCTTGTGTTCCAGCTGACCCACTCCCTGGGTGGGGGGACTGGGT</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span>SRR390728<span class="fl">.2</span> <span class="dv">2</span> <span class="at">length=</span><span class="dv">72</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>;;;;;;;;;;;;;;;;;<span class="dv">4</span>;;;;<span class="dv">3</span>;<span class="fl">393.1</span><span class="sc">+</span><span class="dv">4</span><span class="sc">&amp;&amp;</span><span class="dv">5</span><span class="sc">&amp;&amp;</span>;;;;;;;;;;;;;;;;;;;;;<span class="sc">&lt;</span><span class="dv">9</span>;<span class="sc">&lt;</span>;;;;;<span class="dv">464262</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Todo lo hecho a partir de aquí está en Terminal_9-14-23.txt</em></p>
+</div>
+</div>
+</section>
+<section id="cargar-los-datos-del-dataset-seleccionados" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="cargar-los-datos-del-dataset-seleccionados"><span class="header-section-number">1.3</span> Cargar los datos del dataset seleccionados</h2>
+<p>Para cargar los datos vamos a usar una función de <code>matt</code> (<code>retr_rnaseq</code>) que permite al usuario recuperar datos de ARN-seq del Gene Expression Omnibus (GEO), un repositorio público donde muchos investigadores almacenan sus datos de ARN-seq relacionados con sus publicaciones. Teniendo a mano los números de acceso GEO de los conjuntos de datos RNA-seq, este comando descarga los archivos SRA, extrae las lecturas de ARN-seq como archivos FASTQ o FASTA y, si lo desea renombra los archivos FASTA/FASTQ extraídos como especifique el usuario.</p>
+<p>Para ello tenemos que crear un <code>.txt</code> (con los nombres separados por un tab) como en el ejemplo:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./Images/Picture23.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 1</figcaption>
+</figure>
+</div>
+<p>Una vez que lo tenemos creado tenemos que subirlo a la misma carpeta en la que vayamos a hacer la descarga de los datos y los análisis. El siguiente paso es descargar de GEO los <code>.gz</code> de las muestras seleccionadas:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>matt retr_rnaseq accession_numbers.txt <span class="sc">-</span>keepsra <span class="sc">-</span>o rnaseq_data <span class="sc">-</span>p <span class="dv">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Con este comando lo que hacemos es que se descarguen lo indicado (indicando el documento en el que se encuentran los datos, sin borrar los archivos SRA (<code>-keepsra</code>) en una carpeta nueva (<code>-o rnaseq_data</code>) y que el trabajo se divida entre 6 cores del superordenador (<code>-p 6</code>)</p>
+<p>Este comando tarda bastante por lo que es recomendable usar los siguientes <strong>comandos para poner en segundo plano un trabajo y desvincularlos de la sesión de trabajo</strong>, lo cual es recomendable porque nos permitirá continuar trabajando en el servidor mientras se están ejecutando los trabajos mandados. Otra ventaja es que, al desvincularlos de la sesión de trabajo podremos cerrar el terminal sin preocuparnos de que se paren los procesos. Si cerráramos el terminal sin desvincular el trabajo de nuestra sesión (la sesión está asociada al terminal de trabajo) este trabajo se interrumpiría en el momento de cerrar el terminal (y, por lo tanto, la sesión). Para ello debemos ejecutar lo siguientes comandos:</p>
+<ol type="1">
+<li>Ejecutamos el trabajo que queramos hacer, en nuestro caso usaremos el ejemplo anterior:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>matt retr_rnaseq accession_numbers.txt <span class="sc">-</span>keepsra <span class="sc">-</span>o rnaseq_data <span class="sc">-</span>p <span class="dv">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Tras esto comenzará a ejecutarse. En este momento tenemos que <strong>parar el proceso</strong> con la combinación de teclas <code>Control + z</code>. El output debe ser el siguiente:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>]<span class="sc">+</span>  Stopped                 matt retr_rnaseq accession_numbers.txt <span class="sc">-</span>keepsra <span class="sc">-</span>o rnaseq_data <span class="sc">-</span>p <span class="dv">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li>En este punto tendremos el proceso parado y podremos escribir comandos. Lo siguiente que debemos hacer es mandar el trabajo a <strong>ejecutarse en segundo plano</strong> (mandar al background) con el siguiente comando:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bg</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Output:</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>]<span class="sc">+</span> matt retr_rnaseq accession_numbers.txt <span class="sc">-</span>keepsra <span class="sc">-</span>o rnaseq_data <span class="sc">-</span>p <span class="dv">6</span> <span class="sc">&amp;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Y significará que se ha reanudado la ejecución en segundo plano. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Y significará que se ha reanudado la ejecución en segundo plano.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>matt retr_rnaseq accession_numbers.txt <span class="sc">-</span>keepsra <span class="sc">-</span>o rnaseq_data <span class="sc">-</span>p <span class="dv">6</span> <span class="sc">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Una vez que hayamos ejecutado el proceso en segundo plano pasamos al siguiente paso que es <strong>desvincular el proceso del terminal</strong> (sesión) en el que lo hemos corrido para que continúe ejecutándose si cerramos sesión. Para ello usamos el comando:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>disown</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>El output del terminal no se guardará en ningún lado si los cerramos (el terminal) de manera que si queremos dejar un proceso funcionando y luego poder consultar qué mensajes nos ha dado el proceso (para chequear si ha ido bien o ha habido algún error durante el procesamiento). Podemos hacer que los mensajes que saldrían en el terminal se guarden en un <code>.txt</code> para luego poder consultarlos utilizando el siguiente comando:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Proceso_mandado_a_ejecutar <span class="dv">1</span><span class="sc">&gt;</span>Nombre_que_le_quieras_poner_al_documento.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Este comando debe de utilizarse de la siguiente manera (en el siguiente ejemplo mi documento se llamará documento_ejemplo.out y lo voy a ejecutar directamente en segundo plano con el comando “&amp;” previamente explicado):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>matt retr_rnaseq accession_numbers.txt <span class="sc">-</span>keepsra <span class="sc">-</span>o rnaseq_data <span class="sc">-</span>p <span class="dv">6</span> <span class="dv">1</span><span class="sc">&gt;</span>documento_ejemplo.out <span class="sc">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Con esto haremos que se guarde un documento <code>.out</code> (que se puede leer como <code>.txt</code>) en la carpeta en la que estemos trabajando y que el proceso se lance directamente en segundo plano por lo que solo necesitaríamos aplicar el comando <code>disown</code> para desvincularlo de la sesión y podremos descuidarnos.</p>
+<p>Los datos se nos descargaran en la carpeta rnaseq_data que hemos escrito en el código ejecutado. Cuando finalice, accedemos a esa carpeta y ejecutamos el comando <code>ls</code> (para ver el listado de archivos que contiene esta carpeta) veremos lo siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>Basal_2_1.fastq.gz      Luminal_1_1.fastq.gz        Luminal_2_1.fastq.gz    SRR1919599.sra      SRR1919603.sra</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>Basal_2_2.fastq.gz      Luminal_2_2.fastq.gz    SRR1919600.sra          SRR1919604.sra  dataset_info.tab</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>Basal_1_1.fastq.gz              Basal_3_1.fastq.gz          Luminal_3_1.fastq.gz    SRR1919601.sra      Basal_1_2.fastq.gz          </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>Basal_3_2.fastq.gz      Luminal_1_2.fastq.gz        Luminal_3_2.fastq.gz    SRR1919602.sra  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Una vez en este punto comenzaremos el alineamiento con Vast-Tools.</p>
+</section>
+</section>
+<section id="vast-tools" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Vast-Tools</h1>
+<p><strong>Vertebrate Alternative Splicing and Transcription Tools (VAST-TOOLS)</strong> es un conjunto de herramientas para perfilar y comparar eventos de splicing alternativo en datos de RNA-Seq. Es especialmente adecuado para comparaciones evolutivas. Funciona en sinergia con el servidor web <em>VastDB</em> y <em>Matt</em>, un conjunto de herramientas para el análisis posterior del splicing alternativo. <a href="https://github.com/vastgroup/vast-tools">Enlace a GitHub</a>. Citas:</p>
+<ul>
+<li><strong><em>Capítulo de libro donde viene todo incluso un ejemplo</em></strong>: Gohr, A., Mantica, F., Hermoso-Pulido, A., Tapial, J., Márquez, Y., &amp; Irimia, M. (2022). Computational Analysis of Alternative Splicing Using VAST-TOOLS and the VastDB Framework. Methods in molecular biology (Clifton, N.J.), 2537, 97–128. https://doi.org/10.1007/978-1-0716-2521-7_7</li>
+<li><strong><em>Artículo original</em></strong>: Irimia, M., Weatheritt, R.J., Ellis, J., Parikshak, N.N., Gonatopoulos-Pournatzis, T., Babor, M., Quesnel-Vallières, M., Tapial, J., Raj, B., O’Hanlon, D., Barrios-Rodiles, M., Sternberg, M.J.E., Cordes, S.P., Roth, F.P., Wrana, J.L., Geschwind, D.H., Blencowe, B.B. (2014). A highly conserved program of neuronal microexons is misregulated in autistic brains. Cell, 59:1511-23.</li>
+<li><strong><em>Artículo principal</em></strong>: Tapial, J., Ha, K.C.H., Sterne-Weiler, T., Gohr, A., Braunschweig, U., Hermoso-Pulido, A., Quesnel-Vallières, M., Permanyer, J., Sodaei, R., Marquez, Y., Cozzuto, L., Wang, X., Gómez-Velázquez, M., Rayón, M., Manzanares, M., Ponomarenko, J., Blencowe, B.J., Irimia, M. (2017). An atlas of alternative splicing profiles and functional associations reveals new regulatory programs and genes that simultaneously express multiple major isoforms. Genome Res, 27(10):1759-1768</li>
+<li><strong><em>Artículo de análisis de Intron Retention</em></strong>: Braunschweig, U., Barbosa-Morais, N.L., Pan, Q., Nachman, E., Alipahani, B., Gonatopoulos-Pournatzis, T., Frey, B., Irimia, M., Blencowe, B.J. (2014). Widespread intron retention in mammals functionally tunes transcriptomes. Genome Research, 24:1774-86</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<strong>Trabajamos en Terminal</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<section id="instalación-de-vast-tools" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="instalación-de-vast-tools"><span class="header-section-number">2.1</span> Instalación de Vast-Tools</h2>
+<p>En el terminal, tenemos que crear un clon del repositorio de git:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>git clone https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>vastgroup<span class="sc">/</span>vast<span class="sc">-</span>tools.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Esto nos va a crear una carpeta en el directorio donde hagamos la clonación que se llamará <code>vast-tools</code>. Debemos acceder a esta carpeta y tenemos que crear una nueva carpeta que se llame “VASTDB” (con el comando <code>mkdir VASTDB</code>) con el cual tenemos que ejecutar los siguientes comandos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>wget https<span class="sc">:</span><span class="er">//</span>vastdb.crg.eu<span class="sc">/</span>libs<span class="sc">/</span>vastdb.hs2.<span class="dv">23</span>.<span class="dv">06</span>.<span class="fl">20.</span>tar.gz</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>wget https<span class="sc">:</span><span class="er">//</span>vastdb.crg.eu<span class="sc">/</span>libs<span class="sc">/</span>vastdb.mm2.<span class="dv">23</span>.<span class="dv">06</span>.<span class="fl">20.</span>tar.gz</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>wget https<span class="sc">:</span><span class="er">//</span>vastdb.crg.eu<span class="sc">/</span>libs<span class="sc">/</span>vastdb.rno.<span class="dv">23</span>.<span class="dv">06</span>.<span class="fl">20.</span>tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Con esto hemos instalado las librerías para hacer el alineamiento en humano (última vesión del genoma), en ratón y en rata, respectivamente. Si necesitamos realizar alineamientos con otras especies hay que acceder el github de Vast-Tolols.</p>
+<p>Una vez hemos instalado esto tenemos que añadir Vast-Tools al PATH para que se pueda ejecutar desde cualquier carpeta. Esto lo hacemos con la siguiente línea de comandos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>export PATH<span class="ot">=</span><span class="er">~/</span>directorio<span class="sc">/</span>donde<span class="sc">/</span>hayas<span class="sc">/</span>guardado<span class="sc">/</span>vast<span class="sc">-</span>tools<span class="sc">:</span><span class="er">$</span>PATH</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>echo <span class="st">'export PATH=~ directorio/donde/hayas/guardado/ vast-tools:$PATH'</span> <span class="sc">&gt;</span><span class="er">&gt;</span> <span class="er">~/</span>.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para comprobar que temenos <code>matt</code> instalado Podemos hacer la prueba de esctibir en el terminal el propio nombre:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>Vast<span class="sc">-</span>tools</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Y el output que nos debe devolver es el siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>VAST<span class="sc">-</span>TOOLS v2.<span class="fl">5.1</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>Usage<span class="sc">:</span> vast<span class="sc">-</span>tools sub<span class="sc">-</span>commands [options]</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>[sub<span class="sc">-</span>commands]</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>        align           <span class="sc">:</span>       Align RNA<span class="sc">-</span>Seq reads to exon<span class="sc">-</span>exon junctions and quantify AS</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>        merge           <span class="sc">:</span>       Merge vast<span class="sc">-</span>tool outputs from multiple sub<span class="sc">-</span>samples</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>        combine         <span class="sc">:</span>       Combine two or more <span class="st">'aligned'</span> RNA<span class="sc">-</span>Seq samples into summary tables.</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>.</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>..</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>.</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>.</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>Performance<span class="sc">:</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span>o<span class="sc">/--</span>offrate <span class="sc">&lt;</span>int<span class="sc">&gt;</span> override offrate of index; must be <span class="sc">&gt;=</span> index<span class="st">'s offrate</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="st">  -p/--threads &lt;int&gt; number of alignment threads to launch (default: 1)</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="st">  --mm               use memory-mapped I/O for index; many '</span>bowtie<span class="st">'s can share</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="st">  --shmem            use shared mem for index; many '</span>bowtie<span class="st">'s can share</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="st">Other:</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="st">  --seed &lt;int&gt;       seed for random number generator</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="st">  --verbose          verbose output (for debugging)</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="st">  --version          print version information and quit</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="st">  -h/--help          print this usage message</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>También tenemos que instalar una serie de paquetes para R con los siguientes comandos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>R <span class="sc">-</span>e <span class="st">'install.packages(c("optparse", "RColorBrewer", "reshape2", "ggplot2", "devtools"))'</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>R <span class="sc">-</span>e <span class="st">'devtools::install_github("kcha/psiplot")'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<strong>Continuamos trabajando en Terminal aunque sea con R</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p>La instalación de estos paquetes pueden necesitar de la actualización e instalación de otros, de manera que tendremos que ir comprobando cuales son necesarios y e instalarlos (buscando en internet como instalarlos). Tuve bastantes problemas con esto así que podéis encontrar la solución en el documento del terminal de este día. Una vez instalado vast-tools, es necesario comprobar que tenemos instalado una herramienta de alineamiento: <code>bowtie</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Todo lo hecho a partir de aquí está en Terminal_9-15-23.txt</em></p>
+</div>
+</div>
+</section>
+<section id="instalación-de-bowtie" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="instalación-de-bowtie"><span class="header-section-number">2.2</span> Instalación de bowtie</h2>
+<p>Para comprobar si la temenos, en debemos hacer la prueba de esctibir en el terminal una de sus funciones, como por ejemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>No index, query, or output file specified<span class="sc">!</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>Usage<span class="sc">:</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>bowtie [options]<span class="sc">*</span> <span class="er">&lt;</span>ebwt<span class="sc">&gt;</span> {<span class="sc">-</span><span class="dv">1</span> <span class="sc">&lt;</span>m1<span class="sc">&gt;</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">&lt;</span>m2<span class="sc">&gt;</span> <span class="er">|</span> <span class="sc">--</span><span class="dv">12</span> <span class="sc">&lt;</span>r<span class="sc">&gt;</span> <span class="er">|</span> <span class="sc">--</span>interleaved <span class="sc">&lt;</span>i<span class="sc">&gt;</span> <span class="er">|</span> <span class="er">&lt;</span>s<span class="sc">&gt;</span>} [<span class="sc">&lt;</span>hit<span class="sc">&gt;</span>]</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>m1<span class="sc">&gt;</span>    Comma<span class="sc">-</span>separated list of files containing upstream <span class="fu">mates</span> (or the</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>.</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>.</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a> Performance<span class="sc">:</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span>o<span class="sc">/--</span>offrate <span class="sc">&lt;</span>int<span class="sc">&gt;</span> override offrate of index; must be <span class="sc">&gt;=</span> index<span class="st">'s offrate</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="st">  -p/--threads &lt;int&gt; number of alignment threads to launch (default: 1)</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="st">  --mm               use memory-mapped I/O for index; many '</span>bowtie<span class="st">'s can share</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="st">  --shmem            use shared mem for index; many '</span>bowtie<span class="st">'s can share</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="st">Other:</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="st">  --seed &lt;int&gt;       seed for random number generator</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="st">  --verbose          verbose output (for debugging)</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="st">  --version          print version information and quit</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a><span class="st">  -h/--help          print this usage message</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>También debemos comprobar la versión de que tenemos instalada (<strong>debe de ser la versión 1</strong>, tener cuidado porque también existe <code>bowtie2</code> y esa nos va a dar error). Para instalarlo tenemos que escribir los siguientes comandos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>sudo apt<span class="sc">-</span>get update <span class="sc">-</span>y</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>sudo apt<span class="sc">-</span>get install <span class="sc">-</span>y bowtie</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Si está correctamente instalado todo pasamos al alineamiento con Vast-Tools.</p>
+</section>
+<section id="alineamineto-para-splicing-alternativo-sa" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="alineamineto-para-splicing-alternativo-sa"><span class="header-section-number">2.3</span> Alineamineto para Splicing Alternativo (SA)</h2>
+<p>Como hemos repetido, para el alineamiento vamos a utilizar la herramienta Vast-Tools. Para ello vamos a la carpeta en la que tengamos los archivos a analizar (tras procesarlos en matt) y allí ejecutamos el comando <code>vast-tool align</code> (que lo explicaré con sus argumentos a continuación con la imgen 2):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>vast<span class="sc">-</span>tools align Luminal_1_1.fastq.gz Luminal_1_2.fastq.gz <span class="sc">-</span>sp Hs2 <span class="sc">-</span>o Vast<span class="sc">-</span>Tool_Align <span class="sc">--</span>expr <span class="sc">--</span>IR_version <span class="dv">2</span> <span class="sc">-</span>c <span class="dv">8</span> <span class="sc">-</span>n Luminal_1 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./Images/Picture24.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Imagen 2</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Nota 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este ejemplo es para cuando tenemos análisis Pair-end, de manera que tendremos un archivo (“Luminal_1_1.fastq.gz”) para la secuenciación 3’5’ y otro (“Luminal_1_2.fastq.gz”) para la secuenciación 5’3’. Si tuviéramos un análisis Single-end solo tendríamos que poner el único archivo que se nos hubiera descargado para esa muestra.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Nota 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este ejemplo es para cuando tenemos análisis Pair-end, de manera que tendremos un archivo (“Luminal_1_1.fastq.gz”) para la secuenciación 3’-&gt;5’ y otro (“Luminal_1_2.fastq.gz”) para la secuenciación 5’-&gt;3’. Si tuviéramos un análisis Single-end solo tendríamos que poner el único archivo que se nos hubiera descargado para esa muestra.</p>
+</div>
+</div>
+<p>Realmente el código que yo he corrido es el siguiente para añadir funciones (previamente explicadas):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>vast<span class="sc">-</span>tools align Luminal_1_1.fastq.gz Luminal_1_2.fastq.gz <span class="sc">-</span>sp Hs2top <span class="sc">-</span>o Vast<span class="sc">-</span>Tool_Align <span class="sc">--</span>expr <span class="sc">--</span>IR_version <span class="dv">2</span> <span class="sc">-</span>c <span class="dv">8</span> <span class="sc">-</span>n Luminal_1 <span class="dv">1</span><span class="sc">&gt;</span>Alineamiento_luminal_1.out <span class="sc">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Con esto le añado al final el comando <code>1&gt;Alineamiento_luminal_1.out</code> para que me genere un archivo con los mensajes del terminal t así luego poder chequearlos y el comando <code>&amp;</code> para que lo ejecute en segundo plano y así poder seguir usando el terminal (si quisiera desvincularlo a mi sesión ahora podría utilizar <code>disown</code> y podría cerrar el terminal sin miedo a parar el proceso).</p>
+</section>
+<section id="generación-de-los-psis-percent-spliced-in" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="generación-de-los-psis-percent-spliced-in"><span class="header-section-number">2.4</span> Generación de los PSIs (Percent Spliced-In)</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Todo lo hecho a partir de aquí está en Terminal_9-18-23.txt</em></p>
+</div>
+</div>
+<p>El siguiente paso es combinar en una tabla todos los eventos de cada muestra. Para ello usaremos el comando <code>vast-tools combine</code>. Para utilizar este comando tenemos que estar en la carpeta que contenga la carpeta donde se han generado los alineamientos (la generada tiene que contener la subcarpeta llamada <code>to_compare</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>vast<span class="sc">-</span>tools combine <span class="sc">-</span>sp Hs2 <span class="sc">-</span>o Vast<span class="sc">-</span>Tool_Aling –cores <span class="dv">6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>El comando combinará teniendo en cuenta la versión del genoma humano -hg38- (-sp Hs2). Con el argumento <code>-o &lt;directorio&gt;</code> indicamos la carpeta que contiene los archivos a analizar. Tiene que ser la carpeta previamente mencionada, la que contiene la subcarpeta llamada “to_compare” (que coincide con la que pusimos en el argumento <code>-o</code> en el comando del alineamiento (el paso anterior). Con el argumento <code>–cores &lt;nº_cores&gt;</code> indicamos el número de cores o CPUs del superordenador que queremos que se utilicen para este proceso (por defecto se utiliza 1, con 6 va bastante rápido y en 3-5 min está hecho). Para más opciones siempre podemos consultar la ayuda del comando con</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>vast<span class="sc">-</span>tools combine <span class="sc">-</span>h</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="comparaicón-entre-grupos" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="comparaicón-entre-grupos"><span class="header-section-number">2.5</span> Comparaicón entre grupos</h2>
+<p>Para la comparación entre grupos y las consecutivas gráficas tendremos que instalar-actualizar bastantes paquetes de R que se nos habrá indicado en el output del proceso anterior. Instalarlos todos antes de continuar. Una vez instalados todos los paquetes que necesitaremos procedemos al proceso de comparación con el comando “vast-tools compare”, el cual lo tenemos que ejecutar en la carpeta en la que hemos generado la combinación (en nuestro caso, y siguiendo con el ejemplo, tendremos que acceder a la carpeta <code>Vast-Tool_Aling</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>vast<span class="sc">-</span>tools compare INCLUSION_LEVELS_FULL<span class="sc">-</span>hg38<span class="fl">-6.</span>tab <span class="sc">-</span>a Basal_1,Basal_2,Basal_3 <span class="sc">-</span>name_A Basal_Cells </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span>b Luminal_1,Luminal_2,Luminal_3 <span class="sc">-</span>name_B Luminal_Cells <span class="sc">-</span>sp Hs2 <span class="sc">--</span>print_dPSI </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="sc">--</span>GO <span class="sc">--</span>print_sets <span class="sc">--</span>min_dPSI <span class="dv">25</span> <span class="sc">--</span>min_range <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Los argumentos utilizados definen lo siguiente:</p>
+<ul>
+<li><p><code>INCLUSION_LEVELS_FULL-especie_y_version que hayamos utilizado-nº_muestras_procesadas.tab</code>, Este primer argumento se utiliza para indicar dónde se encuentran los datos. Estos datos se encuentran en un archivo que se ha generado con la función <code>to_compare</code> previamente en la carpeta que habíamos indicado, por eso teníamos que acceder a dicha carpeta (en nuestro caso <code>Vast-Tool_Aling</code>)</p></li>
+<li><p><code>-a muestra_1,muestra_2,muestra_3</code>, en este argumento tenemos que añadir todas las muestras que pertenezcan a este grupo, separadas por comas y sin espacios.</p></li>
+<li><p><code>-name_A Nombre_Grupo_A</code>, Nombre que le queremos dar al grupo de muestras incluidas en el grupo “a”.</p></li>
+<li><p><code>-b muestra_1,muestra_2,muestra_3</code>, en este argumento tenemos que añadir todas las muestras que pertenezcan a este grupo, separadas por comas y sin espacios.</p></li>
+<li><p><code>-name_B Nombre_Grupo_B</code>, Nombre que le queremos dar al grupo de muestras incluidas en el grupo “b”.</p></li>
+<li><p><code>-Hs2</code></p></li>
+<li><p><code>--print_dPSI</code></p></li>
+<li><p><code>--GO</code></p></li>
+<li><p><code>--print_sets</code></p></li>
+<li><p><code>--min_dPSI</code></p></li>
+<li><p><code>--min_range</code></p></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
