@@ -6,18 +6,17 @@ author: "Francisco Porcel-Pastrana"
 format:
   html:
     toc: true
-    toc-expand: 4
+    toc-expand: 1
     toc-location: left
     number-sections: true
     html-math-method: katex
-    number-depth: 4
+    number-depth: 5
     css: styles.css
 ---
-
 # Matt
 [Matt](https://gitlab.com/aghr/matt) es un paquete diseñado por Dr. Manuel Irimia para el análisis de eventos de splicing alternativo. Incluye funciones básicas para la manipulación de tablas, extracción de características relacionadas con exones e intrones, análisis de características discriminantes, mapas de motivos para proteínas de unión a ARN, etc. Cita:
 
-Gohr, M. Irimia Matt: Unix tools for alternative splicing analysis, Bioinformatics, 2019, DOI: 10.1093/bioinformatics/bty606
+Gohr, A., & Irimia, M. (2019). Matt: Unix tools for alternative splicing analysis. Bioinformatics (Oxford, England), 35(1), 130–132. https://doi.org/10.1093/bioinformatics/bty606
 
 ::: {.callout-important}
 # **Trabajamos en Terminal**
@@ -146,7 +145,9 @@ AAGTAGGTCTCGTCTGTGTTTTCTACGAGCTTGTGTTCCAGCTGACCCACTCCCTGGGTGGGGGGACTGGGT
 ```
 
 ::: {.callout-note}
-*Todo lo hecho a partir de aquí está en Terminal_9-14-23.txt*
+*Todo lo hecho a partir de aquí está en:*
+
+[`Terminal_9-14-23.txt`](./Terminales Guardados/Terminal_9-14-23.txt)
 :::
 
 ## Cargar los datos del dataset seleccionados
@@ -307,7 +308,9 @@ R -e 'devtools::install_github("kcha/psiplot")'
 La instalación de estos paquetes pueden necesitar de la actualización e instalación de otros, de manera que tendremos que ir comprobando cuales son necesarios y e instalarlos (buscando en internet como instalarlos). Tuve bastantes problemas con esto así que podéis encontrar la solución en el documento del terminal de este día. Una vez instalado vast-tools, es necesario comprobar que tenemos instalado una herramienta de alineamiento: `bowtie`. 
 
 ::: {.callout-note}
-*Todo lo hecho a partir de aquí está en Terminal_9-15-23.txt*
+*Todo lo hecho a partir de aquí está en:*
+
+[`Terminal_9-15-23.txt`](./Terminales Guardados/Terminal_9-15-23.txt)
 :::
 
 ## Instalación de bowtie
@@ -340,20 +343,67 @@ sudo apt-get install -y bowtie
 
 Si está correctamente instalado todo pasamos al alineamiento con Vast-Tools.
 
+## Teoría sobre el Splicing Alternativo
+El splicing alternativo genera múltiples ARNm diferentes y proteínas derivadas a partir de un único gen mediante la inclusión o exclusión de exones específicos. Este proceso ocurre en el 95% de los genes multiexónicos y está catalizado por el spliceosoma, un complejo formado por un núcleo de cinco pequeñas ribonucleoproteínas nucleares (U1, U2, U4, U5 y U6). El espliceosoma cuenta con la ayuda de más de 200 factores trans-actores que reconocen secuencias reguladoras cis dentro del pre-ARNm y dirigen el spliceosoma para incluir o excluir exones específicos. Así pues, las variantes de empalme pueden surgir de mecanismos que incluyen promotores alternativos, uso preferente de exones o sitios de splicing, alteración del orden de los exones y poliadenilación alternativa
+
+![Imagen 2](./Images/Picture25.png)
+
+El splicing alternativo ofrece una importante ventaja evolutiva al proporcionar una gran fuente de diversidad proteómica. El splicing alternativo suele estar regulado a nivel tisular, y las variantes específicas de tejido cooperan para modular las redes de interacción proteína-proteína. Las células madre expresan variantes de empalme específicas en cada etapa de diferenciación, siendo las células madre indiferenciadas las que mantienen los niveles más altos de diversidad de isoformas de empalme. El empalme alternativo también es crítico en el desarrollo y puede responder a estímulos externos normales. Al igual que otras vías relacionadas con el desarrollo, el splicing alternativo puede ser regulado de forma aberrante por las células cancerosas para su beneficio. en beneficio propio. Los estudios del genoma completo revelan desde hace tiempo la existencia de patrones de splicing específicos del cáncer.
+
+::: {.callout-note}
+Extraído del siguiente artículo: 
+
+Chen, J., Weiss, W. Alternative splicing in cancer: implications for biology and therapy. Oncogene 34, 1–14 (2015). https://doi.org/10.1038/onc.2013.570
+:::
+
 ## Alineamineto para Splicing Alternativo (SA)
+
+### Definiciones
+En este paso, para aumentar la fracción de lecturas de unión de mapeo dentro de cada muestra de RNA-Seq, vast-tools divide automáticamente cada lectura en grupos de lectura de 50 nucleótidos (nt), utilizando por defecto una ventana deslizante de 25 nt (opción `--stepSize`). Por ejemplo, una lectura de 100 nt produciría 3 lecturas superpuestas (de las posiciones 1-50, 26-75 y 51-100). Además, se combinan las dos lecturas de la secuenciación por pares, si están disponibles. Para la cuantificación, sólo se considera un recuento aleatorio por grupo de lecturas (es decir, todas las sublecturas procedentes de la misma lectura original) para evitar el recuento múltiple de la misma molécula secuenciada original.
+
+::: {.callout-tip}
+Es muy recomendable que los caracteres especiales ('-', '.', etc.) no formen parte de los nombres de los archivos fastq, ya que pueden causar problemas imprevistos; utilice '_' en su lugar. (El uso de '-' está reservado para proporcionar la longitud de lectura (legado) o especificar que las lecturas han sido sustraídas del genoma; ver más abajo).
+:::
+
+Actualmente, vast-tools soporta múltiples especies y ensamblajes y está en constante crecimiento en coordinación con VastDB. A partir de la v2.4.0, la especie se proporciona utilizando el ensamblaje estándar (por ejemplo, hg38, mm9, etc). 
+
+Los eventos de splicing vendrán definidos como:
+
+- **PSI** (Percent Splice-In), que define los diferentes eventos de “Exon-Exon Junction”.
+
+- **PSU** (Percent Splice-site usage), que define los eventos de “alternative splice sites”
+
+- **PIR** PIR (Percent of Intron Retention),  que define los eventos de “intrón retention”
+
+Estas medidas son porcentajes que dependen del número de veces que ha ocurrido un evento y se calcula como nº de veces que ocurre un evento en un gen con respecto al número de transcritos cuantificados:
+
+![Imagen 3](./Images/Picture26.png)
+
+Para habilitar el análisis de expresión génica, utilizar la opción “--expr“ (cálculos PSI/PSU/PIRs y cRPKM (lecturas corregidas por aplicabilidad por Kbp y millones de lecturas mapeadas)]o “--exprONLY” (solo cRPKMs). Los cRPKMs se obtienen mapeando solo los primeros 50 nucleótidos de cada lectura, o solo los primeros 50 nucleótidos de la lectura directa si se proporcionan lecturas de extremo pareado.
+
+A continuación hay se muestra un esquema del funcionamiento y posibilidades de vast-tools:
+
+![Imagen 4](./Images/Picture27.png)
+
+### Alineamiento
 Como hemos repetido, para el alineamiento vamos a utilizar la herramienta Vast-Tools. Para ello vamos a la carpeta en la que tengamos los archivos a analizar (tras procesarlos en matt) y allí ejecutamos el comando `vast-tool align` (que lo explicaré con sus argumentos a continuación con la imgen 2):
 ```{r, eval=FALSE}
 vast-tools align Luminal_1_1.fastq.gz Luminal_1_2.fastq.gz -sp Hs2 -o Vast-Tool_Align --expr --IR_version 2 -c 8 -n Luminal_1 
 ```
 
-![Imagen 2](./Images/Picture24.png)
+![Imagen 5](./Images/Picture24.png)
+
 
 ::: {.callout-tip title="Nota 1"}
-Este ejemplo es para cuando tenemos análisis Pair-end, de manera que tendremos un archivo (“Luminal_1_1.fastq.gz”) para la secuenciación 3’5’ y otro (“Luminal_1_2.fastq.gz”) para la secuenciación 5’3’. Si tuviéramos un análisis Single-end solo tendríamos que poner el único archivo que se nos hubiera descargado para esa muestra.
+Este ejemplo es para cuando tenemos análisis Pair-end, de manera que tendremos un archivo (“Luminal_1_1.fastq.gz”) para la secuenciación 3’->5’ y otro (“Luminal_1_2.fastq.gz”) para la secuenciación 5’->3’. Si tuviéramos un análisis Single-end solo tendríamos que poner el único archivo que se nos hubiera descargado para esa muestra.
 :::
 
 ::: {.callout-tip title="Nota 2"}
-Este ejemplo es para cuando tenemos análisis Pair-end, de manera que tendremos un archivo (“Luminal_1_1.fastq.gz”) para la secuenciación 3’->5’ y otro (“Luminal_1_2.fastq.gz”) para la secuenciación 5’->3’. Si tuviéramos un análisis Single-end solo tendríamos que poner el único archivo que se nos hubiera descargado para esa muestra.
+Cuidado de no excedernos en el argumento -c porque si vamos a lanzar varios procesos a la vez podemos colapsar el superordenador.
+:::
+
+::: {.callout-tip title="Nota 3"}
+La expresión génica la calcula como corrected-RPKM values (cRPKM) (es decir, que la normaliza e función de la “effective length, la cual consiste en la media de la longitud de todos los transcritos de un gene poderada por la proporción de la expresión de cada transcrito.
 :::
 
 Realmente el código que yo he corrido es el siguiente para añadir funciones (previamente explicadas):
@@ -363,11 +413,15 @@ vast-tools align Luminal_1_1.fastq.gz Luminal_1_2.fastq.gz -sp Hs2top -o Vast-To
 
 Con esto le añado al final el comando `1>Alineamiento_luminal_1.out` para que me genere un archivo con los mensajes del terminal t así luego poder chequearlos y el comando `&` para que lo ejecute en segundo plano y así poder seguir usando el terminal (si quisiera desvincularlo a mi sesión ahora podría utilizar `disown` y podría cerrar el terminal sin miedo a parar el proceso).
 
-## Generación de los PSIs (Percent Spliced-In)
+## Creación de tabla de datos conjunta
 
 ::: {.callout-note}
-*Todo lo hecho a partir de aquí está en Terminal_9-18-23.txt*
+*Todo lo hecho a partir de aquí está en:*
+
+[`Terminal_9-18-23.txt`](./Terminales Guardados/Terminal_9-18-23.txt)
 :::
+
+En el paso anterior hemos generado los PSI para cada una de la muestras por lo que ahora tendremos que mergear esas tablas para crear una única tabla de trabajo
 
 El siguiente paso es combinar en una tabla todos los eventos de cada muestra. Para ello usaremos el comando `vast-tools combine`. Para utilizar este comando tenemos que estar en la carpeta que contenga la carpeta donde se han generado los alineamientos (la generada tiene que contener la subcarpeta llamada `to_compare`):
 ```{r, eval=FALSE}
@@ -375,12 +429,117 @@ vast-tools combine -sp Hs2 -o Vast-Tool_Aling –cores 6
 ```
 
 El comando combinará teniendo en cuenta la versión del genoma humano -hg38- (-sp Hs2). Con el argumento `-o <directorio>` indicamos la carpeta que contiene los archivos a analizar. Tiene que ser la carpeta previamente mencionada, la que contiene la subcarpeta llamada “to_compare” (que coincide con la que pusimos en el argumento `-o` en el comando del alineamiento (el paso anterior). Con el argumento `–cores <nº_cores>` indicamos el número de cores o CPUs del superordenador que queremos que se utilicen para este proceso (por defecto se utiliza 1, con 6 va bastante rápido y en 3-5 min está hecho).
+
+::: {.callout-tip}
 Para más opciones siempre podemos consultar la ayuda del comando con
 ```{r, eval=FALSE}
 vast-tools combine -h
 ```
+:::
 
-## Comparaicón entre grupos
+Una vez que hemos corrido el código se genera un archivo llamado `INCLUCION_table.tab` (con especificaciones de nuestra muestra en el nombre) la cual la podemos extraer del servidos para leerla en `R`:
+
+```{r, eval=FALSE}
+Inclusion_table<-read.delim("INCLUSION_LEVELS_FULL-hg38-6.tab", header = TRUE, sep = "\t")
+
+View(Inclusion_table)
+```
+![](./Images/Picture29.png)
+
+Donde cada una de estas columnas nos da la siguiente información:
+
+* Columna 1 (**GENE**). Official Gene Symbol
+* COlumna 2 (**EVENT**). ID del evento en VAST-DB compuesto por:
+  + Identificador de Especie: Hsa (human), Mmu (ratón), Gga (pollo)
+  + Tipo de evento de splicing: alternative exon skipping (EX), retained intron (INT), alternative splice site donor choice (ALTD), or alternative splice site acceptor choice (ALTA). En el caso de ALTD/ALTA, cada uno de los sitions de spling está indicado (desde el interior del exon hacia afuera) sobre el total de número de sitios de splicing en el evento (e.g. HsaALTA0000011-1/2)
+  + Identificador numérico
+
+* Columna 3 (**COORD**). Coordenada en el genoma de la secuencia
+* Columna 4 (**LENGHTH**). Longitud de la secuencia, En evntos ALTF/ALTA el primer sitio de splicing para cada evento se asume como nucleótido 0.
+* Columna 5 (**FullCO**). Conjunto completo de coordenadas de la secuencia del evento de splicing alternativo.
+  + Para EX: chromosome:C1donor,Aexon,C2acceptor. Donde C1donor es el donante del exón "de referencia" aguas arriba, C2acceptor es el aceptor del exón "de referencia" aguas abajo y A es el exón alternativo. La cadena es "+" si C1donor < C2acceptor. Si existen múltiples aceptores/donantes en cualquiera de los exones, se muestran separados por "+". NOTA: Las coordenadas C1/C2 "de referencia" aguas arriba y aguas abajo no son necesariamente los exones C1/C2 aguas arriba y aguas abajo más cercanos, sino los más externos con suficiente soporte (para facilitar el diseño de cebadores, etc.). Si desea realizar análisis de las características de los exones y/o dibujar mapas de unión a ARN, se recomienda utilizar Matt.
+  + Para ALTD: chromosome:Aexon,C2acceptor. Los múltiples donor del evento se separan con "+".
+  + Para ALTA: chromosome:C1donor,Aexon. Multiples acceptors del evento se separan con "+".
+  + Para INT: chromosome:C1exon=C2exon:strand.
+
+* Columna 6 (**COMPLEX**): Tipo de evento:
+  + S, C1, C2, C3: Eventos de Exon-EXON Junction (EEJ) se cuantifican mediante splice site-based or transcript-based modules, con un incremento de los grados de complejidad (basado en Score 5 de un amplio panel de muestras de RNA-seq).
+  + ANN: exon skipping (EX) events quantified by the ANNOTATION module. Their IDs also start by ≥ 6 (e.g. HsaEX6000001).
+  + MIC: exon skipping (EX) que son microexones.
+  + IR: eventos intron retention.
+  + Alt3: eventos ALTA.
+  + Alt5: eventos ALTD.
+  
+  A continuación, para cada muestra compilada hay una pareja de columnas que indican:
+  
+* Columna 7 (**Name_Sample**): Porcentaje estimado de inclusión en la secuencia (PSI/PSU/PIR). PSI: percent spliced-in (para EEJ y EX). PSU: percent splice site usage (para ALTD y ALTA). PIR: percent intron retention (para INT).
+
+* Columna 8 (**Name_Sample.Q**): Puntuaciones de calidad y número de lecturas de inclusión y exclusión corregidas (qual@inc,exc):
+  + Score 1. Cobertura de lectura, basada en lecturas reales (como la utilizada en Irimia et al, Cell 2014). Esta es la única puntuación de cobertura utilizada por `compare`, `tidy` y `plot`
+    - Para EX (excepto módulo microexón): OK/LOW/VLOW: (i) ≥20/15/10 lecturas reales (es decir, antes de la corrección de mapeabilidad) mapeadas a todas las uniones de empalme de exclusión, O (ii) ≥20/15/10 lecturas reales mapeadas a uno de los dos grupos de uniones de empalme de inclusión (aguas arriba o aguas abajo del exón alternativo), y ≥15/10/5 al otro grupo de uniones de empalme de inclusión.
+    - Para EX (módulo de microexón): OK/LOW/VLOW: (i) ≥20/15/10 lecturas reales asignadas a la suma de uniones de empalme de exclusión, O (ii) ≥20/15/10 lecturas reales asignadas a la suma de uniones de empalme de inclusión.
+    - Para INT: OK/LOW/VLOW: (i) ≥20/15/10 lecturas reales mapeadas a la suma de uniones de empalme de exclusión, O (ii) ≥20/15/10 lecturas reales mapeadas a una de las dos uniones de inclusión exón-intrón (el 5' o 3' del intrón), y ≥15/10/5 a las otras uniones de empalme de inclusión.
+    - Para ALTD y ALTA: OK/LOW/VLOW: (i) ≥40/25/15 lecturas reales mapeadas a la suma de todas las uniones de empalme implicadas en el evento específico.
+    - Para cualquier tipo de evento: SOK: los mismos umbrales que OK, pero un número total de lecturas ≥100.
+    - Para cualquier tipo de evento: N: no alcanza el umbral mínimo (VLOW).
+  
+  + Score 2. Read coverage, based on corrected reads (similar values as per Score 1).
+  
+  + Score 3.Esta puntuación se ha reciclado para contener información diferente de la versión v2.2.2:
+    - EX (excepto módulo microexón): recuentos de lecturas totales en bruto que admiten inclusión aguas arriba, inclusión aguas abajo y omisión (formato INC1=INC2=EXC).
+    - EX (módulo de microexones): recuentos de lecturas totales sin procesar que admiten inclusión y exclusión (formato INC=EXC).
+    - ALTD y ALTA: valor tipo PSI del exón que alberga el evento ALTD/ALTA. Esta puntuación se utiliza para filtrar eventos en `compare` basándose en la opción `--min_ALT_use`.
+    - IR (a partir de v2.1.3): número corregido de lecturas del cuerpo del intrón (en una muestra de 200 pb en la mitad del intrón, o de todo el intrón si es más corto), y el número de posiciones mapeables en esa muestra (máximo 151 posiciones) (formato READS=POSICIONES).
+    - Antes de la v2.1.3: Cobertura de lectura, basada en lecturas no corregidas que corresponden únicamente a las uniones de empalme C1A, AC2 o C1C2 de referencia (valores similares a los de la puntuación 1).
+  
+  + Score 4. Esta puntuación tiene un significado diferente según el tipo de evento AS:
+    - EX (excepto para el módulo microexon): Desequilibrio de lecturas asignadas a las uniones de empalme de inclusión.
+      - OK: la relación entre el número total de lecturas corregidas que apoyan la inclusión de uniones de empalme aguas arriba y aguas abajo del exón alternativo es < 2.
+      - B1: la relación entre el número total de lecturas corregidas que apoyan la inclusión de los empalmes de empalme aguas arriba y aguas abajo del exón alternativo es > 2 pero < 5.
+      - B2: la relación entre el número total de lecturas corregidas que apoyan la inclusión de empalmes de empalme aguas arriba y aguas abajo del exón alternativo es > 5 (pero ninguna es 0).
+      - B3: cuando las lecturas corregidas para la inclusión de un lado son al menos 15 y 0 para el otro. Se utiliza para filtrar eventos en `compare` cuando la opción `--noB3` está activada.
+      - Bl/Bn: baja (entre 10 y 14)/ninguna cobertura de lectura (entre 1 y 9) para las uniones de empalme que apoyan la inclusión.
+    - EX (módulo de microexones): "na" (no se proporciona información).
+    - ALTD y ALTA: recuentos de lecturas brutas para el sitio de empalme específico, para todos los sitios de empalme del evento juntos (=lecturas totales) y para los que admiten la omisión del exón anfitrión. En versiones anteriores a la v2.2.2: lecturas totales del evento para todas las combinaciones o sólo para el aceptor de referencia (para ALTD) o donante (para ALTA).
+    - IR: recuentos de lecturas brutas que corresponden a la unión exón-intrón aguas arriba, intrón-exón aguas abajo y exón-exón en el formato EIJ=IEJ=EEJ). En versiones anteriores a la v2.2.2, se mostraban los recuentos corregidos en lugar de los recuentos de lecturas en bruto.
+  
+  + Score 5.Esta puntuación tiene un significado diferente según el tipo de evento:
+    - EX (excepto para el módulo microexon): Complejidad del evento. La puntuación se refiere al número de lecturas que proceden de las uniones "de referencia" C1A, AC2 y C1C2. La complejidad aumenta a medida que: S < C1 < C2 < C3.
+      - S: el porcentaje de lecturas complejas (es decir, las lecturas de inclusión y exclusión que no corresponden a las uniones de empalme C1A, AC2 o C1C2 de referencia) es < 5%.
+      - C1: el porcentaje de lecturas complejas es > 5% pero < 20%.
+      - C2: el porcentaje de lecturas complejas es > 20% pero < 50%.
+      - C3: el porcentaje de lecturas complejas es > 50%.
+      - NA: evento de baja cobertura.
+    - EX (módulo de microexones): "na" (no se proporciona información).
+    - ALTD y ALTA: puntuación de complejidad similar a la de los exones. En este caso, un determinado donante (para ALTA) o aceptor (para ALTD) se considera el sitio "de referencia", y las lecturas complejas son las procedentes de cualquier otro donante/aceptor.
+    - IR: valor p de una prueba binomial de equilibrio entre las lecturas asignadas a las uniones exón-intrón aguas arriba y aguas abajo, modificado por las lecturas asignadas a una ventana de 200 pb en el centro del intrón (véase Braunschweig et al., 2014).
+  
+  + inc,exc. número total de lecturas, corregido para la mapeabilidad, que admiten inclusión y exclusión, de forma que PSI = inc/(inc+exc). Así, cuando las lecturas de inclusión implican conjuntos de uniones aguas arriba y aguas abajo, inc y exc se escalan.
+  
+  Pero nos podemos quedar con el primer score como referencia.
+
+## Comparación entre grupos (Análisis de Splicing diferencial)
+
+### Definiciones
+Vast-tools genera comparaciones entre grupos principalmente mediante la comparación de las medias de sus respectivos percent inclusión levels del evento (PSI, PSU o PIR, dependiendo del evento). Un detalle importante es que a partir de ahora vamos a referirnos a todos los inclusión levels como PSI independientemente del evento que sea, aunque si quieres ser purista, para las gráficas deberías de poner el percent inclusión level correspondiente
+
+::: {.callout-attention}
+Recordamos que PSI es para Exon-Exon Juction (EEJ, que incluye todos los tipos de exón skipping), el PSU hace referencia a los Alternative Splice Aites (5’ y 3’) y el PIR hace referencia a los eventos de Intron retention
+:::
+
+Para eventos AS válidos, `vast-tools compare` requiere que el valor absoluto de ΔPSI sea superior a un umbral proporcionado como `--min_dPSI`. Además, requiere que la distribución PSI de los dos grupos no se superponga. Esto puede modificarse con la opción `--min_range`, para proporcionar un mayor o menor rigor. A mayor diferencia mayor rigor. Estos valores los vemos definidos en la siguiente imagen:
+
+![Imagen 5](./Images/Picture28.png)
+También es posible imprimir otros conjuntos de eventos AS de especial interés para comparaciones de características (por ejemplo, utilizando Matt). Esto puede hacerse utilizando la opción `--print_sets`. Producirá tres conjuntos de eventos AS: 
+
+1. Eventos constitutivos (CS), que corresponden a aquellos con PSI < 5 (para IR) o PSI > 95 (para todos los demás tipos) en todas las muestras comparadas; 
+
+2. Eventos crípticos (CR), que corresponden a aquellos con PSI > 95 (para IR) o PSI < 5 (para todos los demás tipos) en todas las muestras comparadas; 
+3. Eventos AS no cambiantes (AS_NC), que corresponden a aquellos con 10 < av_PSI < 90 en al menos uno de los grupos (o un rango de PSI > 10) y que no cambian entre las dos condiciones. Esto último se especifica con la opción `--max_dPSI`. Por defecto, se toma 1/5 del `--min_dPSI` proporcionado.
+
+Esto último hay que tenerlo en cuenta si vamos a descargar los datos (la “inclusion table” que generamos en el paso anterior). Los eventos de splicing constitutivos son aquellos que van se van a dar siempre por lo cual, su PSI va a ser de 100, mientras que los que no se dan nunca van a tener un valor de PSI de 0. Esto se conoce como eventos de tipo “switch” (ON/OFF). El resto son más fluctuantes y son a los que les podemos evaluar verdaderamente un Splicing Diferencial. Es por ello por lo que al comenzar el procedimiento si lo hacemos en R tenemos que establecer filtros como veremos posteriormente.
+
+### Procedimiento en terminal
 Para la comparación entre grupos y las consecutivas gráficas tendremos que instalar-actualizar bastantes paquetes de R que se nos habrá indicado en el output del proceso anterior. Instalarlos todos antes de continuar.
 Una vez instalados todos los paquetes que necesitaremos procedemos al proceso de comparación con el comando “vast-tools compare”, el cual lo tenemos que ejecutar en la carpeta en la que hemos generado la combinación (en nuestro caso, y siguiendo con el ejemplo, tendremos que acceder a la carpeta `Vast-Tool_Aling`):
 ```{r, eval=FALSE}
@@ -403,18 +562,1031 @@ Los argumentos utilizados definen lo siguiente:
 
 -	`-Hs2`
 
--	`--print_dPSI`
+-	`--print_dPSI`, ya lo he mos visto previamente
 
--	`--GO`
+-	`--GO`, ya lo hemos visto previamente
 
--	`--print_sets`
+-	`--print_sets`, ya lo hemos visto previamente
 
--	`--min_dPSI`
+-	`--min_dPSI`, ya lo hemos visto previamente
 
--	`--min_range`
+-	`--min_range`, ya lo hemos visto previamente
+
+::: {.callout-important}
+A partir de ahora, lo que vamos a ver es trabajando en R pero siguiendo el flujo de trabajo del [capítulo de libro de Vast-tools](https://doi.org/10.1007/978-1-0716-2521-7_7) (citado al principio de esta guía). Los resultados trabajando en termial (que lo iré haciendo de forma paralela) se mostrarán en:
+
+[`Terminal_VT.txt`](./Terminales Guardados/Terminal_VT.txt)
+:::
+
+### Procedimiento en R
+Paquetes necesarios:
+```{r, eval=FALSE}
+install.packages("tidyverse")
+install.packages("DT")
+install.packages("ggplot2", dependencies = TRUE)
+install.packages("pheatmap", dependencies = TRUE)
+install.packages("RColorBrewer", dependencies = TRUE)
+BiocManager::install("PCAtools")
+install.packages("ggrepel")
+```
+Y libraries:
+```{r, message=FALSE, warning=FALSE, error=FALSE}
+library(tidyverse)
+library(DT)
+library(ggplot2)
+library(pheatmap)
+library(RColorBrewer)
+library(PCAtools)
+library(ggrepel)
+```
+
+#### Handmade analysis
+Hemos de tener en cuenta dos cosas principales para realizar un prefiltrado de los datos generados con `vast-tool combine`:
+
+::: {.callout-tip}
+Esta parte del proceso la voy hacer en R pero en el terminal porque los archivos pesan mucho y tardan en descargarse. Mostraré los códigos que he seguido matizando al inicio de los mismos que se ha hecho en R (de la siguiente manera: `#Hecho en R de terminal`)
+:::
+
+Comenzamos leyendo la tabla INCLUSION_table.tab que hemos generado:
+
+```{r, eval=FALSE}
+#Hecho en R de terminal
+Inclusion_table<-read.delim("INCLUSION_LEVELS_FULL-hg38-6.tab", header = TRUE, sep = "\t")
+```
+
+1. **Eliminar las muestras de poca calidad**. Las muestras con calidad "N" deben ser eliminadas (o no consideradas para crear la media del grupo para ese evento). El considerar los VLOW queda más a nuestra decisión. 
+
+::: {.callout-important}
+Para eso, el Dr. Luis Pedro Íñiguez (CRG) me ha proveeido de las siguientes funciones que había que definirlas antes de hacer este paso si no las tenemos defininas:
+
+```{r, eval=FALSE}
+#Hecho en R de terminal
+#remove Ns and VLOW from vast-tools INCLUCION TABLE
+removeNVLOW <- function(x){
+  scores <- grep(".Q",names(x),fixed = T)
+  score2 <- scores - 1
+  for(i in score2){x[,i] <- ifelse(grepl("^N|^VLOW",x[,i+1]),NA,x[,i])}
+  return(x)
+}
+
+#remove Ns from vast-tools INCLUSION TABLE
+removeNonly <- function(x){
+  scores <- grep(".Q",names(x),fixed = T)
+  score2 <- scores - 1
+  for(i in score2){
+    x[,i] = ifelse(grepl("^N",x[,i+1]),NA,x[,i])
+  }
+  return(x)
+}
+```
+
+:::
+
+Aplicado a nuestra INCLUSION_Table de manera muy restrictiva sería de la siguiente manera:
+
+```{r, eval=FALSE}
+#Hecho en R de terminal
+rmdf<-removeNonly(df)
+
+#Para ser menos restrictivos usaríamos
+
+#rmdf<-removeNVLOW(Inclusion_table)
+```
+
+Una vez hemos hecho el filtro de calidad tenemos que hacer la media de los componentes de cada grupo.
+
+2. **Establecer los thresolds**.
+  a. *Difrencia entre las medias*. Tenemos que buscar lo mismo que se busca con la varibale `--min_dPSI`en `vast-tool combine`.
+  b. *Diferencia mínima entre el menor valor de la que tenga media más alta y mayor valor de la que tenga la media más baja*. Tenemos que buscar lo mismo que se busca con la varibale `--min_range` en `vast-tool combine`.
+  c. *Eliminar eventos constitutivos*. Como explicamos previamente, hay eventos de tipo "switch". Según este parámetro deben ser excluidos aquellos eventos que en un grupo tenga un PSI>90 y en el otro tengan un PSI<10 (voy a considerar aquellos que NO pasan este threshold aquellos eventos que en uno de los grupos cumpla la condición de 10<PSI<90 pero en el otro no).
+  
+  Para todo este apartado 2 he desarrollado un código que para usarlo tenemos que definir nuestros grupos muestrales:
+```{r, eval=FALSE}
+#Hecho en R de terminal
+Group_1<-"Basal"
+Samples_1<-c("Basal_1", "Basal_2", "Basal_3")
+
+Group_2<-"Luminal"
+Samples_2<-c("Luminal_1", "Luminal_2", "Luminal_3")
+```
+  
+  También tenemos que definir los thresholds que vamos a poner (a, b, c):
+```{r, eval=FALSE}
+#Hecho en R de terminal
+#thresholds para la diferencia entre grupos
+min_range=5
+min_dPSI=25
+
+#Valores de PSI/PSU/PIR a considerar splicing constitutivo
+Const_max=90
+Const_min=10
+```
+ 
+  Y ya comienza el código (que postermiomente desglorasaré para explicarlo):
+```{r, eval=FALSE}
+#Hecho en R de terminal
+dPSI_table<-data.frame("GENE", "EVENT", Group_1, Group_2, "dPSI", "range", "Pass_threshold",  "COORD", "LENGTH", "FullCO", "COMPLEX")
+colnames(dPSI_table)<-c("GENE", "EVENT", Group_1, Group_2, "dPSI", "range", "Pass_threshold", "COORD", "LENGTH", "FullCO", "COMPLEX") #definimos el nombre de las columnas
+
+#Y también creamos la tabla en la que se van a pasar aquellos que pasen el threshold
+dPSI_PASS<-data.frame("GENE", "EVENT", Group_1, Group_2, "dPSI", "range", "Pass_threshold",  "COORD", "LENGTH", "FullCO", "COMPLEX")
+colnames(dPSI_PASS)<-c("GENE", "EVENT", Group_1, Group_2, "dPSI", "range", "Pass_threshold",  "COORD", "LENGTH", "FullCO", "COMPLEX") #definimos el nombre de las columnas
+
+#Por último creamos otra para aquellos que pasen el threshold y cumplan la condición de que 10>PSI>90
+dPSI_df<-data.frame("GENE", "EVENT", Group_1, Group_2, "dPSI", "range", "Pass_threshold",  "COORD", "LENGTH", "FullCO", "COMPLEX")
+colnames(dPSI_df)<-c("GENE", "EVENT", Group_1, Group_2, "dPSI", "range", "Pass_threshold",  "COORD", "LENGTH", "FullCO", "COMPLEX") #definimos el nombre de las columnas
+
+#Establecemos los valores mínimos para la definición de las filas
+fila_PASS=1
+fila_df=1
+porcentaje=0.02
+
+Hora_inicio<-Sys.time()
 
 
+for (i in c(1:nrow(rmdf))){
 
+
+############################################
+##### guardar variables a mantener #########
+dPSI_table[i, c(1:2) ]<-rmdf[i,c(1:2)]
+dPSI_table[i, c(8:11) ]<-rmdf[i,c(3:6)]
+
+
+#######################
+##### Medias  #########
+
+Group_1_mean<-as.numeric(rmdf[i, Samples_1]) %>% mean() %>% round(, digits=5)
+Group_2_mean<-as.numeric(rmdf[i, Samples_2]) %>% mean() %>% round(, digits=5)
+
+dPSI_table[i, c(3:4) ]<-c(Group_1_mean, Group_2_mean)
+
+####################
+##### dPSI #########
+
+Diff<-Group_2_mean - Group_1_mean
+#y ahora hacemos que salga FALSE para aquellos valores que sean inferior al rango mínimo establecido
+Diff_threshold<-ifelse(abs(Diff)>min_dPSI, TRUE, FALSE)
+
+##########################
+##### Overlaping #########
+
+
+Rang<-ifelse(Diff>0, min(Group_2_mean)-max(Group_1_mean), min(Group_1_mean)-max(Group_2_mean))
+#y vemos si pasa el threshold
+Rang_threshold<-ifelse(Diff>0 & min(Group_2_mean)-max(Group_1_mean)>min_range | Diff<0 & min(Group_1_mean)-max(Group_2_mean)>min_range, TRUE, FALSE)
+
+##################################
+##### Paso del threshold #########
+
+PASS<-ifelse(Rang_threshold & Diff_threshold, TRUE, FALSE)
+
+#En la columna threshold añadimos si se cumplen los cutoffs que hemos establecido
+dPSI_table[i, c(5:7)]<-c(Diff ,Rang, PASS)
+
+######################################
+#####                        #########
+#####   tabla de thresholds  #########
+#####                        #########
+######################################
+
+#Ahora solo eventos que han pasado el threshold se van a pasar a una nueva tabla con la que tabajaremos para representar los eventos desregulados
+
+if(!is.na(PASS) & PASS==1){
+  
+dPSI_PASS[fila_PASS,]<-dPSI_table[i,]
+
+#Una vez hemos acabado la línea
+fila_PASS=fila_PASS+1
+}
+
+######################################
+#####                        #########
+#####   tabla de thresholds  #########
+#####     + 10<PSI<90        #########
+######################################
+######################################
+
+#Ahora  nuevo df en el que se acumularán solo eventos que han pasado el threshold
+#y hacemos el bucle
+
+if(!is.na(PASS) & PASS==1 & 
+   ((Group_1_mean<Const_max & Group_2_mean>Const_min) |  
+    (Group_2_mean<Const_max & Group_1_mean>Const_min) |
+    (Group_1_mean<Const_max & Group_2_mean>Const_max) |  
+    (Group_2_mean<Const_max & Group_1_mean>Const_max) | 
+    (Group_1_mean<Const_min & Group_2_mean>Const_min) | 
+    (Group_2_mean<Const_min & Group_1_mean>Const_min))){
+  
+dPSI_df[fila_df,]<-dPSI_table[i,]
+
+#Una vez hemos acabado la línea
+fila_df=fila_df+1
+
+}
+
+#Se imprime el porcentaje de procesado y la hora
+if(i==round(nrow(rmdf)*porcentaje)){
+  
+  Hora_porcentaje<-Sys.time()
+  
+  diferencia_segundos <- as.numeric(difftime(Hora_porcentaje, Hora_inicio, units = "secs"))
+  tiempo_restante_segundos <- diferencia_segundos / (porcentaje) 
+  tiempo_restante_minutos <- tiempo_restante_segundos / 60
+  tiempo_restante_horas <- tiempo_restante_minutos / 60
+  
+   
+  print(paste(porcentaje*100, "% (hora:", format(Sys.time(), "%X, %d/%b/%Y) ---  Tiempo restante estimado: "), round(tiempo_restante_horas), "h ", round(tiempo_restante_minutos - round(tiempo_restante_horas)*60), "min"))
+  
+  
+  
+  porcentaje<-porcentaje+0.02
+  
+}
+
+if(porcentaje>0.9999999999999999999999999999999999999){ 
+         print("-------------------------------   Proceso finalizado   --------------------------------------")
+  }
+
+}
+
+```
+
+::: {.callout-note collapse="TRUE" title="Expliación del código"}
+
+1. Comenzamos definiendo las tablas que se van a generar y las filas en las que se van a ir incorporando los resultados:
+```{r, eval=FALSE}
+dPSI_table<-data.frame("GENE", "EVENT", Group_1, Group_2, "dPSI", "range", "Pass_threshold", "COORD", "LENGTH", "FullCO", "COMPLEX")
+colnames(dPSI_table)<-c("GENE", "EVENT", Group_1, Group_2, "dPSI", "range", "Pass_threshold", "COORD", "LENGTH", "FullCO", "COMPLEX")
+
+#Y también creamos la tabla en la que se van a pasar aquellos que pasen el threshold
+dPSI_PASS<-data.frame("GENE", "EVENT", Group_1, Group_2, "dPSI", "range", "Pass_threshold", "COORD", "LENGTH", "FullCO", "COMPLEX")
+colnames(dPSI_df)<-c("GENE", "EVENT", Group_1, Group_2, "dPSI", "range", "Pass_threshold", "COORD", "LENGTH", "FullCO", "COMPLEX")
+
+#Por último creamos otra para aquellos que pasen el threshold y cumplan la condición de que 10>PSI>90
+dPSI_df<-data.frame("GENE", "EVENT", Group_1, Group_2, "dPSI", "range", "Pass_threshold", "COORD", "LENGTH", "FullCO", "COMPLEX")
+colnames(dPSI_df)<-c("GENE", "EVENT", Group_1, Group_2, "dPSI", "range", "Pass_threshold", "COORD", "LENGTH", "FullCO", "COMPLEX")
+#Establecemos los valores mínimos para la definición de las filas
+fila_PASS=1
+fila_df=1
+porcentaje=0.02
+#guardamos la hora de inicio del proceso para finalmente estimar el tiempo que falta de proceso (ver paso 11)
+Hora_inicio<-Sys.time()
+
+```
+
+::: {.callout-warning title="Generación de tablas"}
+  En este caso vamos a generar varias tablas para comparar los resultado y tener la opción de verlo todo porque estamos practicando, si fueramos a trabaja sabiendo lo que queremos tendríamos que modificar este código para hacerlo más eficiente y que solo genere la tabla que nos interesa
+:::
+ 
+  A continuación creamos un bucle para ir aplicando el procedimiento siguiente a cada una de las filas de `rmdf`.
+
+2. Pasamos los valores que nos interesa mantener al new dataframe `dPSI_table` que se utilizará como base para todas las operaciones
+
+```{r, eval=FALSE}
+dPSI_table[fila, c(1:2) ]<-rmdf[i,c(1:2)]
+dPSI_table[fila, c(8:11) ]<-rmdf[i,c(3:6)]
+```
+
+3. Calculamos la media de los dos grupos y las guardamos en las columnas corresponientes.
+
+```{r, eval=FALSE}
+Group_1_mean<-as.numeric(rmdf[fila, Samples_1]) %>% mean()
+Group_2_mean<-as.numeric(rmdf[fila, Samples_2]) %>% mean()
+
+dPSI_table[fila, c(3:4) ]<-c(Group_1_mean, Group_2_mean)
+```
+
+4. Calculamos la diferencia (equivalente a `min_dPSI`) entre las medias de los grupos y establecemos si pasa o no pasa el threshold:
+```{r, eval=FALSE}
+#La diferencia es simplemente la resta de las medias
+Diff<-Group_2_mean - Group_1_mean
+#y ahora hacemos que salga FALSE para aquellos valores que sean inferior al rango mínimo establecido
+Diff_threshold<-ifelse(abs(Diff)>min_dPSI, TRUE, FALSE)
+```
+
+5. Para el rango (equivalente a `min_range`) primero definimos que que el rango mínimo se calcula como el valor mínimo del grupo con mayor expresión y el valor máximo del grupo con menor expresión:
+
+```{r, eval=FALSE}
+Rang<-ifelse(Diff>0, min(Group_2_mean)-max(Group_1_mean), min(Group_1_mean)-max(Group_2_mean))
+#y vemos si pasa el threshold
+Rang_threshold<-ifelse(Diff>0 & min(Group_2_mean)-max(Group_1_mean)>min_range | Diff<0 & min(Group_1_mean)-max(Group_2_mean)>min_range, TRUE, FALSE)
+```
+
+6. Damos valor a la columna de `Pass_threshold` en función de si se pasan ambos thresholds. Si ambos threshold pasan se define como 1 y alguno o uno de ellos no pasan se definen como 0):
+```{r, eval=FALSE}
+PASS<-ifelse(Rang_threshold & Diff_threshold, TRUE, FALSE)
+
+#En la columna threshold añadimos si se cumplen los cutoffs que hemos establecido
+dPSI_table[fila, c(5:7)]<-c(Diff ,Rang, PASS)
+```
+
+::: {.callout-tip title="Estadística para Splicing" collapse="TRUE"}
+Tras una interesante conversación con el Dr. Manuel Irimia he comprendido que realizar un test estadístico para 3 muestras (aunque se haga un no paramétrico) no tiene sentido porque el pvalor va a dar como poco 0.05 de manera que él, en Vast-Tools, no realiza estadística sino que se basa en los thresholds (de diferencia mínima de las medias y que no exista overlapping entre la distribución de las muestras) así que podríamos dejarlo aquí. Esto se debe al tipo de distribución que presentan los splicing (llamada distribución beta), como podemos ver en las siguientes imágenes:
+
+![Imagen obtenida de [betAS](https://compbio.imm.medicina.ulisboa.pt/app/betAS)](./Images/Picture30.png)
+
+Sin embargo, es posible que queramos realizar algún tipo de aproximación estadística de manera que si tenemos 3 muestras, una vez el Dr. Irima (mirar el ejemplo al final del párrafo) realizó un test de wilkinson + un Test de Student (o algo similar) de manera que si ambos estaban por debajo de 0.05 podemos justificar en la sección de materiales y métodos que estamos haciendo ambos test y cuando consideramos significativa una diferencia (que ambos test pasen). Según un físico muy reputado, Dr. Nuno L Barbosa-Morais, con el que ha colaborado en muchas ocasiones, un test estadístico es adecuado si lo justificas de forma adecuada (tiene que tener sentido, claro). Un ejemplo de esto que os comento ocurre en la estadística del artículo "[Hong Han et al. (2013). Nature](https://pubmed.ncbi.nlm.nih.gov/23739326/)", en la Figura-4G.
+
+Debido al tipo de distribución del splicing alternativo, el tipo de test estadístico tiene que basarse en la propia distribución beta. Por eso, lo más recomendabe es utilizar el paquete de R [`betAS`](https://www.biorxiv.org/content/10.1101/2022.12.26.521935v1) (de Dr. Nuno L Barbosa-Morais) en el cual se estiman pval de las diferencias en el splicing entre dos grupos muestrales (aunque sean pequeños).
+
+A modo de curiosidad, también hemos debatido sobre cuándo utilizar el pvalor ajustado, si antes o después de utilizar el filtro (porque el valor del pval ajustado depende directamente del número de eventos a los que le has calculado el pval). Su opinión es que, para ser más restrictivo se puede utilizar después de aplicar el threshold.
+
+Posteriormente utilizaremos `betAS` para calcular el pvalor estadístico de nuestros eventos
+:::
+
+7. Solo eventos que han pasado el threshold a y b (por comprobar los datos que se generan y poder explorar los constitutivos que se comportan como tal) se van a pasar a una nueva tabla `dPSI_PASS` (*se podría haber puesto antes porque no considera los pvalores calculados, pero primero quería hacer los cálculos y finalmente definir las tablas*):
+```{r, eval=FALSE}
+if(!is.na(PASS) & PASS==1){
+  
+dPSI_PASS[fila_PASS,]<-dPSI_table[i,]
+
+#Una vez hemos acabado la línea
+fila_PASS=fila_PASS+1
+}
+```
+
+8. Solo eventos que han pasado el threshold a, b y c (por comprobar los datos que se generan y poder explorar los constitutivos que se comportan como tal) se van a pasar a una nueva tabla `dPSI_df` (*se podría haber puesto antes porque no considera los pvalores calculados, pero primero quería hacer los cálculos y finalmente definir las tablas*):
+```{r, eval=FALSE}
+if(!is.na(PASS) & PASS==1 & 
+   ((Group_1_mean<Const_max & Group_2_mean>Const_min) |  
+    (Group_2_mean<Const_max & Group_1_mean>Const_min) |
+    (Group_1_mean<Const_max & Group_2_mean>Const_max) |  
+    (Group_2_mean<Const_max & Group_1_mean>Const_max) | 
+    (Group_1_mean<Const_min & Group_2_mean>Const_min) | 
+    (Group_2_mean<Const_min & Group_1_mean>Const_min))){
+  
+dPSI_df[fila_df,]<-dPSI_table[i,]
+
+#Una vez hemos acabado la línea
+fila_df=fila_df+1
+
+}
+```
+
+9. Al final de cada bucle, se calculará el porcentaje de proceso que llevamos realizado en función del nº de filas que se han procesado con respecto a las totales y en función del tiempo que llevamos de proceso se estime el tiempo que queda de procesamiento [en función del tiempo que ha tardado en procesar el nº de filas que llevamos en cada momento del bucle (por lo que va ir fluctuando porque si, por ejemplo, hay muchos NAs al principio va a tardar poco en procesarlos ya que no tiene que hacer ninguna operación y nos puede dar un tiempo estimado bajo, a medida que pase el bucle y vaya haciendo cálculos tardará más y por lo tanto la estimación cambiará)]:
+
+```{r, eval=FALSE}
+#Se imprime el porcentaje de procesado y la hora
+if(i==round(nrow(rmdf)*porcentaje)){
+  
+  Hora_porcentaje<-Sys.time()
+  
+  diferencia_segundos <- as.numeric(difftime(Hora_porcentaje, Hora_inicio, units = "secs"))
+  tiempo_restante_segundos <- diferencia_segundos / (porcentaje) * (1-porcentaje) 
+  tiempo_restante_minutos <- tiempo_restante_segundos / 60
+  tiempo_restante_horas <- tiempo_restante_minutos / 60
+  
+    
+  print(paste(porcentaje*100, " % (hora: ", format(Sys.time(), "%X, %d/%b/%Y) ---  Tiempo restante estimado: "), round(tiempo_restante_horas), "h ", round(tiempo_restante_minutos %% 60), "min"))
+  
+  if(porcentaje==1){ 
+         print("-------------------------------   Proceso finalizado   --------------------------------------")
+  }
+  #definimos el siguiente porcentaje que se imprimirá
+  porcentaje<-porcentaje+0.02
+  
+  }
+```
+::: {.callout-note}
+*Esto es totalmente opcional pero viene bien para comprobar que el código sigue funcionando*
+El output será el siguiente:
+
+`[1] "30 % (hora: 12:25:35, 11/Oct/2023) ---  Tiempo restante estimado:  4 h  50 min"`
+:::
+
+Y aquí concluye el código. Cuando acabe el proceso se imprimirá el siguiente mensaje:
+
+`[1] "-------------------------------   Proceso finalizado   --------------------------------------"`
+:::
+
+Y el resultado será algo como esto:
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+dPSI_df<-read.csv("./Data/dPSI_df.csv", header = TRUE)
+dPSI_df<-dPSI_df[, -1] #porque tenía en la primera fila el rowname y se lo he quitado
+
+dPSI_df %>%  datatable(extensions = "Buttons",
+          options = list(paging = TRUE,
+                           scrollX=TRUE,
+                           searching = TRUE,
+                           ordering = TRUE,
+                           dom = 'Bfrtip',
+                           buttons = c( 'csv', 'excel'),
+                           pageLength=5,
+                           lengthMenu=c(3,5,10) ))
+```
+
+::: {.callout-note}
+Tener en cuenta que te guarda como rowname el nº de la fila de la INCLUSION_table en la que se encontraban los datos. No los vas a ver así en la siguiente gráfica porque lo he eliminado.
+:::
+
+Una vez tenemos la tabla de datos podemos comenzar a realizar la representación gráfica de los mismos, la cual va a ser muy similar (tanto a nivel de código como visual) al análisis de expresión diferencial, solo que aquí representamos eventos de splicing:
+
+::: {.callout-important}
+Recuerda que los datos que utilizamos para graficar no son las medias sino los valores individuales de cada muestra. Estos valores no los hemos extraido en ningún momento en nuestro código anterior de manera que tenemos que recuperarlos. No lo he añadido para así poder ver un poco de manipulación de datos, que viene bien. Para recuprar estos valores he diseñado el siguiente código:
+```{r, eval=FALSE}
+PSI_pass_evets<-data.frame(matrix(ncol=2+length(Samples_1)+length(Samples_2)))
+colnames(PSI_pass_evets)<-c("GENE", "EVENT", Samples_1, Samples_2)
+
+for (n in c(1:nrow(dPSI_df))){
+  
+  PSI_pass_evets[n, c(1, 2)]<- dPSI_PASS[n, c(1, 2)]
+  
+  row_index<- which(df$GENE == dPSI_PASS[n, 1] & df$EVENT == dPSI_PASS[n, 2])
+  
+  for (col in colnames(PSI_pass_evets)[c(3:ncol(PSI_pass_evets))]){
+    
+    col_index<- which(col == colnames(df))
+  
+    PSI_pass_evets[n, col]<- df[row_index, col_index]
+  }  
+  
+}
+```
+
+::: {.callout-note}
+Tener en cuenta que te guarda como rowname el nº de la fila de la INCLUSION_table en la que se encontraban los datos. No los vas a ver así en la siguiente gráfica porque lo he eliminado.
+:::
+
+Y generamos algo así:
+```{r, echo=FALSE, warning=FALSE, error=FALSE}
+PSI_pass_evets<-read.csv("./Data/PSI_pass_evets.csv", header = TRUE)
+PSI_pass_evets<-PSI_pass_evets[, -1] #porque tenía en la primera fila el rowname y se lo he quitado
+
+PSI_pass_evets %>%  datatable(extensions = "Buttons",
+          options = list(paging = TRUE,
+                           scrollX=TRUE,
+                           searching = TRUE,
+                           ordering = TRUE,
+                           dom = 'Bfrtip',
+                           buttons = c( 'csv', 'excel'),
+                           pageLength=5,
+                           lengthMenu=c(3,5,10) ))
+```
+
+Y ahora tendríamos que crear la variable gathered (la matriz larga) para poder realizar las gráficas:
+```{r}
+gathered_PSI <- PSI_pass_evets %>%
+  gather(colnames(PSI_pass_evets)[3:ncol(PSI_pass_evets)], key = "Sample", value = "PSI")
+
+head(gathered_PSI)
+```
+
+::: {.callout-warning}
+Estamos asumiendo que tenemos el metadata cargado porque lo habíamos utilizado para el análisis de expresión diferencial, si necesitáramos cargarlo sería poniendo el siguiente código para cargarlo:
+```{r}
+metaData <- as.data.frame(read.csv('./Data/Metadata_Basal_vs_Luminal.csv', header = TRUE, row.name=1, sep = ","))
+
+metaData %>%  datatable(extensions = "Buttons",
+          options = list(paging = TRUE,
+                           scrollX=TRUE,
+                           searching = TRUE,
+                           ordering = TRUE,
+                           dom = 'Bfrtip',
+                           buttons = c( 'csv', 'excel'),
+                           pageLength=5,
+                           lengthMenu=c(3,5,10) ))
+```
+:::
+
+Por último, le atribuimos el grupo al que pertenece cada una de las muestras a utilizando el metadata:
+```{r}
+gathered_PSI <- inner_join(metaData %>%
+  rownames_to_column(var = "Sample"), gathered_PSI)
+
+head(gathered_PSI)
+```
+
+:::
+
+- Boxplot de los más desregulados
+```{r, warning=FALSE, message=FALSE, error=FALSE}
+ggplot(gathered_PSI) +
+        geom_boxplot(aes(x = EVENT, y = PSI, fill = cell_type)) +
+        scale_y_log10() +
+        xlab("Events") +
+        ylab("Inclusion levels (PSI)") +
+        ggtitle("Differencial Spliced Events") +
+  facet_wrap(~GENE, scale="free")+ 
+  theme(axis.text.x = element_text( size = 7),
+        axis.text.y = element_text( size = 5),
+    strip.text.x = element_text(size = 4, face = "bold"), 
+    legend.key.size=unit(2, "mm"))
+```
+
+Esto son muchos genes pero si seleccionamos por ejemplo los 9 genes que presenten los eventos más diferencialmente spliceados:
+```{r, warning=FALSE, message=FALSE, error=FALSE}
+#Extraemos los 9 eventos con mayor diferencia de PSI
+dPSI_df$dPSI<- as.numeric(dPSI_df$dPSI)
+eventList<- round(dPSI_df$dPSI, digits= 5)
+names(eventList)<- dPSI_df$EVENT
+Top_9_eventList<- sort(eventList, decreasing = T) %>% .[c(1:9)]
+                 
+#hacemos el filtro para los 8 eventos con mayor diferencia de PSI
+top9_PSI<- PSI_pass_evets %>%
+           dplyr::filter(EVENT %in% names(Top_9_eventList)) 
+
+#Ahora hacemos el gathered
+Top_9_gathered_events<- top9_PSI %>%
+           gather(colnames(PSI_pass_evets)[3:ncol(PSI_pass_evets)], 
+           key = "Sample", value = "PSI") 
+
+#Añadimos el metadata
+Top_9_gathered_events <- inner_join(metaData %>%
+  rownames_to_column(var = "Sample"), Top_9_gathered_events)
+
+#y ahora graficamos el heatmap
+ggplot(Top_9_gathered_events) +
+        geom_boxplot(aes(x = EVENT, y = PSI, fill = cell_type)) +
+        scale_y_log10() +
+        xlab("Events") +
+        ylab("Inclusion levels (PSI)") +
+        ggtitle("Differencial Spliced Events") +
+  facet_wrap(~GENE, scale="free")+ 
+  theme(axis.text.x = element_text( size = 7),
+        axis.text.y = element_text( size = 5),
+    strip.text.x = element_text(size = 7, face = "bold"), 
+    legend.key.size=unit(2, "mm"))
+```
+
+- Heatmap
+```{r, warning=FALSE, message=FALSE, error=FALSE}
+#Primero vamos a crear un data.frame(a partir de ahora "df") que va a ser igual que PSI_pass_events pero con con la columna de eventos como rownames y las columnas van a ser solo las muestras:
+PSI_table<- PSI_pass_evets %>%
+          .[, -1] %>%
+          as.tibble() %>%
+          column_to_rownames(var = "EVENT") %>%
+          as.data.frame() %>%
+          mutate_if(is.character, as.numeric)
+
+#Ahora creamos las anotaciones
+annotation <- metaData %>% 
+  rownames_to_column(var="samplename") %>%
+    dplyr::select(samplename, cell_type) %>% 
+    data.frame(row.names = "samplename")
+
+#Y hacemos el heatmap
+pheatmap(PSI_table, 
+         color = colorRampPalette(brewer.pal(6, "YlOrRd"))(100), 
+         cluster_rows = T, 
+         show_rownames = F,
+         show_colnames = F,
+         annotation = annotation, 
+         border_color = NA, 
+         fontsize = 10, 
+         scale = "row", 
+         fontsize_row = 10, 
+         height = 20)
+```
+
+- PCA.
+```{r, warning=FALSE, message=FALSE, error=FALSE}
+#definimos la varibale p como el cálculo de los Componentes Principales
+p<-pca(PSI_table, metadata = metaData, removeVar=0.1)
+
+#Definimos una matriz de dos columnas para ver las dos gráficas juntas
+par(mflow = c(1, 2))
+
+#Calculamos el PC1vsPC2 bonito
+p1<- PCAtools::biplot(p,
+                 title = "PC1 vs PC2",
+                 lab=NULL,
+                 axisLabSize = 10,
+                 colby="cell_type",
+                 colkey = c("Basal"="forestgreen", "Luminal"="lightblue"),
+                 encircle = TRUE,
+                 encircleFill = TRUE,
+                 legendPosition = "bottom",
+                 legendLabSize = 8,
+                 legendIconSize = 4,
+                 legendTitleSize = 10)
+
+#Calculamos múltiples PCAs
+p2<- pairsplot(p,
+    components = getComponents(p, c(1:4)),
+    triangle = TRUE, 
+    trianglelabSize = 16,
+    hline = 0, 
+    vline = 0,
+    pointSize = 2,
+    gridlines.major = FALSE, 
+    gridlines.minor = FALSE,
+    colby = 'cell_type',
+    title = 'Pairs plot',
+    titleLabSize = 12,
+    plotaxes = FALSE,
+    margingaps = unit(c(-0.01, -0.01, -0.01, -0.01), 'cm'))
+
+gridExtra::grid.arrange(p1, p2, ncol = 2)
+```
+
+- Uso de [`VastDB`](https://vastdb.crg.eu/wiki/Main_Page). Podemos buscar información muy útil relacionada con nuestro evento de interés en esta DataBase. Muy recomendable.
+
+
+#### Análisis con betAS
+Esta herramienta ha sido desarrollada por Mariana Ascensão-Ferreira y Nuno L. Barbosa-Morais. También se ha publicado el [preprint](https://www.biorxiv.org/content/biorxiv/early/2023/05/20/2022.12.26.521935.full.pdf) en [bioRxiv](https://www.biorxiv.org/content/10.1101/2022.12.26.521935v1.full):
+
+Mariana Ascensão-Ferreira, Rita Martins-Silva, Nuno Saraiva-Agostinho and Nuno L. Barbosa-Morais (2023). betAS: intuitive analysis and visualisation of differential alternative splicing using beta distributions. bioRxiv
+
+Para analizarlo con betAS podemos ir directamente a su página [web interactiva](https://compbio.imm.medicina.ulisboa.pt/app/betAS) (similar a iDEP.96) o hacerlo en R (lo cual nos da un completo control de los datos). Tenemos que tener en cuenta que todavía es una herramienta en desarrollo.
+
+La guía para R está en el siguiente [enlace](https://diseasetranscriptomicslab.github.io/betAS/inst/betAS_tutorial.html)
+
+Para instalarlo en para R:
+```{r, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("marianaferreira/betAS@dev") #Esto es provisional. El @dev significa que nos estamos descargando un "branch" de github en concreto (en este caso el que ellos han llamado "dev")
+```
+
+Cargamos la libreía:
+```{r, warning=FALSE, message=FALSE, error=FALSE}
+library(betAS)
+#además hay que instalar otras librerías recomendadas:
+library(ggplot2)
+library(plotly) 
+library(dplyr)
+library(ggpubr)
+```
+
+Se pueden `utilizar INCLUSION_tables.tab` generadas con `vast-tools`, los `MATS.JC.txt` genrados con [`rMATS`](https://rnaseq-mats.sourceforge.io/) o los `.psi.gz` generados para cada muestra mediante  [`whippet`](https://www.biorxiv.org/content/10.1101/158519v1.full) mediante el uso de la función `getDataset`:
+- Para `vast-tools`:
+
+```{r, eval=FALSE}
+# Example to load data from vast-tools
+dataset <- getDataset(pathTables="path/to/dataset/*INCLUSION_LEVELS_FULL*.tab", tool="vast-tools")
+
+# Example to load data from rMATS
+dataset <- getDataset(pathTables="path/to/dataset/*MATS.JC.txt", tool="rMATS")
+
+# Example to load data from whippet
+dataset <- getDataset(pathTables=list("path/to/sample1/*.psi.gz",
+                                      "path/to/sample2/*.psi.gz",
+                                      "path/to/sample3/*.psi.gz"), tool="whippet")
+```
+
+::: {.callout-note}
+Darnos cuenta de que lo último que definimos en esta función (`getDataset`) es la herramienta que utilizamos  mediante el argumento `tool =`.
+
+Otra cosa importante a tener en cuenta es que para utilizar la herramienta `whippet` hay que definir al menos dos archivos `.psi.gz`.
+:::
+
+::: {.callout-warning}
+Vuelvo a trabajar en el terminal porque al tener que manipular la INCLUSION_table, ya vimos que es muy pesada así que es mejor trabajar ahí. Pero todo lo voy a hacer en R osea que se puede hacer en nuestr o ordenador.
+
+De igual manera que he hecho anteriormente, dejaré un descargable de los datos tratatos para que podáis practicar
+:::
+
+Para nuestro caso concreto sería:
+```{r, eval=FALSE}
+dataset <- getDataset(pathTables="INCLUSION_LEVELS_FULL-hg38-6.tab", tool="vast-tools")
+tool <- "vast-tools"
+dataset <- getEvents(dataset, tool = tool)
+```
+
+Esto crea un objeto que guarda tanto los valores de PSI como los de calidad en una especie de dataset simultáneos con las mismas características (como hacía `DESeq2`).
+
+Podemos realizar un filtro por tipo de evento. Por ejemplo, con el siguiente comando podemos quedarnos con los exon skipping solamente (el `N=10`hará que solo consideremos aquellos eventos de los que hayamos tenido un mínimo de 10 eventos):
+```{r, eval=FALSE}
+dataset_filtered <- filterEvents(dataset, types=c("C1", "C2", "C3", "S", "MIC"), N=10)
+```
+
+Una vez hemos cargado y formateado nuestro dataset para poder utilizarlo, podemos realizar los filtros que queramos, por ejemplo:
+```{r, eval=FALSE}
+dataset_filtered <- alternativeEvents(dataset_filtered, minPsi=1, maxPsi=99)
+```
+
+A continuación podemos hacer una representación de la distribución del PSI por muestra (en el eje de la y tenemos la :
+```{r, eval=FALSE}
+bigPicturePlot <- bigPicturePlot(table = dataset_filtered$PSI)
+#tenemos que indicar que queremos queremos ver la distribución del objeto PSI
+bigPicturePlot + theme_minimal()
+```
+
+![](./Images/Picture31.png)
+
+A continuación tenemos que definir los grupos para así poder hacer el análisis. Para ello:
+
+1. Leemos el archivo de metadata como un dataframe:
+```{r}
+metadata<- as.data.frame(read.csv("Data/Metadata_Basal_vs_Luminal.csv"))
+```
+
+2. Definimos la variable "cell_type" com la variable con la que vamos a definir los grupos y guardamos los grupos en la variable `groups` y las muestras en la varieble `samples`:
+```{r}
+groupingVariable <- "cell_type"
+
+groups <- unique(metadata[,groupingVariable])
+#tener cuidado porque esta variable tiene que estar definida como caracter. Si tenemos algún error probar con lo siguiente:
+
+#groups <- as.character(unique(metadata[,groupingVariable]))
+
+samples <- metadata$id
+```
+
+3. Vamos a representar una pie chart de la distribución de las muestras
+```{r}
+colors <- c("#FF9AA2", "#AFAAD1")
+
+groupList <- list()
+
+for(i in 1:length(groups)){
+
+  groupNames <- samples[which(metadata[,groupingVariable] == groups[i])]
+
+  # Assign new group
+  currentNames <- names(groupList)
+  groupList[[length(groupList)+1]] <- list(name = groups[i],
+                                           samples = groupNames,
+                                           color = colors[i])
+  names(groupList) <- make.unique(c(currentNames, groups[i]))
+
+}
+
+slices <- rep(1, length(groups))
+
+pie(slices, col = colors[1:length(groups)], border = "black", labels=groups, main = "Color palette for group definition")
+```
+
+::: {.callout-note title="Explicación código del pie chart" collpse="TRUE"}
+1. Comenzamos definiendo los colores que vamos a utilizar. Como tenemos dos grupos solo vamos a definir dos colores:
+```{r, eval=FALSE}
+colors <- c("#FF9AA2", "#AFAAD1")
+```
+
+2. A continuación creamos una lista para asignar a cada grupo un color (con el bucle a continuación):
+```{r, eval=FALSE}
+groupList <- list()
+
+for(i in 1:length(groups)){
+
+  groupNames <- samples[which(metadata[,groupingVariable] == groups[i])]
+
+  # Asignamos un nuevo grupo
+  currentNames <- names(groupList)
+  groupList[[length(groupList)+1]] <- list(name = groups[i],
+                                           samples = groupNames,
+                                           color = colors[i])
+  names(groupList) <- make.unique(c(currentNames, groups[i]))
+
+}
+#Visualicemos como queda la lista
+```
+
+3. Definimos  el tamaño de las slices de las pie chart
+```{r}
+slices <- rep(1, length(groups))
+```
+
+4. Por úlimo graficamos el pie chart:
+```{r}
+pie(slices, col = colors[1:length(groups)], border = "black", labels=groups, main = "Color palette for group definition")
+```
+:::
+
+Ahora es cuando viene la parte interesante de betAS por que comienza el **análisis de splicing diferencial**. La estadística del splicing diferencial se basa en la distribución beta de los eventos de splicnig como hemos mencionado anteriormente. Para ello, betAS calcula los siguientes parámetros para calcular la significancia:
+
+- **P<sub>diff<sub>**. Este enfoque toma los dos conjuntos de puntos aleatorios por condición y calcula, para el ∆PSI estimado de cada evento AS, la proporción de diferencias entre estos que son mayores que cero, lo que tiene la misma interpretación que preguntarse qué proporción de valores emitidos por la distribución beta para una condición son mayores que los emitidos para la otra, reflejando así la probabilidad de que el AS diferencial de PSI<sub>betAS<sub>(grupo A) sea mayor que PSI<sub>betAS<sub>(grupo B).
+
+-**F-estadística**. betAS también permite realizar un análisis de varianza similar al ANOVA, comparando las variabilidades intergrupo e intragrupo. Para cada evento, within se considera el conjunto de diferencias entre cada par de muestras que forman parte del mismo grupo y between el conjunto de diferencias entre cada par de grupos. El cociente de los valores absolutos medios de between e within proporciona, por tanto, un estadístico "tipo F". Esta métrica proporciona un compromiso entre el tamaño del efecto de las diferencias AS y su significación.
+
+-**FDR**. Se utiliza la generación aleatoria de puntos a partir de una distribución beta para estimar la distribución nula del PSI y su precisión. A continuación, se selecciona aleatoriamente un punto de cada distribución nula de la muestra y, manteniendo la asignación de grupos de las muestras (es decir, qué muestras pertenecen a cada grupo), se calcula el ∆PSI entre grupos bajo la hipótesis nula. El proceso se repite muchas veces (10 000 por defecto) y el FDR es la proporción de simulaciones aleatorias ∆PSI que son mayores (es decir, más extremas) o iguales que el ∆PSI empírico.
+
+Primero comenzamos definiendo el nombre de los grupos de forma compatible con las funciones que vamos a utilizar:
+```{r, eval=FALSE}
+groupA    <- "Basal"
+groupB    <- "Luminal"
+```
+
+Definimos las muestras que hay dentro de cada grupo:
+```{r, eval=FALSE}
+samplesA    <- groupList[[groupA]]$samples
+samplesB    <- groupList[[groupB]]$samples
+```
+
+Y convertimos las muestras en índices:
+```{r, eval=FALSE}
+colsGroupA    <- convertCols(dataset_filtered$PSI, samplesA)
+colsGroupB    <- convertCols(dataset_filtered$PSI, samplesB)
+```
+
+
+- **P<sub>diff<sub>**
+A continuación calculamos la probabilidad de differential splicing (P<sub>diff<sub>) entre los grupos para cada evento con la función `prepareTableVolcano`.
+```{r, eval=FALSE}
+volcanoTable_Pdiff <- prepareTableVolcano(psitable = dataset_filtered$PSI,
+                                    qualtable = dataset_filtered$Qual,
+                                    npoints = 500,
+                                    colsA = colsGroupA,
+                                    colsB = colsGroupB,
+                                    labA = groupA,
+                                    labB = groupB,
+                                    basalColor = "#89C0AE",
+                                    interestColor = "#E69A9C",
+                                    maxDevTable = maxDevSimulationN100)
+
+head(volcanoTable_Pdiff[,c("GENE","EVENT","COORD","Pdiff","deltapsi")])
+```
+![](./Images/Picture32.png)
+
+A continuación podemos graficar por ejemplo un volcano plot (la función `plotVolcano` está basaada en `ggplot2` de manera que podemos aplicar funciones como `theme()` para modificar la gráfica):
+```{r, eval=FALSE}
+plotVolcano(betasTable = volcanoTable_Pdiff,
+                            labA = groupA,
+                              labB = groupB,
+                            basalColor = "#89C0AE",
+                            interestColor = "#E69A9C") +
+  ggtitle("Volcano plot of Pdiff of ΔPSI")+
+  #con theme podemos cambiar muchas varibales a nuestro gusto
+  theme(
+    plot.title = element_text(size= 15, hjust = 0.5),
+    axis.title.x= element_text(size = 10),
+    axis.text.x = element_text(size = 10),# Tamaño de los labels en el eje X
+    axis.title.y = element_text(size = 10),
+    axis.text.y = element_text(size = 10)   # Tamaño de los labels en el eje Y
+  )
+#no he encontrado la forma de cambiar los puntos de tamaño
+
+```
+![](./Images/Picture33.png)
+
+- **F-statistic**
+Para calcular la F-estadística las funciones son similares a la que utilizamos para Pdiff. Comenzamos calculando este parámetro:
+```{r, eval=FALSE}
+volcanoTable_Fstat <- prepareTableVolcanoFstat(psitable = dataset_filtered$PSI,
+                                    qualtable = dataset_filtered$Qual,
+                                    npoints = 500,
+                                    colsA = colsGroupA,
+                                    colsB = colsGroupB,
+                                    labA = groupA,
+                                    labB = groupB,
+                                    basalColor = "#89C0AE",
+                                    interestColor = "#E69A9C",
+                                    maxDevTable = maxDevSimulationN100)
+
+
+head(volcanoTable_Fstat[,c("GENE","EVENT","COORD","Fstat","deltapsi")])
+```
+![](./Images/Picture34.png)
+
+Y ahora podemos representar el volcano plot:
+```{r, eval=FALSE}
+plotVolcanoFstat(betasTable = volcanoTable_Fstat,
+                            labA = groupA,
+                            labB = groupB,
+                            basalColor = "#89C0AE",
+                            interestColor = "#E69A9C") +
+  ggtitle("Volcano plot of F-stat of ΔPSI")+
+  theme(
+    plot.title = element_text(size= 15, hjust = 0.5),
+    axis.title.x= element_text(size = 10),
+    axis.text.x = element_text(size = 10),# Tamaño de los labels en el eje X
+    axis.title.y = element_text(size = 10),
+    axis.text.y = element_text(size = 10)   # Tamaño de los labels en el eje Y
+  )
+#no he encontrado la forma de cambiar los puntos de tamaño
+```
+![](./Images/Picture35.png)
+
+::: {.callout-tip}
+Se que estas gráficas están muy feas. Podríamos tener el control absoluto con `ggplot` + `geom_point` pero no me voy a parar ahora.
+:::
+
+- **FDR**
+Para calcular el FDR las funciones vuelven a ser similares a las utilizamos previamente. Comenzamos calculando este parámetro:
+```{r, eval=FALSE}
+volcanoTable_FDR <- prepareTableVolcanoFDR(psitable = dataset_filtered$PSI,
+                                    qualtable = dataset_filtered$Qual,
+                                    npoints = 500,
+                                    colsA = colsGroupA,
+                                    colsB = colsGroupB,
+                                    labA = groupA,
+                                    labB = groupB,
+                                    basalColor = "#89C0AE",
+                                    interestColor = "#E69A9C",
+                                    maxDevTable = maxDevSimulationN100,
+                                    nsim = 100) 
+
+head(volcanoTable_FDR[,c("GENE","EVENT","COORD","FDR","deltapsi")])
+```
+![](./Images/Picture36.png)
+
+Y volvemos a utilizar la función prefedefinida para representar un volcano:
+```{r, eval=FALSE}
+plotVolcanoFDR(betasTable = volcanoTable_FDR,
+                            labA = groupA,
+                            labB = groupB,
+                            basalColor = "#89C0AE",
+                            interestColor = "#E69A9C") +
+  ggtitle("Volcano plot of FDR of ΔPSI")+
+  theme(
+    plot.title = element_text(size= 15, hjust = 0.5),
+    axis.title.x= element_text(size = 10),
+    axis.text.x = element_text(size = 10),# Tamaño de los labels en el eje X
+    axis.title.y = element_text(size = 10),
+    axis.text.y = element_text(size = 10)   # Tamaño de los labels en el eje Y
+  )
+```
+![](./Images/Picture37.png)
+
+- Representación de eventos de interés: Vamos a representar el evento "HsaEX0041241" que fue uno de los que nos salió en mi análisis handmade a ver que sale. Con betAS podemos hacer gráficas muy chulas.
+```{r, eval=FALSE}
+#primero definimos el evento
+eventID<-"HsaEX0041241"
+
+tdensities <- plotIndividualDensitiesList(eventID = eventID,
+                                          npoints = 500,
+                                          psitable = dataset$PSI,
+                                          qualtable = dataset$Qual,
+                                          groupList = groupList,
+                                          maxDevTable = maxDevSimulationN100)
+
+tdensities + theme_minimal() + ggtitle(eventID)
+```
+![](./Images/Picture38.png)
+
+Otra gráfica chula es la siguiente:
+```{r, eval=FALSE}
+plotPdiff <- prepareTableEvent(eventID = eventID,
+                               psitable = dataset$PSI,
+                               qualtable = dataset$Qual,
+                               npoints = 500,
+                               colsA = colsGroupA,
+                               colsB = colsGroupB,
+                               labA = groupA,
+                               labB = groupB,
+                               basalColor = "#89C0AE",
+                               interestColor = "#E69A9C",
+                               maxDevTable = maxDevSimulationN100,
+                               nsim = 1000) %>% 
+  plotPDiffFromEventObjList()+ theme(
+    plot.title = element_text(size= 15, hjust = 0.5),
+    axis.title.x= element_text(size = 10),
+    axis.text.x = element_text(size = 10),# Tamaño de los labels en el eje X
+    axis.title.y = element_text(size = 10),
+    axis.text.y = element_text(size = 10)   # Tamaño de los labels en el eje Y
+  )
+
+
+plotFstat <- prepareTableEvent(eventID = eventID,
+                               psitable = dataset$PSI,
+                               qualtable = dataset$Qual,
+                               npoints = 500,
+                               colsA = colsGroupA,
+                               colsB = colsGroupB,
+                               labA = groupA,
+                               labB = groupB,
+                               basalColor = "#89C0AE",
+                               interestColor = "#E69A9C",
+                               maxDevTable = maxDevSimulationN100,
+                               nsim = 1000) %>% 
+  plotFstatFromEventObjList()+ theme(
+    plot.title = element_text(size= 15, hjust = 0.5),
+    axis.title.x= element_text(size = 10),
+    axis.text.x = element_text(size = 10),# Tamaño de los labels en el eje X
+    axis.title.y = element_text(size = 10),
+    axis.text.y = element_text(size = 10)   # Tamaño de los labels en el eje Y
+  )
+
+
+plotFDR <- prepareTableEvent(eventID = eventID,
+                               psitable = dataset$PSI,
+                               qualtable = dataset$Qual,
+                               npoints = 500,
+                               colsA = colsGroupA,
+                               colsB = colsGroupB,
+                               labA = groupA,
+                               labB = groupB,
+                               basalColor = "#89C0AE",
+                               interestColor = "#E69A9C",
+                               maxDevTable = maxDevSimulationN100,
+                               nsim = 1000) %>% 
+  plotFDRFromEventObjList()+ theme(
+    plot.title = element_text(size= 15, hjust = 0.5),
+    axis.title.x= element_text(size = 10),
+    axis.text.x = element_text(size = 10),# Tamaño de los labels en el eje X
+    axis.title.y = element_text(size = 10),
+    axis.text.y = element_text(size = 10)   # Tamaño de los labels en el eje Y
+  )
+
+ggarrange(plotPdiff,plotFstat,plotFDR, ncol=3)
+```
+![](./Images/Picture39.png)
+
+::: {.callout-tip}
+De nuevo, estas gráficas están muy feas. Podríamos tener el control absoluto con `ggplot` + `geom_point` pero no me voy a parar ahora.
+:::
+
+- **Comparación entre varios grupos**. Para esto podemos ir al punto 6 del [vignette](https://diseasetranscriptomicslab.github.io/betAS/inst/betAS_tutorial.html).
+
+## Analisis de Enriquecimiento de Differenctial Splicing
+
+### Paquete 1
+
+### Paquete 2
+
+# Otros paquetes de interés
+
+## PSIchomics
 
 
 

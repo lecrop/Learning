@@ -6,11 +6,11 @@ author: "Francisco Porcel-Pastrana"
 format:
   html:
     toc: true
-    toc-expand: 4
+    toc-expand: 1
     toc-location: left
     number-sections: true
     html-math-method: katex
-    number-depth: 4
+    number-depth: 5
     css: styles.css
 ---
 
@@ -18,7 +18,9 @@ format:
 En un primer momento íbamos a instalar [Salmon](https://doi.org/10.1038/nmeth.4197) ([enlace a documentacion GitHub de Salmon](https://salmon.readthedocs.io/en/latest/salmon.html)) con Anaconda pero daba problemas a la hora de realizar la instalación de Salmon. Luego procedimos a la instalación de Mamba ([Enlace a página de Mamaba](https://mamba.readthedocs.io/en/latest/installation.html) y de e [instalación](https://mamba.readthedocs.io/en/latest/mamba-installation.html#mamba-install)) a través de Anaconda pero crasheaba en la instalación. Buscando en webs hemos encontrado que no es recomendable tener instalado Anaconda y Mamba a la vez de manera que hemos borrado los repositorios de Anacoda del servidor (y de miniconda, que tener miniconda y Anaconda no tenia ningún sentido porque Anaconda es más rápido y grande que miniconda de manera que era absurdo). Para eliminar tanto Anaconda (que se encontraba e la carpeta anaconda3) como Miniconda (que se encontraba en la carpeta miniconda3) hemos usado los siguientes comandos:
 
 ::: {.callout-note}
-*Todo lo hecho a partir de aquí está en Terminal_9-19-23.txt*
+*Todo lo hecho a partir de aquí está en:*
+
+[`Terminal_9-19-23.txt`](./Terminales Guardados/Terminal_9-19-23.txt)
 :::
 
 ```{r, eval=FALSE}
@@ -295,7 +297,9 @@ Las columnas tienen la siguiente interpretación.
 - **NumReads** - Es la estimación de Salmon del número de lecturas que corresponden a cada transcrito cuantificado. Es una "estimación" en la medida en que es el número esperado de lecturas que se han originado a partir de cada transcrito dada la estructura de las lecturas de mapeo único y mapeo múltiple y las estimaciones de abundancia relativa para cada transcrito.
 
 ::: {.callout-note}
-*Todo lo hecho a partir de aquí está en Terminal_9-20-23.txt*
+*Todo lo hecho a partir de aquí está en:*
+
+[`Terminal_9-20-23.txt`](./Terminales Guardados/Terminal_9-20-23.txt)
 :::
 
 El siguiente paso va a ser unir todos los archivos `.sf` en el que tenemos la cuantificación de cada una de las muestras para generar la matriz de datos para hacer los análisis.
@@ -425,7 +429,7 @@ library(magick)
 ```
 
 ```{r, echo=FALSE}
-countData <- as.data.frame(read.csv('Basal_vs_Luminal_GC.csv', header = TRUE, row.names=1, sep = ","))
+countData <- as.data.frame(read.csv('./Data/Basal_vs_Luminal_GC.csv', header = TRUE, row.names=1, sep = ","))
 
 ```
 
@@ -433,7 +437,7 @@ Ahora podemos cargar los datos que hemos generado el `.csv`:
 
 ```{r, echo=FALSE, results='asis'}
 library(knitr)
-kable(countData[1:6,], caption="Basal_vs_Luminal_GC.csv")
+kable(countData[1:6,], caption="./Data/Basal_vs_Luminal_GC.csv")
 ```
 
 ::: {.callout-important title="Formato de la metadata"}
@@ -443,7 +447,7 @@ Tenemos que crear un `.csv` de metada para poder analizar las distintas variable
 Ahora podemos cargar el archivo que hemos creado con la metadata de las muestras. Tenemos que convertir en factor todas las variables que lo sean (no he probado con variables continuas):
 
 ```{r}
-metaData <- as.data.frame(read.csv('Metadata_Basal_vs_Luminal.csv', header = TRUE, row.name=1, sep = ","))
+metaData <- as.data.frame(read.csv('./Data/Metadata_Basal_vs_Luminal.csv', header = TRUE, row.name=1, sep = ","))
 metaData[,c(1:ncol(metaData))]<-as.factor(metaData[,c(1:ncol(metaData))])
 head(metaData)
 ```
@@ -548,7 +552,7 @@ head(normalized_counts)
 Vamos a extraer estos datos normalizados en un archivo para utilizarlos más adelante:
 
 ```{r}
-write.csv(normalized_counts, file="/normalized_counts.csv")
+write.csv(normalized_counts, file="./Data/normalized_counts.csv")
 ```
 
 ::: {.callout-note}
@@ -1157,7 +1161,7 @@ PCAtools::biplot(p,
 ```
 
 También podemos hacer la representación de varias gráficas PCA de forma simultánea para así poder ver más de una opción:
-```{r}
+```{r, message=FALSE, warning=FALSE}
 pairsplot(p,
     components = getComponents(p, c(1:4)),
     triangle = TRUE, 
