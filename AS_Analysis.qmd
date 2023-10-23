@@ -16,10 +16,10 @@ format:
 # Matt
 [Matt](https://gitlab.com/aghr/matt) es un paquete diseñado por Dr. Manuel Irimia para el análisis de eventos de splicing alternativo. Incluye funciones básicas para la manipulación de tablas, extracción de características relacionadas con exones e intrones, análisis de características discriminantes, mapas de motivos para proteínas de unión a ARN, etc. Cita:
 
-Gohr, A., & Irimia, M. (2019). Matt: Unix tools for alternative splicing analysis. Bioinformatics (Oxford, England), 35(1), 130–132. https://doi.org/10.1093/bioinformatics/bty606
+> Gohr, A., & Irimia, M. (2019). Matt: Unix tools for alternative splicing analysis. Bioinformatics (Oxford, England), 35(1), 130–132. https://doi.org/10.1093/bioinformatics/bty606
 
-::: {.callout-important}
-# **Trabajamos en Terminal**
+::: {.callout-important title="**Trabajamos en Terminal**"}
+
 :::
 
 ## Instalación de matt
@@ -155,7 +155,7 @@ Para cargar los datos vamos a usar una función de `matt` (`retr_rnaseq`) que pe
 
 Para ello tenemos que crear un `.txt` (con los nombres separados por un tab) como en el ejemplo:
 
-![Imagen 1](./Images/Picture23.png)
+![Imagen 1](./images/Picture23.png)
 
 Una vez que lo tenemos creado tenemos que subirlo a la misma carpeta en la que vayamos a hacer la descarga de los datos y los análisis. El siguiente paso es descargar de GEO los `.gz` de las muestras seleccionadas:
 ```{r, eval=FALSE}
@@ -227,13 +227,27 @@ Una vez en este punto comenzaremos el alineamiento con Vast-Tools.
 **Vertebrate Alternative Splicing and Transcription Tools (VAST-TOOLS)** es un conjunto de herramientas para perfilar y comparar eventos de splicing alternativo en datos de RNA-Seq. Es especialmente adecuado para comparaciones evolutivas. Funciona en sinergia con el servidor web *VastDB* y *Matt*, un conjunto de herramientas para el análisis posterior del splicing alternativo.
 [Enlace a GitHub](https://github.com/vastgroup/vast-tools). Citas:
 
-- ***Capítulo de libro donde viene todo incluso un ejemplo***: Gohr, A., Mantica, F., Hermoso-Pulido, A., Tapial, J., Márquez, Y., & Irimia, M. (2022). Computational Analysis of Alternative Splicing Using VAST-TOOLS and the VastDB Framework. Methods in molecular biology (Clifton, N.J.), 2537, 97–128. https://doi.org/10.1007/978-1-0716-2521-7_7
-- ***Artículo original***: Irimia, M., Weatheritt, R.J., Ellis, J., Parikshak, N.N., Gonatopoulos-Pournatzis, T., Babor, M., Quesnel-Vallières, M., Tapial, J., Raj, B., O’Hanlon, D., Barrios-Rodiles, M., Sternberg, M.J.E., Cordes, S.P., Roth, F.P., Wrana, J.L., Geschwind, D.H., Blencowe, B.B. (2014). A highly conserved program of neuronal microexons is misregulated in autistic brains. Cell, 59:1511-23.
-- ***Artículo principal***: Tapial, J., Ha, K.C.H., Sterne-Weiler, T., Gohr, A., Braunschweig, U., Hermoso-Pulido, A., Quesnel-Vallières, M., Permanyer, J., Sodaei, R., Marquez, Y., Cozzuto, L., Wang, X., Gómez-Velázquez, M., Rayón, M., Manzanares, M., Ponomarenko, J., Blencowe, B.J., Irimia, M. (2017). An atlas of alternative splicing profiles and functional associations reveals new regulatory programs and genes that simultaneously express multiple major isoforms. Genome Res, 27(10):1759-1768
-- ***Artículo de análisis de Intron Retention***: Braunschweig, U., Barbosa-Morais, N.L., Pan, Q., Nachman, E., Alipahani, B., Gonatopoulos-Pournatzis, T., Frey, B., Irimia, M., Blencowe, B.J. (2014). Widespread intron retention in mammals functionally tunes transcriptomes. Genome Research, 24:1774-86
+- ***Capítulo de libro donde viene todo incluso un ejemplo***
 
-::: {.callout-important}
-# **Trabajamos en Terminal**
+> Gohr, A., Mantica, F., Hermoso-Pulido, A., Tapial, J., Márquez, Y., & Irimia, M. (2022). Computational Analysis of Alternative Splicing Using VAST-TOOLS and the VastDB Framework. Methods in molecular biology (Clifton, N.J.), 2537, 97–128. https://doi.org/10.1007/978-1-0716-2521-7_7
+
+- ***Artículo original*** 
+
+> Irimia, M., Weatheritt, R.J., Ellis, J., Parikshak, N.N., Gonatopoulos-Pournatzis, T., Babor, M., Quesnel-Vallières, M., Tapial, J., Raj, B., O’Hanlon, D., Barrios-Rodiles, M., Sternberg, M.J.E., Cordes, S.P., Roth, F.P., Wrana, J.L., Geschwind, D.H., Blencowe, B.B. (2014). A highly conserved program of neuronal microexons is misregulated in autistic brains. Cell, 59:1511-23.
+
+
+- ***Artículo principal*** 
+
+> Tapial, J., Ha, K.C.H., Sterne-Weiler, T., Gohr, A., Braunschweig, U., Hermoso-Pulido, A., Quesnel-Vallières, M., Permanyer, J., Sodaei, R., Marquez, Y., Cozzuto, L., Wang, X., Gómez-Velázquez, M., Rayón, M., Manzanares, M., Ponomarenko, J., Blencowe, B.J., Irimia, M. (2017). An atlas of alternative splicing profiles and functional associations reveals new regulatory programs and genes that simultaneously express multiple major isoforms. Genome Res, 27(10):1759-1768
+
+
+- ***Artículo de análisis de Intron Retention*** 
+
+> Braunschweig, U., Barbosa-Morais, N.L., Pan, Q., Nachman, E., Alipahani, B., Gonatopoulos-Pournatzis, T., Frey, B., Irimia, M., Blencowe, B.J. (2014). Widespread intron retention in mammals functionally tunes transcriptomes. Genome Research, 24:1774-86
+
+
+::: {.callout-important title="**Trabajamos en Terminal**"}
+
 :::
 
 ## Instalación de Vast-Tools
@@ -301,8 +315,8 @@ R -e 'devtools::install_github("kcha/psiplot")'
 
 ```
 
-::: {.callout-important}
-# **Continuamos trabajando en Terminal aunque sea con R**
+::: {.callout-important title="# **Continuamos trabajando en Terminal aunque sea con R**"}
+
 :::
 
 La instalación de estos paquetes pueden necesitar de la actualización e instalación de otros, de manera que tendremos que ir comprobando cuales son necesarios y e instalarlos (buscando en internet como instalarlos). Tuve bastantes problemas con esto así que podéis encontrar la solución en el documento del terminal de este día. Una vez instalado vast-tools, es necesario comprobar que tenemos instalado una herramienta de alineamiento: `bowtie`. 
@@ -346,15 +360,13 @@ Si está correctamente instalado todo pasamos al alineamiento con Vast-Tools.
 ## Teoría sobre el Splicing Alternativo
 El splicing alternativo genera múltiples ARNm diferentes y proteínas derivadas a partir de un único gen mediante la inclusión o exclusión de exones específicos. Este proceso ocurre en el 95% de los genes multiexónicos y está catalizado por el spliceosoma, un complejo formado por un núcleo de cinco pequeñas ribonucleoproteínas nucleares (U1, U2, U4, U5 y U6). El espliceosoma cuenta con la ayuda de más de 200 factores trans-actores que reconocen secuencias reguladoras cis dentro del pre-ARNm y dirigen el spliceosoma para incluir o excluir exones específicos. Así pues, las variantes de empalme pueden surgir de mecanismos que incluyen promotores alternativos, uso preferente de exones o sitios de splicing, alteración del orden de los exones y poliadenilación alternativa
 
-![Imagen 2](./Images/Picture25.png)
+![Imagen 2](./images/Picture25.png)
 
 El splicing alternativo ofrece una importante ventaja evolutiva al proporcionar una gran fuente de diversidad proteómica. El splicing alternativo suele estar regulado a nivel tisular, y las variantes específicas de tejido cooperan para modular las redes de interacción proteína-proteína. Las células madre expresan variantes de empalme específicas en cada etapa de diferenciación, siendo las células madre indiferenciadas las que mantienen los niveles más altos de diversidad de isoformas de empalme. El empalme alternativo también es crítico en el desarrollo y puede responder a estímulos externos normales. Al igual que otras vías relacionadas con el desarrollo, el splicing alternativo puede ser regulado de forma aberrante por las células cancerosas para su beneficio. en beneficio propio. Los estudios del genoma completo revelan desde hace tiempo la existencia de patrones de splicing específicos del cáncer.
 
-::: {.callout-note}
-Extraído del siguiente artículo: 
 
-Chen, J., Weiss, W. Alternative splicing in cancer: implications for biology and therapy. Oncogene 34, 1–14 (2015). https://doi.org/10.1038/onc.2013.570
-:::
+> Chen, J., Weiss, W. Alternative splicing in cancer: implications for biology and therapy. Oncogene 34, 1–14 (2015). https://doi.org/10.1038/onc.2013.570
+
 
 ## Alineamineto para Splicing Alternativo (SA)
 
@@ -377,13 +389,13 @@ Los eventos de splicing vendrán definidos como:
 
 Estas medidas son porcentajes que dependen del número de veces que ha ocurrido un evento y se calcula como nº de veces que ocurre un evento en un gen con respecto al número de transcritos cuantificados:
 
-![Imagen 3](./Images/Picture26.png)
+![Imagen 3](./images/Picture26.png)
 
 Para habilitar el análisis de expresión génica, utilizar la opción “--expr“ (cálculos PSI/PSU/PIRs y cRPKM (lecturas corregidas por aplicabilidad por Kbp y millones de lecturas mapeadas)]o “--exprONLY” (solo cRPKMs). Los cRPKMs se obtienen mapeando solo los primeros 50 nucleótidos de cada lectura, o solo los primeros 50 nucleótidos de la lectura directa si se proporcionan lecturas de extremo pareado.
 
 A continuación hay se muestra un esquema del funcionamiento y posibilidades de vast-tools:
 
-![Imagen 4](./Images/Picture27.png)
+![Imagen 4](./images/Picture27.png)
 
 ### Alineamiento
 Como hemos repetido, para el alineamiento vamos a utilizar la herramienta Vast-Tools. Para ello vamos a la carpeta en la que tengamos los archivos a analizar (tras procesarlos en matt) y allí ejecutamos el comando `vast-tool align` (que lo explicaré con sus argumentos a continuación con la imgen 2):
@@ -391,7 +403,7 @@ Como hemos repetido, para el alineamiento vamos a utilizar la herramienta Vast-T
 vast-tools align Luminal_1_1.fastq.gz Luminal_1_2.fastq.gz -sp Hs2 -o Vast-Tool_Align --expr --IR_version 2 -c 8 -n Luminal_1 
 ```
 
-![Imagen 5](./Images/Picture24.png)
+![Imagen 5](./images/Picture24.png)
 
 
 ::: {.callout-tip title="Nota 1"}
@@ -444,7 +456,7 @@ Inclusion_table<-read.delim("INCLUSION_LEVELS_FULL-hg38-6.tab", header = TRUE, s
 
 View(Inclusion_table)
 ```
-![](./Images/Picture29.png)
+![](./images/Picture29.png)
 
 Donde cada una de estas columnas nos da la siguiente información:
 
@@ -529,7 +541,7 @@ Recordamos que PSI es para Exon-Exon Juction (EEJ, que incluye todos los tipos d
 
 Para eventos AS válidos, `vast-tools compare` requiere que el valor absoluto de ΔPSI sea superior a un umbral proporcionado como `--min_dPSI`. Además, requiere que la distribución PSI de los dos grupos no se superponga. Esto puede modificarse con la opción `--min_range`, para proporcionar un mayor o menor rigor. A mayor diferencia mayor rigor. Estos valores los vemos definidos en la siguiente imagen:
 
-![Imagen 5](./Images/Picture28.png)
+![Imagen 5](./images/Picture28.png)
 También es posible imprimir otros conjuntos de eventos AS de especial interés para comparaciones de características (por ejemplo, utilizando Matt). Esto puede hacerse utilizando la opción `--print_sets`. Producirá tres conjuntos de eventos AS: 
 
 1. Eventos constitutivos (CS), que corresponden a aquellos con PSI < 5 (para IR) o PSI > 95 (para todos los demás tipos) en todas las muestras comparadas; 
@@ -573,7 +585,7 @@ Los argumentos utilizados definen lo siguiente:
 -	`--min_range`, ya lo hemos visto previamente
 
 ::: {.callout-important}
-A partir de ahora, lo que vamos a ver es trabajando en R pero siguiendo el flujo de trabajo del [capítulo de libro de Vast-tools](https://doi.org/10.1007/978-1-0716-2521-7_7) (citado al principio de esta guía). Los resultados trabajando en termial (que lo iré haciendo de forma paralela) se mostrarán en:
+A partir de ahora, lo que vamos a ver es trabajando en R pero siguiendo el flujo de trabajo del  [capítulo de libro de Vast-tools](https://doi.org/10.1007/978-1-0716-2521-7_7) (citado al principio de esta guía). Los resultados trabajando en termial (que lo iré haciendo de forma paralela) se mostrarán en:
 
 [`Terminal_VT.txt`](./Terminales Guardados/Terminal_VT.txt)
 :::
@@ -884,7 +896,7 @@ dPSI_table[fila, c(5:7)]<-c(Diff ,Rang, PASS)
 ::: {.callout-tip title="Estadística para Splicing" collapse="TRUE"}
 Tras una interesante conversación con el Dr. Manuel Irimia he comprendido que realizar un test estadístico para 3 muestras (aunque se haga un no paramétrico) no tiene sentido porque el pvalor va a dar como poco 0.05 de manera que él, en Vast-Tools, no realiza estadística sino que se basa en los thresholds (de diferencia mínima de las medias y que no exista overlapping entre la distribución de las muestras) así que podríamos dejarlo aquí. Esto se debe al tipo de distribución que presentan los splicing (llamada distribución beta), como podemos ver en las siguientes imágenes:
 
-![Imagen obtenida de [betAS](https://compbio.imm.medicina.ulisboa.pt/app/betAS)](./Images/Picture30.png)
+![Imagen obtenida de [betAS](./images/Picture30.png)
 
 Sin embargo, es posible que queramos realizar algún tipo de aproximación estadística de manera que si tenemos 3 muestras, una vez el Dr. Irima (mirar el ejemplo al final del párrafo) realizó un test de wilkinson + un Test de Student (o algo similar) de manera que si ambos estaban por debajo de 0.05 podemos justificar en la sección de materiales y métodos que estamos haciendo ambos test y cuando consideramos significativa una diferencia (que ambos test pasen). Según un físico muy reputado, Dr. Nuno L Barbosa-Morais, con el que ha colaborado en muchas ocasiones, un test estadístico es adecuado si lo justificas de forma adecuada (tiene que tener sentido, claro). Un ejemplo de esto que os comento ocurre en la estadística del artículo "[Hong Han et al. (2013). Nature](https://pubmed.ncbi.nlm.nih.gov/23739326/)", en la Figura-4G.
 
@@ -1262,7 +1274,7 @@ bigPicturePlot <- bigPicturePlot(table = dataset_filtered$PSI)
 bigPicturePlot + theme_minimal()
 ```
 
-![](./Images/Picture31.png)
+![](./images/Picture31.png)
 
 A continuación tenemos que definir los grupos para así poder hacer el análisis. Para ello:
 
@@ -1345,11 +1357,11 @@ pie(slices, col = colors[1:length(groups)], border = "black", labels=groups, mai
 
 Ahora es cuando viene la parte interesante de betAS por que comienza el **análisis de splicing diferencial**. La estadística del splicing diferencial se basa en la distribución beta de los eventos de splicnig como hemos mencionado anteriormente. Para ello, betAS calcula los siguientes parámetros para calcular la significancia:
 
-- **P<sub>diff<sub>**. Este enfoque toma los dos conjuntos de puntos aleatorios por condición y calcula, para el ∆PSI estimado de cada evento AS, la proporción de diferencias entre estos que son mayores que cero, lo que tiene la misma interpretación que preguntarse qué proporción de valores emitidos por la distribución beta para una condición son mayores que los emitidos para la otra, reflejando así la probabilidad de que el AS diferencial de PSI<sub>betAS<sub>(grupo A) sea mayor que PSI<sub>betAS<sub>(grupo B).
+- **P~diff~**. Este enfoque toma los dos conjuntos de puntos aleatorios por condición y calcula, para el ∆PSI estimado de cada evento AS, la proporción de diferencias entre estos que son mayores que cero, lo que tiene la misma interpretación que preguntarse qué proporción de valores emitidos por la distribución beta para una condición son mayores que los emitidos para la otra, reflejando así la probabilidad de que el AS diferencial de PSI~betAS~ (grupo A) sea mayor que PSI~betAS~ (grupo B).
 
--**F-estadística**. betAS también permite realizar un análisis de varianza similar al ANOVA, comparando las variabilidades intergrupo e intragrupo. Para cada evento, within se considera el conjunto de diferencias entre cada par de muestras que forman parte del mismo grupo y between el conjunto de diferencias entre cada par de grupos. El cociente de los valores absolutos medios de between e within proporciona, por tanto, un estadístico "tipo F". Esta métrica proporciona un compromiso entre el tamaño del efecto de las diferencias AS y su significación.
+- **F-estadística**. betAS también permite realizar un análisis de varianza similar al ANOVA, comparando las variabilidades intergrupo e intragrupo. Para cada evento, within se considera el conjunto de diferencias entre cada par de muestras que forman parte del mismo grupo y between el conjunto de diferencias entre cada par de grupos. El cociente de los valores absolutos medios de between e within proporciona, por tanto, un estadístico "tipo F". Esta métrica proporciona un compromiso entre el tamaño del efecto de las diferencias AS y su significación.
 
--**FDR**. Se utiliza la generación aleatoria de puntos a partir de una distribución beta para estimar la distribución nula del PSI y su precisión. A continuación, se selecciona aleatoriamente un punto de cada distribución nula de la muestra y, manteniendo la asignación de grupos de las muestras (es decir, qué muestras pertenecen a cada grupo), se calcula el ∆PSI entre grupos bajo la hipótesis nula. El proceso se repite muchas veces (10 000 por defecto) y el FDR es la proporción de simulaciones aleatorias ∆PSI que son mayores (es decir, más extremas) o iguales que el ∆PSI empírico.
+- **FDR**. Se utiliza la generación aleatoria de puntos a partir de una distribución beta para estimar la distribución nula del PSI y su precisión. A continuación, se selecciona aleatoriamente un punto de cada distribución nula de la muestra y, manteniendo la asignación de grupos de las muestras (es decir, qué muestras pertenecen a cada grupo), se calcula el ∆PSI entre grupos bajo la hipótesis nula. El proceso se repite muchas veces (10 000 por defecto) y el FDR es la proporción de simulaciones aleatorias ∆PSI que son mayores (es decir, más extremas) o iguales que el ∆PSI empírico.
 
 Primero comenzamos definiendo el nombre de los grupos de forma compatible con las funciones que vamos a utilizar:
 ```{r, eval=FALSE}
@@ -1370,8 +1382,8 @@ colsGroupB    <- convertCols(dataset_filtered$PSI, samplesB)
 ```
 
 
-- **P<sub>diff<sub>**
-A continuación calculamos la probabilidad de differential splicing (P<sub>diff<sub>) entre los grupos para cada evento con la función `prepareTableVolcano`.
+- **P~diff~**.
+A continuación calculamos la probabilidad de differential splicing (P~diff~) entre los grupos para cada evento con la función `prepareTableVolcano`.
 ```{r, eval=FALSE}
 volcanoTable_Pdiff <- prepareTableVolcano(psitable = dataset_filtered$PSI,
                                     qualtable = dataset_filtered$Qual,
@@ -1386,7 +1398,7 @@ volcanoTable_Pdiff <- prepareTableVolcano(psitable = dataset_filtered$PSI,
 
 head(volcanoTable_Pdiff[,c("GENE","EVENT","COORD","Pdiff","deltapsi")])
 ```
-![](./Images/Picture32.png)
+![](./images/Picture32.png)
 
 A continuación podemos graficar por ejemplo un volcano plot (la función `plotVolcano` está basaada en `ggplot2` de manera que podemos aplicar funciones como `theme()` para modificar la gráfica):
 ```{r, eval=FALSE}
@@ -1407,10 +1419,10 @@ plotVolcano(betasTable = volcanoTable_Pdiff,
 #no he encontrado la forma de cambiar los puntos de tamaño
 
 ```
-![](./Images/Picture33.png)
+![](./images/Picture33.png)
 
-- **F-statistic**
-Para calcular la F-estadística las funciones son similares a la que utilizamos para Pdiff. Comenzamos calculando este parámetro:
+- **F-statistic**.
+Para calcular la F-estadística las funciones son similares a la que utilizamos para P~diff~. Comenzamos calculando este parámetro:
 ```{r, eval=FALSE}
 volcanoTable_Fstat <- prepareTableVolcanoFstat(psitable = dataset_filtered$PSI,
                                     qualtable = dataset_filtered$Qual,
@@ -1426,7 +1438,7 @@ volcanoTable_Fstat <- prepareTableVolcanoFstat(psitable = dataset_filtered$PSI,
 
 head(volcanoTable_Fstat[,c("GENE","EVENT","COORD","Fstat","deltapsi")])
 ```
-![](./Images/Picture34.png)
+![](./images/Picture34.png)
 
 Y ahora podemos representar el volcano plot:
 ```{r, eval=FALSE}
@@ -1445,13 +1457,13 @@ plotVolcanoFstat(betasTable = volcanoTable_Fstat,
   )
 #no he encontrado la forma de cambiar los puntos de tamaño
 ```
-![](./Images/Picture35.png)
+![](./images/Picture35.png)
 
 ::: {.callout-tip}
 Se que estas gráficas están muy feas. Podríamos tener el control absoluto con `ggplot` + `geom_point` pero no me voy a parar ahora.
 :::
 
-- **FDR**
+- **FDR**.
 Para calcular el FDR las funciones vuelven a ser similares a las utilizamos previamente. Comenzamos calculando este parámetro:
 ```{r, eval=FALSE}
 volcanoTable_FDR <- prepareTableVolcanoFDR(psitable = dataset_filtered$PSI,
@@ -1468,7 +1480,7 @@ volcanoTable_FDR <- prepareTableVolcanoFDR(psitable = dataset_filtered$PSI,
 
 head(volcanoTable_FDR[,c("GENE","EVENT","COORD","FDR","deltapsi")])
 ```
-![](./Images/Picture36.png)
+![](./images/Picture36.png)
 
 Y volvemos a utilizar la función prefedefinida para representar un volcano:
 ```{r, eval=FALSE}
@@ -1486,7 +1498,7 @@ plotVolcanoFDR(betasTable = volcanoTable_FDR,
     axis.text.y = element_text(size = 10)   # Tamaño de los labels en el eje Y
   )
 ```
-![](./Images/Picture37.png)
+![](./images/Picture37.png)
 
 - Representación de eventos de interés: Vamos a representar el evento "HsaEX0041241" que fue uno de los que nos salió en mi análisis handmade a ver que sale. Con betAS podemos hacer gráficas muy chulas.
 ```{r, eval=FALSE}
@@ -1502,7 +1514,7 @@ tdensities <- plotIndividualDensitiesList(eventID = eventID,
 
 tdensities + theme_minimal() + ggtitle(eventID)
 ```
-![](./Images/Picture38.png)
+![](./images/Picture38.png)
 
 Otra gráfica chula es la siguiente:
 ```{r, eval=FALSE}
@@ -1570,7 +1582,7 @@ plotFDR <- prepareTableEvent(eventID = eventID,
 
 ggarrange(plotPdiff,plotFstat,plotFDR, ncol=3)
 ```
-![](./Images/Picture39.png)
+![](./images/Picture39.png)
 
 ::: {.callout-tip}
 De nuevo, estas gráficas están muy feas. Podríamos tener el control absoluto con `ggplot` + `geom_point` pero no me voy a parar ahora.
@@ -1580,18 +1592,573 @@ De nuevo, estas gráficas están muy feas. Podríamos tener el control absoluto 
 
 ## Analisis de Enriquecimiento de Differenctial Splicing
 
-### Paquete 1
+### Paquete 1: NEASE (Network Enrichment method for Alternative Splicing Events)
+El paquete [NEASE (Network-based Enrichment method for Alternative Splicing Events)](https://github.com/louadi/NEASE) detecta primero las características de las proteínas afectadas por AS, como dominios, motivos y residuos. A continuación, NEASE utiliza interacciones proteína-proteína integradas con interacciones dominio-dominio, nivel de residuo e interacciones dominio-motivo para identificar socios de interacción probablemente afectados por AS.
 
-### Paquete 2
+A continuación, NEASE realiza un análisis de sobrerrepresentación de conjuntos de genes e identifica vías enriquecidas en función de los bordes afectados. Además, dado que el enfoque estadístico está basado en redes, también prioriza genes empalmados (diferencialmente) y encuentra nuevos biomarcadores de enfermedades candidatos en caso de empalmes aberrantes.
+
+Dejo también el enlace al [tutorial](https://github.com/louadi/NEASE)
+
+
+> Louadi, Z., Elkjaer, M.L., Klug, M. et al. Functional enrichment of alternative splicing events with NEASE reveals insights into tissue identity and diseases. Genome Biol 22, 327 (2021). https://doi.org/10.1186/s13059-021-02538-1
+
+
+::: {.callout-important title="Python"}
+:::
+
+Para instalarlo tenemos que usar los sigueintes comandos:
+```{r, eval=FALSE}
+pip install nease
+```
+
+::: {.callout-warning title="No fucinona por un fallo sintáctico de código de los desarrolladores, lo dejo aquí hasta nuevo aviso"}
+Se podría modificar desde local pero no estoy para desaprovechar el tiempo (probablemente surjan más problemas con eso y el lenguaje es python así que agilidad no va a haber para resolverlo por mi parte). He dejado un report del Issue en el GitHub de los desarrolladores para ver si lo solucionan.
+:::
+
+### Paquete 2: PEGASAS (Pathway Enrichment-Guided Activity Study of Alternative splicing)
+Se trata de una herramienta que busca, como dice su nombre, realizar un enriquecimiento de enventos de splicing y la desregulación del mismo en pathways asociadas al cáncer mediante la correlación de las firmas transcripcionales de 50 vías diferentes impulsoras del cáncer con estos eventos de splicing alternativo. La guía de esta herramienta está en el siguiente enlace al [GitHub](https://github.com/Xinglab/PEGASAS). Cita del artículo
+
+> Phillips, J. W., Pan, Y., Tsai, B. L., Xie, Z., Demirdjian, L., Xiao, W., Yang, H. T., Zhang, Y., Lin, C. H., Cheng, D., Hu, Q., Liu, S., Black, D. L., Witte, O. N., & Xing, Y. (2020). [Pathway-guided analysis identifies Myc-dependent alternative pre-mRNA splicing in aggressive prostate cancers](https://pubmed.ncbi.nlm.nih.gov/32086391/). Proceedings of the National Academy of Sciences of the United States of America, 117(10), 5269–5279. https://doi.org/10.1073/pnas.1915975117
+
+
+Tiene [web interactiva](https://xingshiny.research.chop.edu/PEGASASServer/).
+
+::: {.callout-important title="Python"}
+:::
+
+Para instalarlo tenemos que tener instaladas las siguientes dependencias:
+- En python 2.7:
+```{r, eval=FALSE}
+#primero tenemos que instalar pip, que es un instalador de funciones para phyton
+
+sudo apt install python-pip
+
+#Función número 1
+pip install numpy
+
+#Función número 2
+pip install scipy
+
+#Función número 3
+pip install matplotlib
+```
+
+- En R:
+```{r, eval=FALSE}
+install.packages("LSD")
+
+install.packages("data.table") 
+
+install.packages("ggplot2")
+```
+
+que utilizar los siguientes comandos:
+```{r, eval=FALSE}
+git clone https://github.com/Xinglab/PEGASAS.git
+
+cd PEGASAS
+
+python setup.py install
+```
+
+::: {.callout-warning title="No me fucinonaba y no se por qué, lo dejo aquí hasta nuevo aviso"} 
+:::
 
 # Otros paquetes de interés
 
 ## PSIchomics
+PSIchomics es un paquete interactivo de R para el análisis integrador del splicing alternativo y la expresión génica basado en  [The Cancer Genome Atlas  (TCGA)](https://tcga-data.nci.nih.gov/docs/publications/tcga) (que contiene datos moleculares asociados a 34 tipos de tumores), el proyecto [Genotype-Tissue Expression (GTEx)](http://gtexportal.org/) (que contiene datos de múltiples tejidos humanos normales), el [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) y datos proporcionados por el usuario. Los datos de los proyectos GTEx, TCGA y SRA seleccionados incluyen información asociada al sujeto/muestra y datos transcriptómicos, como la cuantificación de lecturas RNA-Seq alineadas con uniones de empalme (en adelante, junction quantification) y exones.
+
+Esta herramienta ha sido desarollada por el Dr. Nuno L. Barbosa-Morais y tiene su [aplicación interactiva en internet (para no depender de código)](https://compbio.imm.medicina.ulisboa.pt/app/psichomics) y su correspondiente [tutorial](), pero como sabeis, aquí hemos venido a jugar.
+
+> Nuno Saraiva-Agostinho and Nuno L. Barbosa-Morais (2019). [psichomics: graphical application for alternative splicing quantification and analysis](https://doi.org/10.1093/nar/gky888). Nucleic Acids Research.
+
+- Instalación
+```{r, eval=FALSE}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("psichomics")
+```
+
+- Ativamos el paquete:
+```{r, message=FALSE, warning=FALSE, error=FALSE}
+library(psichomics)
+```
+
+### Descarga y carga de datos del TCGA
+Los datos se descargan de FireBrowse, un servicio que aloja datos procesados de TCGA, según sea necesario para ejecutar los análisis posteriores. Antes de descargar los datos, compruebe las siguientes opciones:
+
+- Tipos de tumores disponibles
+```{r}
+# Available tumour types
+cohorts <- getFirebrowseCohorts()
+head(cohorts)
+```
+
+- Fechas de las muestras disponibles (suena raro pero es para la curva de supervivencia o recidiva, lo tengo que checkear)
+```{r}
+# Available sample dates
+date <- getFirebrowseDates()
+head(date)
+```
+
+```{r}
+# Available data types
+dataTypes <- getFirebrowseDataTypes()
+head(dataTypes)
+```
+
+::: {.callout-note}
+Tener en cuenta que también existe la opción de Gene expression (normalised by RSEM). Sin embargo, no recomiendan cargar los datos de expresión génica sin procesar, seguidos de filtrado y normalización como se demuestra a continuación.
+:::
+
+Para probar, vmaos a descargar y cargar la BBDD de cáncer de mama (BRCA). Primero cargamos los datos de trabajo:
+```{r}
+# Set download folder
+folder <- getDownloadsFolder()
+
+# Download and load most recent junction quantification and clinical data from
+# TCGA/FireBrowse for Breast Cancer
+data <- loadFirebrowseData(folder=folder,
+                           cohort="BRCA",
+                           data=c("clinical", "junction_quantification",
+                                  "RSEM_genes"),
+                           date="2016-01-28")
+names(data) 
+#Nos devolverá:
+#[1] "Breast invasive carcinoma NA"
+
+names(data[[1]])
+#Nos devuelve:
+#[1] "Clinical data"                            "Junction quantification (Illumina HiSeq)"
+#[3] "Gene expression (Illumina HiSeq)"         "Sample metadata"  
+
+#Recuperamos la información en variables para utilizarlas posteriormente:
+
+clinical      <- data[[1]]$`Clinical data`
+sampleInfo    <- data[[1]]$`Sample metadata`
+junctionQuant <- data[[1]]$`Junction quantification (Illumina HiSeq)`
+geneExpr      <- data[[1]]$`Gene expression`
+```
+
+Los datos sólo se descargan si los archivos no están presentes en la carpeta dada. En otras palabras, si los archivos ya se descargaron, la función sólo cargará los archivos, por lo que es posible reutilizar el código anterior sólo para cargar los archivos solicitados.
+
+::: {.callout-important title="Métodos para cargar datos desde distintos repositorios"}
+Los propios autores de este fantástico paquete contemplan la posibilidad de subir datos propios así como datos desde otros repositorios. Está muy bien explicado en el siguiente [enlace](https://nuno-agostinho.github.io/psichomics/articles/custom_data.html)
+:::
+
+### Filtrar y normalizar expresión génica
+Como este paquete no se centra en el análisis de la expresión génica, sugerimos leer la sección RNA-seq de la guía de usuario de `limma`. No obstante, presentamos los siguientes comandos para filtrar y normalizar rápidamente la expresión génica:
+```{r}
+# Chequeamos que los genes tengan al menos 10 count en al menos en 15 o más muestras
+# del total de muestras
+
+filter <- filterGeneExpr(geneExpr, minCounts=10, minTotalCounts=15)
+
+geneExprNorm <- normaliseGeneExpression(geneExpr,
+                                        geneFilter=filter,
+                                        method="TMM",
+                                        log2transform=TRUE)
+```
+
+::: {.callout-note title="Qué hace `normaliseGeneExpression()`"}
+1) Filtra la expresión génica basándose en su argumento `geneFilter`
+
+2) Normaliza la expresión génica con `edgeR::calcNormFactors` (internamente) usando el método de media recortada de valores M (TMM) (por defecto)
+
+3) Calcula log2-cuentas por millón (logCPM)
+:::
+
+### Cuantificación de splicing altenativo
+Tras cargar los datos clínicos y de junction quantification de splicing alternativo de TCGA, cuantifique el splicing alternativo haciendo clic en el panel verde Cuantificación de splicing alternativo.
+
+Como se ha mencionado anteriormente, el splicing alternativo se cuantifica a partir de la cuantificación de uniones previamente cargada y de un archivo de anotación de splicing alternativo. Para comprobar los archivos de anotación disponibles:
+```{r}
+annotList <- listSplicingAnnotations()
+annotList
+```
+
+::: {.callout-tip title="Custom splicing annotation"}
+Se pueden preparar anotaciones adicionales de splicing alternativo para psichomics analizando la anotación de programas como VAST-TOOLS, MISO, SUPPA y rMATS. Tener en cuenta que SUPPA y rMATS son capaces de crear su anotación de splicing basándose en la anotación del transcrito. Por favor, lea Preparación de anotaciones de splicing alternativo.
+:::
+
+Vamos a cargar las anotaciones de la versión hg19 del genoma (porque es la que usan en el ejemplo):
+```{r}
+hg19 <- listSplicingAnnotations(assembly="hg19")[[1]]
+annotation <- loadAnnotation(hg19)
+```
+
+Una vez quemos cargado la anotación, podemos ver los tipos de eventos que se han cargado:
+```{r}
+getSplicingEventTypes()
+```
+
+De igual manera que para la expresión génica, se filtrarán aquellos elementos que no tengan un mínimo de reads
+```{r, message=FALSE, warning=FALSE, error=FALSE, results='hide'}
+minReads <- 10 # default
+
+psi <- quantifySplicing(annotation, junctionQuant, minReads=minReads)
+```
+
+Los eventos tienen el siguiente formato:
+```{r}
+events <- rownames(psi)
+head(events)
+```
+
+Dónde, por ejemplo, el elemento `SE_1_-_2125078_2124414_2124284_2121220_C1orf86` está compuesto de:
+- `SE. Refiere al tpo de evento.
+- `1`. Cromosoma
+- `-`. Strand (no se a qué se refiere)
+- Cohordenadas del evento.
+- `C1orf86`. Gen en el que ha ocurrido el evento.
+
+### Creación de grupos de comparación
+Vamos a crear grupos basados en los tipos de muestras disponibles (es decir, Metastásico, Tumor sólido primario y Tejido sólido normal) y en los estadios tumorales. Como los estadios tumorales se dividen en subestadios, fusionaremos los subestadios para tener sólo muestras tumorales de los estadios I, II, III y IV (las muestras del estadio X se descartan porque son muestras tumorales no caracterizadas).
+```{r}
+# Agrupamos las muestras en función de si son normales o tumorales
+types  <- createGroupByAttribute("Sample types", sampleInfo)
+normal <- types$`Solid Tissue Normal`
+tumour <- types$`Primary solid Tumor`
+
+# Agrupamos en función de si son normales o de algún estadío tumoral
+stages <- createGroupByAttribute(
+    "patient.stage_event.pathologic_stage_tumor_stage", clinical)
+groups <- list()
+for (i in c("i", "ii", "iii", "iv")) {
+    stage <- Reduce(union,
+           stages[grep(sprintf("stage %s[a|b|c]{0,1}$", i), names(stages))])
+    # Incluimos solo las muestras tumorales
+    stageTumour <- names(getSubjectFromSample(tumour, stage))
+    elem <- list(stageTumour)
+    names(elem) <- paste("Tumour Stage", toupper(i))
+    groups <- c(groups, elem)
+}
+groups <- c(groups, Normal=list(normal))
+```
+
+::: {.callout-tip title="Explicación del código paso a paso" collapse=TRUE}
+1. Creación de grupos (en una lista) en función de etapas tumorales:
+```{r}
+stages <- createGroupByAttribute("patient.stage_event.pathologic_stage_tumor_stage", clinical)
+
+#vamosa a visualizarlo
+head(stages)
+```
+  a. `createGroupByAttribute` es una función que crea grupos a partir de una variable de atributo. En este caso, la variable es `"patient.stage_event.pathologic_stage_tumor_stage"`, que es la variable de los datos clínicos cargados de las etapas tumorales de los pacientes. `stages` contendrá grupos de muestras en función de estas etapas tumorales.
+
+2. Creación de la variable `groups`, que será una lista donde se almacenarán los grupos de muestras.
+```{r, eval=FALSE}
+groups <- list()
+```
+
+
+3. Bucle de selección de etapa tumoral:
+```{r, eval=FALSE}
+for (i in c("i", "ii", "iii", "iv")) {
+    stage <- Reduce(union,
+           stages[grep(sprintf("stage %s[a|b|c]{0,1}$", i), names(stages))])
+    # Incluimos solo las muestras tumorales
+    stageTumour <- names(getSubjectFromSample(tumour, stage))
+    elem <- list(stageTumour)
+    names(elem) <- paste("Tumour Stage", toupper(i))
+    groups <- c(groups, elem)
+}
+```
+
+
+::: {.callout-note title="Desglosando el punto 3" collapse=TRUE}
+3.1. Abrimos el bucle para cada una de las posibles etapas tumorales (que estén dentro de la variable clínica, hay que saber bien qué datos tenemos para así poder hacer distintas agrupaciones en función de los datos clínicos):
+```{r, eval=FALSE}
+for (i in c("i", "ii", "iii", "iv")) {
+```
+  
+3.2 Para cada valor de i se va a comenzar definiendo `stage` como 
+```{r, eval=FALSE}
+stage <- Reduce(union, stages[grep(sprintf("stage %s[a|b|c]{0,1}$", i), names(stages))])
+```
+  - `sprintf("stage %s[a|b|c]{0,1}$", i)`: Esta línea crea un patrón de búsqueda utilizando `sprintf`. El patrón será como `"stage ia[a|b|c]{0,1}\$"` para el valor de `"i"`, `"stage iia[a|b|c]{0,1}\$"` para la etapa `"ii"`, y así sucesivamente. El patrón permite que se encuentren coincidencias que contienen una sola letra opcional "a", "b" o "c" al final de la etapa.
+  - `grep(..., names(stages))`: `grep` busca el valor actual de i en los nombres de las etapas `(names(stages))`, que se obtienen de la variable stages.
+  - `stages[grep(...)]`: Esto devuelve las etapas que coinciden con el patrón de búsqueda. Por ejemplo, si el valor es "i", esto devolverá todas las etapas que coincidan con "stage ia", "stage ib", "stage ic", etc.
+  - `Reduce(union, ...)`: La función Reduce se utiliza para combinar todas las etapas que coincidieron con el patrón en una sola. union es una función que combina conjuntos, por lo que `Reduce(union, ...)` crea un conjunto que contiene todas las muestras de las etapas correspondientes a la etapa actual.
+
+3.3. Filtrado de muestras tumorales: Se filtran las muestras tumorales del valor `stage`. `getSubjectFromSample` obtiene los sujetos asociados con las muestras, y `names(...)` devuelve los nombres de las muestras tumorales de ese valor.
+```{r, eval=FALSE}
+stageTumour <- names(getSubjectFromSample(tumour, stage))
+```
+
+3.4. Creación de un elemento de grupo y asignación de nombre: Se crea un elemento de lista `elem` que contiene las muestras tumorales de la etapa. Luego, se le asigna un nombre basado en la etapa ("Tumour Stage i", "Tumour Stage ii", etc.). Como utilizamos la función `toupper(i)` nos devolverá el valor de i en mayúscula (no tiene nada que ver con tuppers, esta función literalmente es "to upper", que significa "a mayúscula"):
+```{r, eval=FALSE}
+elem <- list(stageTumour)
+names(elem) <- paste("Tumour Stage", toupper(i))
+```
+
+3.5. Agregación del elemento al grupo general: El elemento `elem` se agrega a la lista general `groups`, que almacena todos los grupos.
+```{r, eval=FALSE}
+groups <- c(groups, elem)
+```
+
+3.6. Cerramos el bucle:
+```{r, eval=FALSE}
+}
+```
+
+:::
+
+4. Creamos el grupo "normal" (no tumoral). Finalmente, se agrega un grupo llamado "Normal" que contiene las muestras no tumorales. El conjunto `groups` ahora contendrá todos los grupos creados, incluyendo las etapas tumorales y el grupo de muestras "normales"(no tumorales).
+```{r, eval=FALSE}
+groups <- c(groups, Normal=list(normal))
+
+```
+
+Vamos a visualizar los elementos que hay en groups:
+```{r}
+str(groups)
+```
+:::
+
+Para una mayor cosistencia en los fururos análisis vamos a preapar los colores para cada grupo
+```{r}
+colours <- c("#6D1F95", "#FF152C", "#00C7BA", "#FF964F", "#00C65A")
+names(colours) <- names(groups)
+attr(groups, "Colour") <- colours
+```
+
+Preparamos una primera comparacion de muestras normales con respecto a las tumorales en estadío I:
+```{r}
+normalVSstage1Tumour <- groups[c("Tumour Stage I", "Normal")]
+attr(normalVSstage1Tumour, "Colour") <- attr(groups, "Colour")
+```
+
+Tambien vamos a preparar una segunda comparación de muestras normales con respecto a las tumorales
+```{r}
+
+normalVStumour <- list(Normal=normal, Tumour=tumour)
+attr(normalVStumour, "Colour") <- c(Normal="#00C65A", Tumour="#EFE35C")
+```
+
+### Ejemplo
+Vamos a juguetear un poco con los datos
+
+#### Differential splicing analysis
+Para hacer un análisis de expresión diferencial entre los pacientes normales vs. los tumorales en estadío 1 tenemos que usar el siguiente comando:
+```{r}
+diffSplicing <- diffAnalyses(psi, normalVSstage1Tumour)
+```
+
+En este análisis se realiza una comparación estadística mediantes Wilcoxon test, lo cual, al haber muchas muestras si es posible realizarlo. Vamos a realizar una serie de filtros:
+```{r}
+deltaPSIthreshold <- abs(diffSplicing$`∆ Median`) > 0.1
+pvalueThreshold   <- diffSplicing$`Wilcoxon p-value (BH adjusted)` < 0.01
+eventsThreshold <- diffSplicing[deltaPSIthreshold & pvalueThreshold, ]
+head(eventsThreshold)
+```
+
+Y vamos a realizar trambien una representación volcano de los valores ajustados por BH
+```{r, warning=FALSE, message=FALSE}
+ggplot(diffSplicing, aes(`∆ Median`, 
+                         -log10(`Wilcoxon p-value (BH adjusted)`))) +
+    geom_point(data=eventsThreshold,
+               colour="orange", alpha=0.5, size=3) + 
+    geom_point(data=diffSplicing[!deltaPSIthreshold | !pvalueThreshold, ],
+               colour="gray", alpha=0.5, size=3) + 
+    theme_light(16) +
+    ylab("-log10(q-value)")
+```
+
+#### Differential inclusion of one event
+Comprobemos si existe una diferencia significativa en la inclusión del exón 12 de NUMB entre las muestras de mama tumorales y normales del TCGA. Para ello:
+```{r}
+ASevents <- rownames(psi)
+(tmp     <- grep("SRRM1", ASevents, value=TRUE))
+
+```
+
+Vamoss a imprimir el primer evento:
+```{r, warning=FALSE, message=FALSE}
+SRRM1 <- tmp[2]
+plotSplicingEvent(SRRM1)
+```
+
+También podemos ver la distribución de los PSI de las muestras dentro para los grupos de la comparación:
+```{r, warning=FALSE, message=FALSE}
+plotDistribution(psi[SRRM1, ], normalVStumour)
+```
+
+
+- **Kaplan-Meier de un evento de splicing**
+```{r, warning=FALSE, message=FALSE}
+# Survival curves based on optimal PSI cutoff
+library(survival)
+
+# Assign alternative splicing quantification to patients based on their samples
+samples <- colnames(psi)
+match <- getSubjectFromSample(samples, clinical, sampleInfo=sampleInfo)
+
+eventPSI <- assignValuePerSubject(psi[SRRM1, ], match, clinical,                          samples=unlist(tumour))
+
+opt <- optimalSurvivalCutoff(clinical, eventPSI, censoring="right", 
+                             event="days_to_death", timeStart="days_to_death")
+(optimalCutoff <- opt$par)    # Optimal exon inclusion level
+
+(optimalPvalue <- opt$value)  # Respective p-value
+
+label     <- labelBasedOnCutoff(eventPSI, round(optimalCutoff, 2), 
+                                label="PSI values")
+survTerms <- processSurvTerms(clinical, censoring="right",
+                              event="days_to_death", timeStart="days_to_death",
+                              group=label, scale="years")
+surv <- survfit(survTerms)
+pvalue <- testSurvival(survTerms)
+plotSurvivalCurves(surv, pvalue=pvalue, mark=FALSE)
+```
+
+- **Correlación de un evento de splicing con la expresion de un gen**
+
+Podemos ver la correlación de este evento con la expressión de algún gen de interés (vamos a usar "ADARB1" porque me acaba de venir a la cabeza)
+```{r}
+genes <- rownames(geneExprNorm)
+(tmp  <- grep("ADARB1", genes, value=TRUE))
+```
+
+```{r}
+ADARB1   <- tmp[1]
+plotDistribution(geneExprNorm[ADARB1, ], normalVStumour, psi=FALSE)
+```
+
+Y podemos ver si existe correlación entre estos dos valores (expresión de ADARB1 e inclusión del evento en SRRM1).
+```{r, warning=FALSE, message=FALSE}
+plotCorrelation(correlateGEandAS(
+    geneExprNorm, psi, ADARB1, SRRM1, method="spearman"))
+```
+
+- **Kaplan-Meier de múltiples eventos de splicing**
+
+Este análisis va a realizar los análisis para todos los eventos que determinemos (en este caso he definido que sean los 4 eventos de SRRM1 que estaban guardados en la variable `tmp` que calculamos con aterioridad), y luego representaremos el evento que queramos (en este caso he representado el evento nº2 como se puede ver en la última línea del código, que corresponde al mismo evento que el caso anterior y así podemos ver que el cálculo es el mismo que en el caso anterior)
+```{r, warning=FALSE, message=FALSE}
+tmp     <- grep("SRRM1", ASevents, value=TRUE)
+
+SRRM1_events<-tmp[1:4]
+# Survival curves based on optimal PSI cutoff
+library(survival)
+
+# Assign alternative splicing quantification to patients based on their samples
+samples <- colnames(psi)
+match <- getSubjectFromSample(samples, clinical, sampleInfo=sampleInfo)
+
+survPlots <- list()
+for (event in SRRM1_events) {
+    # Find optimal cutoff for the event
+    eventPSI <- assignValuePerSubject(psi[event, ], match, clinical,
+                                      samples=unlist(tumour))
+    opt <- optimalSurvivalCutoff(clinical, eventPSI, censoring="right", 
+                                 event="days_to_death", 
+                                 timeStart="days_to_death")
+    (optimalCutoff <- opt$par)    # Optimal exon inclusion level
+    (optimalPvalue <- opt$value)  # Respective p-value
+    
+    label     <- labelBasedOnCutoff(eventPSI, round(optimalCutoff, 2), 
+                                    label="PSI values")
+    survTerms <- processSurvTerms(clinical, censoring="right",
+                                  event="days_to_death", 
+                                  timeStart="days_to_death",
+                                  group=label, scale="years")
+    surv <- survival::survfit(survTerms)
+    pvalue <- testSurvival(survTerms)
+    survPlots[[event]] <- plotSurvivalCurves(surv, pvalue=pvalue, mark=FALSE)
+}
+
+# Now print the survival plot of a specific event
+survPlots[[ SRRM1_events[[2]] ]]
+```
+
+
+#### Differential gene expression
+Las alteraciones detectadas en el splicing alternativo pueden ser simplemente un reflejo de los cambios en los niveles de expresión génica. Por lo tanto, para desentrañar estos dos efectos, también debería realizarse un análisis de expresión diferencial entre el estadio tumoral I y las muestras normales. Para ello:
+
+::: {.callout-note}
+Esto está bien para una exploración inicial pero no se puede comparar a una exploración con el análisis completo como hicimos en el apartado de RNAseq. Aún así es útil y también aprendemos a utilizar las kaplan-Meier.
+:::
+
+```{r, warning=FALSE, message=FALSE}
+# Prepare groups of samples to analyse and further filter unavailable samples in
+# selected groups for gene expression
+ge           <- geneExprNorm[ , unlist(normalVSstage1Tumour), drop=FALSE]
+isFromGroup1 <- colnames(ge) %in% normalVSstage1Tumour[[1]]
+design       <- cbind(1, ifelse(isFromGroup1, 0, 1))
+
+# Fit a gene-wise linear model based on selected groups
+library(limma)
+fit <- lmFit(as.matrix(ge), design)
+
+# Calculate moderated t-statistics and DE log-odds using limma::eBayes
+ebayesFit <- eBayes(fit, trend=TRUE)
+
+# Prepare data summary
+pvalueAdjust <- "BH" # Benjamini-Hochberg p-value adjustment (FDR)
+summary <- topTable(ebayesFit, number=nrow(fit), coef=2, sort.by="none",
+                    adjust.method=pvalueAdjust, confint=TRUE)
+names(summary) <- c("log2 Fold-Change", "CI (low)", "CI (high)", 
+                    "Average expression", "moderated t-statistics", "p-value", 
+                    paste0("p-value (", pvalueAdjust, " adjusted)"),
+                    "B-statistics")
+attr(summary, "groups") <- normalVSstage1Tumour
+
+# Calculate basic statistics
+stats <- diffAnalyses(ge, normalVSstage1Tumour, "basicStats", 
+                      pvalueAdjust=NULL)
+
+final <- cbind(stats, summary)
+
+# Differential gene expression between breast tumour stage I and normal samples
+library(ggplot2)
+library(ggrepel)
+cognateGenes <- unlist(parseSplicingEvent(events)$gene)
+logFCthreshold  <- abs(final$`log2 Fold-Change`) > 1
+pvalueThreshold <- final$`p-value (BH adjusted)` < 0.01
+
+final$genes <- gsub("\\|.*$", "\\1", rownames(final))
+ggplot(final, aes(`log2 Fold-Change`, 
+                  -log10(`p-value (BH adjusted)`))) +
+    geom_point(data=final[logFCthreshold & pvalueThreshold, ],
+               colour="orange", alpha=0.5, size=3) + 
+    geom_point(data=final[!logFCthreshold | !pvalueThreshold, ],
+               colour="gray", alpha=0.5, size=3) + 
+    geom_text_repel(data=final[cognateGenes, ], aes(label=genes),
+                    box.padding=0.4, size=5) +
+    theme_light(16) +
+    ylab("-log10(q-value)")
+```
+
+- **Distribución de la expresión de un gen**
+```{r, warning=FALSE, message=FALSE}
+plotDistribution(geneExprNorm["ACOT7", ], normalVSstage1Tumour)
+```
 
 
 
+- **Kaplan-Meier de la expresión de un gen**
 
+Voy a utilizar para probar este código uno de los genes que sale desregulados:
+```{r, warning=FALSE, message=FALSE}
+ACOT7ge <- assignValuePerSubject(geneExprNorm["ACOT7", ], match, clinical, 
+                                 samples=unlist(tumour))
 
+# Survival curves based on optimal gene expression cutoff
+opt <- optimalSurvivalCutoff(clinical, ACOT7ge, censoring="right",
+                             event="days_to_death", timeStart="days_to_death")
+(optimalCutoff <- opt$par)    # Optimal exon inclusion level
 
+(optimalPvalue <- opt$value)  # Respective p-value
 
-
+# Process again after rounding the cutoff
+roundedCutoff <- round(optimalCutoff, 2)
+label     <- labelBasedOnCutoff(ACOT7ge, roundedCutoff, label="Gene expression")
+survTerms <- processSurvTerms(clinical, censoring="right",
+                              event="days_to_death", timeStart="days_to_death",
+                              group=label, scale="years")
+surv   <- survfit(survTerms)
+pvalue <- testSurvival(survTerms)
+plotSurvivalCurves(surv, pvalue=pvalue, mark=FALSE)
+```

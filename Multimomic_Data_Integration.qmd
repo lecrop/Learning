@@ -1,0 +1,36 @@
+---
+title: "Multiomic Data Integration"
+
+author: "Francisco Porcel-Pastrana"
+
+format:
+  html:
+    toc: true
+    toc-expand: 1
+    toc-location: left
+    number-sections: true
+    html-math-method: katex
+    number-depth: 5
+    css: styles.css
+---
+
+# MOFA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
